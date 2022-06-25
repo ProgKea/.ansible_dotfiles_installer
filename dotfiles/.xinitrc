@@ -8,13 +8,6 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
-
-
-
-
-
-
-
     xrdb -merge $sysresources
 
 fi
@@ -57,6 +50,7 @@ slstatus &
 ~/.fehbg &
 pgrep -x unclutter > /dev/null || unclutter -idle 3 &
 rebind &
-#xcompmgr &
-while type dwm >/dev/null ; do dwm && continue || break ; done
+xcompmgr &
+#while type dwm >/dev/null ; do dwm && continue || break ; done
 #exec i3
+exec bspwm

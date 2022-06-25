@@ -5,7 +5,6 @@
     mode: 0700
     state: directory
   tags:
-    - dotfiles
     - ssh
 
 - name: Install ssh key
@@ -14,7 +13,6 @@
     dest: "{{ dest_key }}"
     mode: 0600
   tags:
-    - dotfiles
     - ssh
 
 - name: Install ssh key public
@@ -23,7 +21,6 @@
     dest: "{{ dest_key }}.pub"
     mode: 0644
   tags:
-    - dotfiles
     - ssh
 
 - name: Install ssh hosts
@@ -32,7 +29,6 @@
     dest: "{{ dest_ssh_hosts }}"
     mode: 0600
   tags:
-    - dotfiles
     - ssh
 
 - name: Install ssh config
@@ -41,7 +37,6 @@
     dest: "{{ dest_ssh_config }}"
     mode: 0600
   tags:
-    - dotfiles
     - ssh
 
 - name: Ensure gh directory exists.
@@ -50,7 +45,6 @@
     mode: 0700
     state: directory
   tags:
-    - dotfiles
     - ssh
 
 - name: Install gh hosts
@@ -59,5 +53,4 @@
     dest: "{{ dest_gh_hosts }}"
     mode: 0600
   tags:
-    - dotfiles
     - ssh

@@ -3,11 +3,12 @@
 alt + shift + Return
 	st
 
-alt + shift + n 
-	st -e nvim
-
 alt + shift + w 
-	chromium	
+	google
+
+alt + w 
+	visitWebsite
+
 # bspwm-specific Hotkeys
 
 # restart
@@ -43,8 +44,8 @@ alt + shift + {1-9,0}
     bspc node --to-desktop ^{1-9,10}
 
 # Change monitor
-alt + {comma,period}
-    bspc monitor -f {next,prev}
+#alt + {comma,period}
+#    bspc monitor -f {next,prev}
 
 # Fullscreen toggle
 alt + f
