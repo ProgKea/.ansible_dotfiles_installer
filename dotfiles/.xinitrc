@@ -45,12 +45,12 @@ fi
 /usr/bin/pipewire-pulse &
 /usr/bin/wireplumber &
 xset r rate 300 50 &
-slstatus &
+#slstatus &
 #dunst &
 ~/.fehbg &
 pgrep -x unclutter > /dev/null || unclutter -idle 3 &
 rebind &
-xcompmgr &
+#xcompmgr &
 #while type dwm >/dev/null ; do dwm && continue || break ; done
 #exec i3
 exec bspwm

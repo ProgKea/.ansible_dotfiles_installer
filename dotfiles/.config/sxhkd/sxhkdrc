@@ -9,6 +9,20 @@ alt + shift + w
 alt + w 
 	visitWebsite
 
+# audio bindings
+
+XF86AudioRaiseVolume 
+  pactl set-sink-volume @DEFAULT_SINK@ +10%
+
+XF86AudioLowerVolume
+  pactl set-sink-volume @DEFAULT_SINK@ -10%
+
+XF86AudioMute
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86AudioMicMute
+  pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
 # bspwm-specific Hotkeys
 
 # restart
@@ -32,7 +46,7 @@ shift + space
     bspc node --focus biggest.local
 
 # Promote to master
-alt + shift + space
+alt + z
     bspc node -s biggest.local
 
 # Change desktop
@@ -42,10 +56,6 @@ alt + {1-9,0}
 # Move to desktop
 alt + shift + {1-9,0}
     bspc node --to-desktop ^{1-9,10}
-
-# Change monitor
-#alt + {comma,period}
-#    bspc monitor -f {next,prev}
 
 # Fullscreen toggle
 alt + f
@@ -66,4 +76,3 @@ alt + p
 # quit bspwm
 shift + alt + q 
 	loginctl kill-session $XDG_SESSION_ID
-
