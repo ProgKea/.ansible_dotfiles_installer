@@ -33,11 +33,8 @@
 ;;(setq doom-font (font-spec :family "Iosevka" :size 24 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Iosevka" :size 24))
 
-(setq doom-font (font-spec :family "Hack Nerd Font" :size 24 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 24))
-
-;;(setq doom-font (font-spec :family "UbuntuMono Nerd Font Mono" :size 24);;:weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "UbuntuMono Nerd Font Mono" :size 24))
+(setq doom-font (font-spec :family "Ubuntu Mono" :size 24);;:weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "Ubuntu Mono" :size 24))
 
 (setq compile-command "")
 

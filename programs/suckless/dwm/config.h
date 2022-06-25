@@ -81,20 +81,22 @@ static char dmenumon[2] =
 static const char *dmenucmd[] = {"dmenu_run", "-m",      dmenumon,
                                  "-fn",       dmenufont, NULL};
 static const char *termcmd[] = {"st", NULL};
-//static const char *termcmd[] = {"alacritty", NULL};
-//static const char *termcmd[] = {"kitty", NULL};
+// static const char *termcmd[] = {"alacritty", NULL};
+// static const char *termcmd[] = {"kitty", NULL};
 static const char *google[] = {"google", NULL};
 static const char *web[] = {"visitWebsite", NULL};
 static const char *yt[] = {"yt", "-g", NULL};
 static const char *ytMute[] = {"yt", "-g", "-m", NULL};
 static const char *killer[] = {"killer", NULL};
 // volume controls
-static const char *upvol[] = {"amixer", "-q",     "set", "Master",
-                              "5%+",    "unmute", NULL};
-static const char *downvol[] = {"amixer", "-q",     "set", "Master",
-                                "5%-",    "unmute", NULL};
-static const char *mutevol[] = {"amixer", "-q",     "set",
-                                "Master", "toggle", NULL};
+static const char *upvol[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK@",
+                              "+10%", NULL};
+static const char *downvol[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK@",
+                                "-10%", NULL};
+static const char *mutevol[] = {"pactl", "set-sink-mute", "@DEFAULT_SINK@",
+                                "toggle", NULL};
+static const char *mutemic[] = {"pactl", "set-source-mute", "@DEFAULT_SINK@",
+                                "toggle", NULL};
 
 #include "shiftview.c"
 static char *endx[] = {"/bin/sh", "-c", "endx", "externalpipe", NULL};
@@ -131,7 +133,8 @@ static Key keys[] = {
     {MODKEY, XK_b, shiftview, {.i = -1}},
     {MODKEY, XK_F8, spawn, {.v = upvol}},
     {MODKEY, XK_F7, spawn, {.v = downvol}},
-    {MODKEY, XK_F5, spawn, {.v = mutevol}},
+    {MODKEY, XK_F6, spawn, {.v = mutevol}},
+    {MODKEY, XK_F5, spawn, {.v = mutemic}},
     {MODKEY, XK_F4, spawn, {.v = killer}},
     TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
