@@ -18,20 +18,32 @@
         #- xterm
         #- gnome-terminal
 
-- name: Check if oh-my-zsh is installed
-  tags: terminal
-  stat:
-    path: "$HOME/.oh-my-zsh"
-  register: file_data
 
 - name: Change default shell to zsh
   tags: terminal
   shell: USER=$(whoami); sudo chsh --shell /bin/zsh $USER
 
+- name: Check if oh-my-zsh is installed
+  tags: terminal
+  stat:
+    path: "$HOME/.oh-my-zsh"
+    register: oh_my_zsh_installed
+
 - name: Install oh-my-zsh
   tags: terminal
   shell: sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  when: not file_data.stat.exists
+  when: not oh_my_zsh_installed.stat.exists
+
+- name: Check if .zshrc.pre-oh-my-zsh exists
+  tags: terminal
+  stat:
+    path: "$HOME/.zshrc.pre-oh-my-zsh"
+    register: zshrc_pre_installed
+
+- name: Remove .zshrc.pre-oh-my-zsh
+  tags: terminal
+  shell: mv $HOME/.zshrc.pre-oh-my-zsh $HOME/.zshrc
+  when: not zshrc_pre_installed.stat.exists
 
 - name: Copy fonts
   tags: terminal, font
