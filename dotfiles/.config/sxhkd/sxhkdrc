@@ -1,0 +1,68 @@
+#  ------ programs  -------- # 
+
+alt + shift + Return
+	st
+
+alt + shift + n 
+	st -e nvim
+
+alt + shift + w 
+	chromium	
+# bspwm-specific Hotkeys
+
+# restart
+shift + alt + r
+	bspc wm -r
+
+# Change focus
+alt + {j,k}
+    bspc node --focus {next.local,prev.local}
+
+# Move window
+alt + shift + {j,k}
+    bspc node -s {next.local,prev.local}
+
+# Close window
+alt + shift + c 
+    bspc node -c
+
+# Focus master
+shift + space
+    bspc node --focus biggest.local
+
+# Promote to master
+alt + shift + space
+    bspc node -s biggest.local
+
+# Change desktop
+alt + {1-9,0}
+    bspc desktop --focus ^{1-9,10}
+
+# Move to desktop
+alt + shift + {1-9,0}
+    bspc node --to-desktop ^{1-9,10}
+
+# Change monitor
+alt + {comma,period}
+    bspc monitor -f {next,prev}
+
+# Fullscreen toggle
+alt + f
+    bspc desktop --layout next
+
+# Resize
+alt + {h,l}
+    bspwm_node_resize {west,east}
+
+# Reload config
+alt + F2
+     ~/.config/bspwm/bspwmrc
+
+# dmenu run
+alt + p
+     dmenu_run
+
+# quit bspwm
+shift + alt + q 
+	loginctl kill-session $XDG_SESSION_ID
+

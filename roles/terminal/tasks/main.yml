@@ -1,0 +1,54 @@
+---
+- name: Install terminal apps
+  tags: terminal
+  package:
+    name:
+      - tmux
+      - lsd
+      - wget
+      - unrar
+      - unzip
+      - zsh
+      - github-cli
+      - z
+      - xcompmgr
+      - so
+        #- kitty
+        #- alacritty
+        #- xterm
+        #- gnome-terminal
+
+- name: Check if oh-my-zsh is installed
+  tags: terminal
+  stat:
+    path: "$HOME/.oh-my-zsh"
+  register: file_data
+
+- name: Change default shell to zsh
+  tags: terminal
+  shell: USER=$(whoami); sudo chsh --shell /bin/zsh $USER
+
+- name: Install oh-my-zsh
+  tags: terminal
+  shell: sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  when: not file_data.stat.exists
+
+- name: Copy fonts
+  tags: terminal, font
+  shell: sudo cp fonts/*.ttf -t /usr/share/fonts/TTF
+
+- name: Check if Ubuntu Family is installed
+  tags: terminal, font
+  stat:
+    path: "/usr/share/fonts/ubuntu"
+  register: ubuntu_family_installed
+
+- name: Install Ubuntu Family
+  tags: terminal, font
+  become: yes
+  copy: src="./fonts/ubuntu" dest="/usr/share/fonts/ubuntu"
+  when: not ubuntu_family_installed.stat.exists
+
+- name: Cache fonts
+  tags: terminal, font
+  shell: fc-cache --force

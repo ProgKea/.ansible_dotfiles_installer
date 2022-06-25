@@ -1,0 +1,26 @@
+---
+- name: Create symlinks of dotfiles
+  tags: dotfiles
+  shell: stow -d "dotfiles" -t "$HOME/" .
+
+- name: Install feh
+  tags: dotfiles, wallpaper
+  package:
+    name: feh
+
+- name: Check if wallpapers directory exists
+  tags: dotfiles, wallpaper
+  stat:
+    path: "$HOME/wallpapers"
+  register: wallpapers_directory
+
+- name: Create wallpapers directory
+  tags: dotfiles, wallpaper
+  file:
+    path: "$HOME/wallpapers"
+    state: directory
+  when: not wallpapers_directory.stat.exists
+
+- name: Create symlinks of wallpapers
+  tags: dotfiles, wallpaper
+  shell: stow -d "wallpapers" -t "$HOME/wallpapers" .

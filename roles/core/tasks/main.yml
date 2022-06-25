@@ -1,0 +1,32 @@
+---
+- name: Install core packages
+  package:
+    name:
+      - git
+      - stow
+      - unclutter
+
+- name: Check OS
+  shell: cat /etc/os-release | head -n 1
+  register: linux_distro
+
+- name: Install Archlinux support
+  package:
+    name:
+      - archlinux-keyring
+      - archlinux-mirrorlist
+      - artix-archlinux-support
+  when: linux_distro.stdout == 'NAME="Artix Linux"'
+
+- name: Copy pacman.conf
+  copy: src=./etc/pacman.conf dest=/etc/pacman.conf
+  when: linux_distro.stdout == 'NAME="Artix Linux"'
+
+- name: Install base-devel
+  package:
+    name: base-devel
+  when: ansible_distribution == "Archlinux"
+
+- name: Install paru if not already installed
+  shell: if [ which paru == "paru not found" ]; then git clone https://aur.archlinux.org/paru.git $HOME/paru && (cd $HOME/paru; makepkg -si) && rm -rf $HOME/paru; fi
+  when: ansible_distribution == "Archlinux"

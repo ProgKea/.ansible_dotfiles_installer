@@ -1,0 +1,15 @@
+#!/usr/bin/sh
+
+if [[ $1 ]]; then 
+  echo $1 > ~/.local/share/webScripts/browser.txt
+  echo "Changed browser to $1"
+  exit 0
+fi
+searchEngine=$(cat ~/.local/share/webScripts/search.txt | awk '{print $1}' | dmenu -i -l 10 -p "Search Engine:")
+url=$(cat ~/.local/share/webScripts/search.txt | grep "$searchEngine " | awk '{print $2}')
+if [[ $searchEngine != "" ]]; then
+  searchTerm=$(: | dmenu -i -l 10 -p "$searchEngine:")
+fi
+if [[ $searchTerm != "" ]]; then
+  $(cat ~/.local/share/webScripts/browser.txt) "$url$searchTerm"
+fi

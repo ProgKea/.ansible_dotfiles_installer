@@ -1,0 +1,10 @@
+#!/bin/sh
+
+searchEngine=$(cat ~/.local/share/webScripts/search.txt | awk '{print $1}' | fzf)
+if [[ $searchEngine != "" ]]; then
+  url=$(cat ~/.local/share/webScripts/search.txt | grep "$searchEngine " | awk '{print $2}')
+  read -p "Enter Query: " searchTerm
+fi
+if [[ $searchTerm != "" ]]; then
+  tmux neww bash -c "w3m '$url$searchTerm'"
+fi

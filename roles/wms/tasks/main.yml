@@ -1,0 +1,6 @@
+---
+- name: Install window managers
+  package:
+    name:
+      - i3-gaps
+      - i3status

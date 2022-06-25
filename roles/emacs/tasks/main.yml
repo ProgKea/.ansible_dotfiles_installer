@@ -1,0 +1,23 @@
+---
+- name: Install emacs native comp package
+  tags: emacs
+  package:
+    name: emacs-nativecomp
+
+- name: Check if .emacs.d directory exists
+  tags: emacs
+  stat:
+    path: "$HOME/.emacs.d"
+  register: emacs_d
+
+- name: Clone Doom Emacs
+  tags: emacs
+  git:
+    repo: 'https://github.com/doomemacs/doomemacs'
+    depth: 1
+    dest: ~/.emacs.d
+  when: not emacs_d.stat.exists
+
+- name: Install Doom Emacs
+  tags: emacs
+  shell: ~/.emacs.d/bin/doom sync

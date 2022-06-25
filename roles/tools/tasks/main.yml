@@ -1,0 +1,28 @@
+---
+- name: Check if pip is installed
+  tags: django, tools
+  shell: which pip
+  register: pip_installed
+
+- name: Install pip
+  tags: django, tools
+  package:
+    name: python-pip
+  when: '"not found" in pip_installed.stdout'
+
+- name: Check if django is installed
+  tags: django, tools
+  shell: python -m django --version
+  register: django_installed
+
+- name: Install django
+  tags: django, tools
+  shell: pip install django
+  when: '"No module named django" in django_installed.stdout'
+
+- name: Install utils rewrites
+  tags: tools
+  package:
+    name:
+      - fd
+      - ripgrep
