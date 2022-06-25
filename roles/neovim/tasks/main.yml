@@ -31,4 +31,4 @@
 
 - name: Install Neovim Plugins
   tags: neovim
-  shell: vim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+  shell: vim --headless -c "PackerCompile" -c "PackerSync" -c "qa"
