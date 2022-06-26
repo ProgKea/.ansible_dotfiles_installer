@@ -3,4 +3,3 @@ read -p "Enter Option: " option
 read -p "Enter Query: " query
 
 curl cht.sh/$option/$query
-

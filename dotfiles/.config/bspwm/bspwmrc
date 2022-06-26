@@ -19,3 +19,4 @@ bspc config external_rules_command  ~/.config/bspwm/external_rules.sh
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Emacs state=tiled
+bspc rule -a firefox state=tiled

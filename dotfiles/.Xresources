@@ -1,5 +1,6 @@
 !tango
-*foreground:              #babdb6
+!*foreground:              #babdb6
+*foreground:              #ffffff
 *background:              #000000
 *color0:                  #2e3436
 *color1:                  #cc0000

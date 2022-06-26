@@ -1,47 +1,43 @@
 env:
   TERM: xterm-256color
 
-
 font:
   normal:
     family: Ubuntu Mono
   size: 17.0
 
-
 key_bindings:
-  - { key: Up,           mods: Control|Shift,                         action: IncreaseFontSize }
-  - { key: Down,          mods: Control|Shift,                         action: DecreaseFontSize }
-
+  - { key: Up, mods: Control|Shift, action: IncreaseFontSize }
+  - { key: Down, mods: Control|Shift, action: DecreaseFontSize }
 
 window:
-  opacity: 0.9
-
+  opacity: 1.0
 
 colors:
   bright:
-    black: '#555753'
-    blue: '#729fcf'
-    cyan: '#34e2e2'
-    green: '#8ae234'
-    magenta: '#ad7fa8'
-    red: '#ef2929'
-    white: '#eeeeec'
-    yellow: '#fce94f'
-#  cursor:
-#    cursor: '#ffffff'
-    text: '#000000'
+    black: "#555753"
+    blue: "#729fcf"
+    cyan: "#34e2e2"
+    green: "#8ae234"
+    magenta: "#ad7fa8"
+    red: "#ef2929"
+    white: "#eeeeec"
+    yellow: "#fce94f"
+    #  cursor:
+    #    cursor: '#ffffff'
+    text: "#000000"
   normal:
-    black: '#000000'
-    blue: '#3465a4'
-    cyan: '#06989a'
-    green: '#4e9a06'
-    magenta: '#75507b'
-    red: '#cc0000'
-    white: '#d3d7cf'
-    yellow: '#c4a000'
+    black: "#000000"
+    blue: "#3465a4"
+    cyan: "#06989a"
+    green: "#4e9a06"
+    magenta: "#75507b"
+    red: "#cc0000"
+    white: "#d3d7cf"
+    yellow: "#c4a000"
   primary:
-    background: '#000000'
-    foreground: '#babdb6'
+    background: "#000000"
+    foreground: "#babdb6"
   selection:
-    background: '#b5d5ff'
-    text: '#000000'
+    background: "#b5d5ff"
+    text: "#000000"
