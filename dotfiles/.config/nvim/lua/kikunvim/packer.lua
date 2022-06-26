@@ -7,12 +7,14 @@ end
 return require("packer").startup(function()
   use("wbthomason/packer.nvim")
 
+  use("nvim-lua/popup.nvim")
+  use("nvim-lua/plenary.nvim")
+
   use("TimUntersberger/neogit")
 
   -- Appearance
   use("folke/tokyonight.nvim")
   use("gruvbox-community/gruvbox")
-  use("kristijanhusak/defx-icons")
   use("nvim-treesitter/nvim-treesitter", {
     run = ":TSUpdate"
   })
@@ -21,7 +23,6 @@ return require("packer").startup(function()
   -- Lsp
   use("neovim/nvim-lspconfig")
   use("glepnir/lspsaga.nvim")
-  use("folke/lsp-colors.nvim")
   use("L3MON4D3/LuaSnip")
   use("hrsh7th/cmp-nvim-lsp")
   use("hrsh7th/cmp-buffer")
@@ -29,8 +30,6 @@ return require("packer").startup(function()
   use("onsails/lspkind-nvim")
 
   use("ThePrimeagen/harpoon")
-  use("nvim-lua/popup.nvim")
-  use("nvim-lua/plenary.nvim")
   use("windwp/nvim-autopairs")
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-fzy-native.nvim")
