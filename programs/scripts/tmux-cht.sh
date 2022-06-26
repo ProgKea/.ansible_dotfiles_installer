@@ -11,6 +11,6 @@ if grep -qs "$selected" ~/.tmux-cht-languages; then
     tmux neww bash -c "echo \"curl cht.sh/$selected/$query/\" & curl cht.sh/$selected/$query & while [ : ]; do sleep 1; done" 
 else
     query=`echo $query | tr ' ' '+'`
-    tmux neww bash -c "curl -s cht.sh/$selected~$query | cat"
+    tmux neww bash -c "echo \"curl cht.sh/$selected~$query\" & curl cht.sh/$selected~$query & while [ : ]; do sleep 1; done" 
 fi
 
