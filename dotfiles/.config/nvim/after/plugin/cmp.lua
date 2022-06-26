@@ -1,5 +1,13 @@
 local cmp = require'cmp'
 
+local source_mapping = {
+	buffer = "[Buffer]",
+	nvim_lsp = "[LSP]",
+	nvim_lua = "[Lua]",
+	path = "[Path]",
+}
+local lspkind = require("lspkind")
+
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -18,11 +26,21 @@ cmp.setup({
       select = true
     }),
   },
+  formatting = {
+      format = function(entry, vim_item)
+          vim_item.kind = lspkind.presets.default[vim_item.kind]
+          local menu = source_mapping[entry.source.name]
+          vim_item.menu = menu
+          return vim_item
+      end,
+  },
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-  }, {
-    { name = 'buffer' },
+      { name = 'nvim_lsp' },
+
+      { name = 'buffer' },
+
+      { name = "luasnip" },
   }),
 })
 
-vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
+--vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
