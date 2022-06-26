@@ -43,4 +43,4 @@ cmp.setup({
   }),
 })
 
---vim.cmd [[highlight! default link CmpItemKind CmpItemMenuDefault]]
+require("luasnip.loaders.from_vscode").lazy_load()

@@ -1,9 +1,3 @@
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-  return
-end
-
 return require("packer").startup(function()
   use("wbthomason/packer.nvim")
 
@@ -21,19 +15,21 @@ return require("packer").startup(function()
   use("kyazdani42/nvim-web-devicons")
 
   -- Lsp
+  use("L3MON4D3/LuaSnip")
+  use("saadparwaiz1/cmp_luasnip")
+  use("rafamadriz/friendly-snippets")
   use("neovim/nvim-lspconfig")
   use("glepnir/lspsaga.nvim")
-  use("L3MON4D3/LuaSnip")
   use("hrsh7th/cmp-nvim-lsp")
   use("hrsh7th/cmp-buffer")
   use("hrsh7th/nvim-cmp")
   use("onsails/lspkind-nvim")
-  use("saadparwaiz1/cmp_luasnip")
 
   use("ThePrimeagen/harpoon")
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-fzy-native.nvim")
   use("sbdchd/neoformat")
   use("mbbill/undotree")
-  --use("windwp/nvim-autopairs")
 end)
+
+--use("windwp/nvim-autopairs")
