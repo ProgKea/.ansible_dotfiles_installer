@@ -80,9 +80,10 @@ static char dmenumon[2] =
 // col_gray4,
 static const char *dmenucmd[] = {"dmenu_run", "-m",      dmenumon,
                                  "-fn",       dmenufont, NULL};
-static const char *termcmd[] = {"st", NULL};
-// static const char *termcmd[] = {"alacritty", NULL};
-// static const char *termcmd[] = {"kitty", NULL};
+// static const char *termcmd[] = {"st", NULL};
+//static const char *termcmd[] = {"alacritty", NULL};
+static const char *termcmd[] = {"urxvtc", NULL};
+//static const char *termcmd[] = {"kitty", NULL};
 static const char *google[] = {"google", NULL};
 static const char *web[] = {"visitWebsite", NULL};
 static const char *yt[] = {"yt", "-g", NULL};

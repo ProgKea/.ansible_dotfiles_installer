@@ -127,15 +127,14 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^?' backward-delete-char
 
 # open tmux if its not already open
-#[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session && exit;}
 [ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
 
 export FZF_DEFAULT_COMMAND="find -L -maxdepth 4"
 export PAGER="less"
+export TERMINAL="st"
 export EDITOR="nvim"
 export GOBIN="$HOME/code/go/bin"
 export GOPATH="$HOME/code/go"
-#export TERM="xterm-256color"
 
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line

@@ -30,6 +30,5 @@ return require("packer").startup(function()
   use("nvim-telescope/telescope-fzy-native.nvim")
   use("sbdchd/neoformat")
   use("mbbill/undotree")
+  use("windwp/nvim-autopairs")
 end)
-
---use("windwp/nvim-autopairs")

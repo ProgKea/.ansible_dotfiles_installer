@@ -37,7 +37,7 @@ colors:
     yellow: "#c4a000"
   primary:
     background: "#000000"
-    foreground: "#babdb6"
+    foreground: "#ffffff"
   selection:
     background: "#b5d5ff"
     text: "#000000"

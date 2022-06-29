@@ -10,9 +10,11 @@ vnoremap("J", ":m '>+1<CR>gv=gv")
 vnoremap("K", ":m '<-2<CR>gv=gv")
 
 nnoremap("<leader>pv", ":Ex<CR>")
+nnoremap("<leader>pt", ":Lexplore<CR>")
 nnoremap("<leader>u", ":UndotreeShow<CR>")
+nnoremap("<C-o>", ":bp<CR>")
 
-nnoremap("<S-C-p>", "\"0p")
+--nnoremap("<S-C-p>", ":\"0p")
 
 nmap("<C-a>", "gg<S-v>G")
 
@@ -22,7 +24,7 @@ nmap("<S-Tab>", ":tabprev<Return>")
 nmap("<Tab>", ":tabnext<Return>")
 
 -- Replace all is aliased to S.
-nnoremap("S", "k%s//g<Left><Left>")
+nnoremap("S", ":%s//g<Left><Left>")
 
 nmap("<leader>m", ":w<CR>:!make<CR>")
 
