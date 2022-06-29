@@ -18,3 +18,50 @@
 *color13:                 #ad7fa8
 *color14:                 #34e2e2
 *color15:                 #eeeeec
+
+!! URxvt
+!URxvt*scrollstyle:  plain
+URxvt*buffered: false
+
+URxvt*termName: xterm-256color
+URxvt.font: xft:Ubuntu Mono Nerd Font Mono:style=Regular:style=Medium:size=25:antialias=true:hinting=true,\
+xft:Unifont:style=Medium:size=23
+! Bolt
+URxvt.boldFont: xft:Ubuntu Mono Nerd Font Mono:style=Bold:size=25:antialias=true:hinting=true,\
+xft:Unifont:style=Medium:size=23
+! Italic
+URxvt.italicFont: xft:Ubuntu Mono Nerd Font Mono:style=Light,Regular:size=25:antialias=true:hinting=true,\
+xft:Unifont:style=Medium:size=23
+Xft*antialias         : true
+Xft.hinting           : true
+Xft.hintstyle         : hintfull
+Xft.autohint          : true
+Xft*dpi               : 96
+
+URxvt*letterSpace: +1
+!URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+URxvt.internalBorder: 4
+!URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+URxvt.scrollBar_right: false
+URxvt.depth: 24
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.intensityStyles: false
+
+URxvt.perl-ext-common: default
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
+! True Transparency
+URxvt.depth: 32
+URxvt.background: [90]#000000
+
+! Fake Transparency
+!URxvt*inheritPixmap: true
+!URxvt*transparent: true
+!URxvt*shading: 110
