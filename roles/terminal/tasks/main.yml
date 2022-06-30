@@ -3,6 +3,9 @@
   tags: terminal
   package:
     name:
+      - urxvt-unicode
+      - urxvt-perls
+      - perl
       - tmux
       - lsd
       - wget
@@ -13,11 +16,9 @@
       - z
       - xcompmgr
       - so
-        #- kitty
-        #- alacritty
-        #- xterm
-        #- gnome-terminal
 
+- name: Create terminal_emulator file
+  shell: echo st > $HOME/.local/share/terminal_emulator
 
 - name: Change default shell to zsh
   tags: terminal

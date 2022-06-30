@@ -1,0 +1,2 @@
+#!/bin/sh
+echo $1 > $HOME/.local/share/terminal_emulator

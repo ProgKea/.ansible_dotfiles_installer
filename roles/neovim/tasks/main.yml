@@ -1,7 +1,7 @@
 ---
 - name: Clone/Pull Neovim
   tags: neovim
-  shell: if [ ! -d "$HOME/neovim" ]; then git clone https://github.com/neovim/neovim $HOME/neovim; else git -C $HOME/neovim pull; fi
+  shell: if [ ! -d "$HOME/neovim" ]; then git clone --branch nightly https://github.com/neovim/neovim $HOME/neovim; else git -C $HOME/neovim pull origin master; fi
 
 - name: Install tree-sitter, cmake
   tags: neovim
@@ -12,7 +12,7 @@
 
 - name: Build Neovim
   tags: neovim
-  shell: sudo make CMAKE_BUILD_TYPE=RelWithDebInfo -C $HOME/neovim && sudo make install -C ~/neovim
+  shell: sudo make distclean -C $HOME/neovim && sudo make CMAKE_BUILD_TYPE=RelWithDebInfo -C $HOME/neovim && sudo make install -C ~/neovim
 
 - name: Create Neovim vim symlink if not present
   tags: neovim
@@ -28,7 +28,3 @@
   tags: neovim
   shell: git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   when: not packer_installed.stat.exists
-
-- name: Install Neovim Plugins
-  tags: neovim
-  shell: vim --headless -c "PackerCompile" -c "PackerSync" -c "qa"

@@ -13,6 +13,7 @@ nnoremap("<leader>lo", function() vim.diagnostic.open_float() end)
 nnoremap("<leader>ln", function() vim.diagnostic.goto_next() end)
 nnoremap("<leader>lp", function() vim.diagnostic.goto_prev() end)
 nnoremap("<leader>lf", function() vim.cmd(":Neoformat") end)
+nnoremap("<leader>lq", function() vim.diagnostic.setqflist() end)
 
 -- LuaSnip
 inoremap("<Tab>", function() require("luasnip").jump(1) end)
