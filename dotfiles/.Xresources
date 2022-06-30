@@ -20,8 +20,8 @@
 *color15:                 #eeeeec
 
 !! URxvt
-!URxvt*scrollstyle:  plain
-URxvt*buffered: false
+URxvt*scrollstyle:  plain
+!URxvt*buffered: false
 
 URxvt*termName: xterm-256color
 URxvt.font: xft:Ubuntu Mono Nerd Font Mono:style=Regular:style=Medium:size=25:antialias=true:hinting=true,\

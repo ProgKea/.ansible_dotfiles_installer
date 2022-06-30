@@ -144,6 +144,7 @@ bar {
     mode hide
     hidden_state hide
     status_command i3status
+    #status_command slstatus
 }
 
 bindsym $mod+Shift+t bar mode toggle
