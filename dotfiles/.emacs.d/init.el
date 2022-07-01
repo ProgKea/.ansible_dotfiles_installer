@@ -158,6 +158,13 @@
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.2))
 
+(use-package yasnippet
+  :ensure
+  :config
+  (yas-reload-all)
+  (add-hook 'prog-mode-hook 'yas-minor-mode)
+  (add-hook 'text-mode-hook 'yas-minor-mode))
+
 (setq lsp-enable-links nil)
 (setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-ui-doc-enable nil)
@@ -167,9 +174,6 @@
 
 ;; languages
 (use-package rust-mode
-  :ensure)
-
-(use-package haskell-mode
   :ensure)
 
 ;; keybindings
