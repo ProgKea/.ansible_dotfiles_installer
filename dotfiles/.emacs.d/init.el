@@ -22,6 +22,7 @@
 (add-hook 'minibuffer-exit-hook #'my-minibuffer-exit-hook)
 
 ;; setq's
+(setq vc-follow-symlinks t)
 (setq-default truncate-lines 1)
 (setq byte-compile-warnings '(cl-functions))
 (setq inhibit-startup-screen t)
@@ -85,17 +86,17 @@
 (advice-add 'evil-inner-paren :before #'my/jump-to-par)
 
 (use-package magit
-  :ensure t
+  :ensure
   :commands (magit-status magit-get-current-branch)
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 (use-package flycheck
-  :ensure t
+  :ensure
   :init (global-flycheck-mode))
 
 (use-package projectile
-  :ensure t
+  :ensure
   :init
   (when (file-directory-p "~/documents")
     (setq projectile-project-search-path '("~/documents")))
@@ -120,21 +121,24 @@
   (which-key-mode 1))
 
 (use-package diminish
-  :ensure t
+  :ensure
   :init
   (diminish 'which-key-mode)
   (diminish 'flycheck-mode)
   (diminish 'projectile-mode))
 
 (use-package undo-tree
-  :ensure t
+  :ensure
   :after evil
   :diminish
   :config
   (evil-set-undo-system 'undo-tree)
-  (global-undo-tree-mode 1))
+  (global-undo-tree-mode 1)
+  :custom
+  (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
-(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+(use-package vterm
+  :ensure)
 
 (use-package gruber-darker-theme
   :ensure)
@@ -156,8 +160,11 @@
   (company-idle-delay 0.2))
 
 (setq lsp-enable-links nil)
-(setq lsp-ui-sideline-show-hover nil)
 (setq lsp-headerline-breadcrumb-enable nil)
+(setq lsp-ui-doc-enable nil)
+(setq lsp-ui-sideline-show-hover nil)
+(setq lsp-signature-render-documentation nil)
+(setq lsp-eldoc-enable-hover nil)
 
 ;; languages
 (use-package rust-mode
@@ -185,6 +192,7 @@
 (evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
 (evil-define-key 'normal 'global (kbd "<leader>ln") 'flycheck-next-error)
 (evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
+(evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

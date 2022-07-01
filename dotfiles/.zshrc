@@ -137,7 +137,7 @@ bindkey -M vicmd 'y' vi-yank-xclip
 
 
 # open tmux if its not already open
-[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
+#[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
 
 export FZF_DEFAULT_COMMAND="find -L -maxdepth 4"
 export PAGER="less"
