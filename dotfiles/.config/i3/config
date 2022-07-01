@@ -139,12 +139,10 @@ bindsym $mod+Shift+u resize grow height 10 px or 10 ppt
 
 bindsym $mod+r mode "resize"
 
-# i3-status
 bar {
-    mode hide
-    hidden_state hide
+#    mode hide
+#    hidden_state hide
     status_command i3status
-    #status_command slstatus
 }
 
 bindsym $mod+Shift+t bar mode toggle

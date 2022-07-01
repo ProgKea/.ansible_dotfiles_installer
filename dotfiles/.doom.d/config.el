@@ -13,6 +13,19 @@
 (setq evil-replace-state-cursor 'box)
 (setq evil-operator-state-cursor 'box)
 
+(defun my/jump-to-par (&rest args)
+    (when (< (save-excursion
+         (search-forward "("))
+       (save-excursion
+         (search-forward ")")))
+    (search-forward "(")))
+(advice-add 'evil-inner-paren :before #'my/jump-to-par)
+
+(use-package company
+  :ensure
+  :custom
+  (company-idle-delay 0.5))
+
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "John Doe"
@@ -40,8 +53,8 @@
 
 ;; lsp
 (setq lsp-headerline-breadcrumb-enable nil)
-(add-hook 'c-mode-hook 'lsp)
-(add-hook 'c++-mode-hook 'lsp)
+(setq lsp-signature-render-documentation nil)
+(setq lsp-eldoc-enable-hover nil)
 
 ;; keybindings
 (map! :leader :n "r" #'lsp-rename)
@@ -57,6 +70,9 @@
 (map! :leader :n "mr" #'recompile)
 (map! :n "C-p" 'projectile-find-file)
 
+;; scrolloff option like in vim
+(setq scroll-margin 8)
+
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -65,7 +81,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq load-theme 'gruber-darker)
+;;(setq load-theme 'gruber-darker)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.

@@ -58,8 +58,8 @@ URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
 ! True Transparency
-URxvt.depth: 32
-URxvt.background: [90]#000000
+!URxvt.depth: 32
+!URxvt.background: [90]#000000
 
 ! Fake Transparency
 !URxvt*inheritPixmap: true
