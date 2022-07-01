@@ -163,6 +163,7 @@ alias hst="history 1 -1 | cut -c 8- | uniq | fzf | tr -d '\n' | xclip -sel c"
 alias ansi="ansible-playbook $HOME/.ansible_dotfiles_installer/local.yml"
 
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+bindkey -s ^h "tmux-sessionizer\n"
 
 # Load syntax highlighting; should be last.
 # source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null

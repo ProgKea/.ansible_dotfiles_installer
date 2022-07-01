@@ -46,7 +46,6 @@
 (blink-cursor-mode 0)
 (column-number-mode 1)
 (electric-pair-mode 1)
-(electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 (menu-bar--display-line-numbers-mode-relative)
 (fringe-mode 0)
@@ -170,6 +169,9 @@
 (use-package rust-mode
   :ensure)
 
+(use-package haskell-mode
+  :ensure)
+
 ;; keybindings
 (evil-set-leader 'normal (kbd "SPC"))
 (evil-define-key 'normal 'global (kbd "C-p") 'projectile-find-file)
@@ -193,6 +195,10 @@
 (evil-define-key 'normal 'global (kbd "<leader>ln") 'flycheck-next-error)
 (evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
 (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
+
+; vertico keybindings
+(define-key vertico-map (kbd "C-w") #'backward-kill-word)
+(define-key vertico-map (kbd "C-u") #'backward-kill-sentence)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
