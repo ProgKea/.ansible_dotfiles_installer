@@ -1,0 +1,1 @@
+("~/code/yt-subs/" "~/code/mini-game-collection/" "~/.ansible_dotfiles_installer/" "~/code/bad-game-from-tiktok/" "~/code/emdless/" "~/code/yt-sub-server/" "~/code/yew-test/" "~/code/ppm_geometry/" "~/code/nvim_old/" "~/code/Endless-Driver/")

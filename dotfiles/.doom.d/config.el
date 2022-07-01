@@ -68,6 +68,7 @@
 (map! :leader :n "lp" #'flycheck-previous-error)
 (map! :leader :n "mm" #'compile)
 (map! :leader :n "mr" #'recompile)
+(map! :leader :n "pv" #'dired-jump)
 (map! :n "C-p" 'projectile-find-file)
 
 ;; scrolloff option like in vim

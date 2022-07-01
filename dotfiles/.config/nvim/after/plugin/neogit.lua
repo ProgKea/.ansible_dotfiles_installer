@@ -5,6 +5,6 @@ neogit.setup {
   disable_commit_confirmation = true,
 }
 
-nnoremap("<leader>gs", function()
+nnoremap("<leader>g", function()
     neogit.open({ kind = "replace" })
 end);
