@@ -36,8 +36,7 @@
 
 ;; Set default font
 (set-frame-font "UbuntuMono 25" nil t)
-;; (add-to-list 'default-frame-alist
-;; 	    '(font . "Ubuntu Mono-25"))
+;; (set-frame-font "Iosevka 23" nil t)
 
 ;; Set emacs modes
 (blink-cursor-mode 1)
@@ -78,14 +77,6 @@
              :config
              (evil-collection-init))
 
-(defun my/jump-to-par (&rest args)
-    (when (< (save-excursion
-         (search-forward "("))
-       (save-excursion
-         (search-forward ")")))
-    (search-forward "(")))
-(advice-add 'evil-inner-paren :before #'my/jump-to-par)
-
 (use-package magit
   :ensure
   :commands (magit-status magit-get-current-branch)
@@ -120,9 +111,6 @@
   :ensure
   :init
   (which-key-mode 1))
-
-(use-package sx
-  :ensure)
 
 (use-package diminish
   :ensure
@@ -160,13 +148,15 @@
   :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-enable nil)
-  (lsp-ui-sideline-show-hover nil))
+  (lsp-ui-sideline-show-hover nil)
+  (lsp-ui-sideline-show-diagnostics nil))
 
 (use-package company
   :after lsp-mode
   :hook (prog-mode . company-mode)
   :custom
   (company-minimum-prefix-length 1)
+  (completion-ignore-case t) 
   (company-idle-delay 0.2))
 
 (use-package yasnippet
@@ -212,14 +202,10 @@
 (evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
 (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
 
-; sx keybindings
-(evil-define-key 'normal 'global (kbd "C-f i") 'sx-search)
-(evil-define-key 'normal 'global (kbd "C-f o") 'sx-display)
-
 ; Company keybindigns
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-w") 'backward-kill-word))
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-e") 'company-abort))
-(with-eval-after-load 'company (define-key company-active-map (kbd "<SPC>") 'company-complete-selection))
+(with-eval-after-load 'company (define-key company-active-map (kbd "<tab>") 'yas-next-field))
 (with-eval-after-load 'company (global-set-key (kbd "C-<SPC>") 'company-complete))
 
 ; vertico keybindings
@@ -230,6 +216,22 @@
 (add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
+;; functions
+(defun kill-other-buffers ()
+    "Kill all other buffers."
+    (interactive)
+    (mapc 'kill-buffer 
+          (delq (current-buffer) 
+                (remove-if-not 'buffer-file-name (buffer-list)))))
+
+(defun my/jump-to-par (&rest args)
+    (when (< (save-excursion
+         (search-forward "("))
+       (save-excursion
+         (search-forward ")")))
+    (search-forward "(")))
+(advice-add 'evil-inner-paren :before #'my/jump-to-par)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -237,7 +239,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(zenburn))
  '(custom-safe-themes
-   '("70cfdd2e7beaf492d84dfd5f1955ca358afb0a279df6bd03240c2ce74a578e9e" "a37d20710ab581792b7c9f8a075fcbb775d4ffa6c8bce9137c84951b1b453016" "33ea268218b70aa106ba51a85fe976bfae9cf6931b18ceaf57159c558bbcd1e6" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
+   '("6c4c97a17fc7b6c8127df77252b2d694b74e917bab167e7d3b53c769a6abb6d6" "b89a4f5916c29a235d0600ad5a0849b1c50fab16c2c518e1d98f0412367e7f97" "70cfdd2e7beaf492d84dfd5f1955ca358afb0a279df6bd03240c2ce74a578e9e" "a37d20710ab581792b7c9f8a075fcbb775d4ffa6c8bce9137c84951b1b453016" "33ea268218b70aa106ba51a85fe976bfae9cf6931b18ceaf57159c558bbcd1e6" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
  '(package-selected-packages
    '(zenburn-theme hc-zenburn-theme projectile flycheck magit evil-collection evil company use-package))
  '(warning-suppress-types '((comp) (comp))))

@@ -1,1 +1,1 @@
-("~/.ansible_dotfiles_installer/" "~/code/subashtion-rs/" "~/code/emdless/" "~/code/mini-game-collection/" "~/code/yt-sub-server/" "~/documents/Prüfung/" "~/code/bad-game-from-tiktok/" "~/code/yew-test/" "~/code/ppm_geometry/" "~/code/nvim_old/" "~/code/Endless-Driver/")
+("~/code/mini-game-collection/" "~/algo/codewars_rust/" "~/.ansible_dotfiles_installer/" "~/code/subashtion-rs/" "~/documents/Prüfung/" "~/code/emdless/" "~/code/yt-sub-server/" "~/code/bad-game-from-tiktok/" "~/code/yew-test/" "~/code/ppm_geometry/" "~/code/nvim_old/" "~/code/Endless-Driver/")
