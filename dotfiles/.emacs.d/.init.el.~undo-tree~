@@ -1,0 +1,22 @@
+(undo-tree-save-format-version . 1)
+"1e90cb97c5c3c2fa4519a26392d9b7001635dbf1"
+[nil nil nil nil (25279 9894 534660 522000) 0 nil]
+([nil current ((5819 . 6058) (#("(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )" 0 239 (fontified nil)) . -5819) (5772 . 5818) (#("
+" 0 1 (fontified nil)) . -5772) (5699 . 5773) (#(" " 0 1 (fontified nil)) . 5699) (5669 . 5700) (#("
+" 0 1 (fontified nil)) . -5669) (5588 . 5670) (#(" " 0 1 (fontified nil)) . 5588) (5279 . 5589) (#("(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes '(gruber-darker))
+ '(custom-safe-themes
+   '(\"3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc\" default))
+ '(package-selected-packages
+   '(projectile flycheck magit evil-collection evil company use-package))
+ '(warning-suppress-types '((comp) (comp))))" 0 539 (fontified nil)) . -5279) (t 25279 9876 961838 584000)) nil (25279 9894 534638 403000) 0 nil])
+nil

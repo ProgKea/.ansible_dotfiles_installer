@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ $1 == "" ]]; then
+  song=$(find $HOME/music -type f | fzf)
+  mpv --really-quiet "$song" &
+elif [[ $1 == "dmenu" ]]; then
+  song=$(find $HOME/music -type f | dmenu -i -l 10 -p "Song: ")
+  mpv --really-quiet "$song" &
+elif [[ $1 == "loop" ]]; then
+  song=$(find $HOME/music -type f | fzf)
+  mpv --really-quiet --loop "$song" &
+elif [[ $1 == "categories" ]]; then
+  ls $HOME/music
+else
+  mpv --really-quiet --shuffle $HOME/music/$1/* &
+fi

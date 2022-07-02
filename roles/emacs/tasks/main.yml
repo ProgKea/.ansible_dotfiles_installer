@@ -1,0 +1,5 @@
+---
+- name: Install emacs native comp package
+  tags: emacs
+  package:
+    name: emacs-nativecomp

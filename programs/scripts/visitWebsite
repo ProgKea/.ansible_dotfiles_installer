@@ -1,0 +1,7 @@
+#!/usr/bin/sh
+
+site=$(cat ~/.local/share/webScripts/bookmarks.txt | awk '{print $1}' | dmenu -i -l 10 -p "Visit:")
+query=$(cat ~/.local/share/webScripts/bookmarks.txt | grep $site | awk '{print $2}')
+if [[ $query ]]; then
+  $(cat ~/.local/share/webScripts/browser.txt) "$query"
+fi
