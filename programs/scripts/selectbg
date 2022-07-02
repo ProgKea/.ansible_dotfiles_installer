@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-wallpaper_path="$HOME/wallpapers/"
-selected=$(ls $wallpaper_path | grep -E "(*.png|*.jpg|*.jpeg|*.svg)" | fzf)
-if [[ -z $selected ]]; then
-  exit 0
-fi
-
-feh --bg-fill $wallpaper_path$selected

@@ -1,7 +1,0 @@
----
-- name: Install media packages
-  package:
-    name:
-      - zathura
-      - zathura-pdf-poppler
-      - mpv
