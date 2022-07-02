@@ -1,9 +1,0 @@
----
-- name: Install window managers
-  tags: wms
-  package:
-    name:
-      - i3-gaps
-      - i3status
-      - sxhkd
-      - bspwm

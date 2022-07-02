@@ -1,7 +1,0 @@
-#!/bin/bash
-
-code_files=$(find $HOME/code -type f)
-document_files=$(find $HOME/documents -type f)
-file=$(echo "$code_files$document_files" | dmenu -i -l 25)
-
-curl -F "file=@$file" 0x0.st | xclip -selection c
