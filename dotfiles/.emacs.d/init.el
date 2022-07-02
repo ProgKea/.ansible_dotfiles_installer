@@ -49,6 +49,8 @@
 ;; (fringe-mode 0)
 
 ;; set keybindings
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-u") 'backward-kill-sentence)
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (global-set-key (kbd "C-x j") 'async-shell-command)
 (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
@@ -182,6 +184,7 @@
 (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
 (evil-define-key 'normal 'global (kbd "<leader>pv") 'dired-jump)
 (evil-define-key 'normal 'global (kbd "<leader>pp") 'projectile-switch-project)
+(evil-define-key 'normal 'global (kbd "<leader>pa") 'projectile-add-known-project)
 (evil-define-key 'normal 'global (kbd "<leader>pr") 'projectile-remove-known-project)
 (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
 (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
@@ -206,10 +209,6 @@
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-e") 'company-abort))
 (with-eval-after-load 'company (define-key company-active-map (kbd "<tab>") 'yas-next-field))
 (with-eval-after-load 'company (global-set-key (kbd "C-<SPC>") 'company-complete))
-
-; vertico keybindings
-(define-key vertico-map (kbd "C-w") #'backward-kill-word)
-(define-key vertico-map (kbd "C-u") #'backward-kill-sentence)
 
 ;; hooks
 (add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode -1)))
