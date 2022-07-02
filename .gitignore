@@ -1,2 +1,2 @@
-./dotfiles/.config/nvim/plugin/packer_compiled.lua
-./dotfiles/.emacs.d/elpa
+packer_compiled.lua
+elpa/
