@@ -1,0 +1,90 @@
+#  ------ programs  -------- # 
+
+alt + shift + Return
+	st
+
+alt + shift + w 
+	google
+
+alt + w 
+	visitWebsite
+
+# audio bindings
+
+XF86AudioRaiseVolume 
+  pactl set-sink-volume @DEFAULT_SINK@ +10%
+
+XF86AudioLowerVolume
+  pactl set-sink-volume @DEFAULT_SINK@ -10%
+
+XF86AudioMute
+  pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+XF86AudioMicMute
+  pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# bspwm-specific Hotkeys
+
+# restart
+shift + alt + r
+	bspc wm -r
+
+# Change focus
+alt + {j,k}
+    bspc node --focus {next.local,prev.local}
+
+# Move window
+alt + shift + {j,k}
+    bspc node -s {next.local,prev.local}
+
+# Close window
+alt + shift + c 
+    bspc node -c
+
+# Focus master
+shift + space
+    bspc node --focus biggest.local
+
+# Promote to master
+alt + z
+    bspc node -s biggest.local
+
+# Change desktop
+alt + {1-9,0}
+    bspc desktop --focus ^{1-9,10}
+
+# Move to desktop
+alt + shift + {1-9,0}
+    bspc node --to-desktop ^{1-9,10}
+
+# Fullscreen
+alt + f
+    bspc desktop --layout fullscreen
+
+# Fullscreen
+alt + t
+    bspc desktop --layout tiled
+
+# floating toggle
+alt + shift + o
+    if [ -z "$(bspc query -N -n focused.floating)" ]; then \                    
+        bspc node focused -t floating; \                                        
+    else \                                                                      
+        bspc node focused -t tiled; \                                           
+    fi
+
+# Resize
+alt + {h,l}
+    bspwm_node_resize {west,east}
+
+# Reload config
+alt + F2
+     ~/.config/bspwm/bspwmrc
+
+# dmenu run
+alt + p
+     dmenu_run
+
+# quit bspwm
+shift + alt + q 
+	loginctl kill-session $XDG_SESSION_ID

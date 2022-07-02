@@ -1,0 +1,22 @@
+---
+- name: Check if firefox is installed
+  tags: firefox, productivity
+  shell: which firefox
+  register: firefox_installed
+
+- name: Install firefox
+  tags: firefox, productivity
+  package:
+    name: firefox
+  when: '"not found" in firefox_installed.stdout'
+
+- name: Check if firefox config is installed
+  tags: firefox, productivity
+  stat:
+    path: "$HOME/.mozilla/firefox/gd2gcmeu.default-release"
+  register: firefox_config_installed
+
+- name: Install firefox config
+  tags: firefox, productivity
+  copy: src="./programs/firefox/gd2gcmeu.default-release" dest="$HOME/.mozilla/firefox/gd2gcmeu.default-release"
+  when: not firefox_config_installed.stat.exists

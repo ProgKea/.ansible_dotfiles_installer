@@ -1,0 +1,9 @@
+.config/discord/*
+.config/discordcanary/*
+.config/Electron/*
+.config/draw.io/*
+.config/fish/*
+.config/gtk*/*
+.config/nvim_primagen/*
+.config/sqlitebrowser/*
+.config/nvim/*

@@ -1,0 +1,12 @@
+[submodule ".emacs.d/.local/straight/repos/harpoon.el"]
+	path = .emacs.d/.local/straight/repos/harpoon.el
+	url = https://github.com/otavioschwanck/harpoon.el.git
+[submodule ".emacs.d/.local/straight/repos/obsidian-theme"]
+	path = .emacs.d/.local/straight/repos/obsidian-theme
+	url = https://github.com/mswift42/obsidian-theme.git
+[submodule ".emacs.d/.local/straight/repos/emacs-libvterm"]
+	path = .emacs.d/.local/straight/repos/emacs-libvterm
+	url = https://github.com/akermu/emacs-libvterm.git
+[submodule ".emacs.d/.local/straight/repos/darkburn-theme"]
+	path = .emacs.d/.local/straight/repos/darkburn-theme
+	url = https://github.com/gorauskas/darkburn-theme.git
