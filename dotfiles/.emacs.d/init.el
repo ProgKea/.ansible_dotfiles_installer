@@ -1,8 +1,8 @@
 (require 'package)
 (setq package-archives '(
-			("melpa" . "https://melpa.org/packages/")
-			("org" . "https://orgmode.org/elpa/")
-			("elpa" . "https://elpa.gnu.org/packages/")))
+			 ("melpa" . "https://melpa.org/packages/")
+			 ("org" . "https://orgmode.org/elpa/")
+			 ("elpa" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -35,8 +35,9 @@
 (setq auto-save-default nil)
 
 ;; Set default font
-(add-to-list 'default-frame-alist
-	    '(font . "Ubuntu Mono-25"))
+(set-frame-font "UbuntuMono 25" nil t)
+;; (add-to-list 'default-frame-alist
+;; 	    '(font . "Ubuntu Mono-25"))
 
 ;; Set emacs modes
 (blink-cursor-mode 1)
@@ -52,6 +53,7 @@
 
 ;; set keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(global-set-key (kbd "C-x j") 'async-shell-command)
 (global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
 
 ;; Install and configure packages
@@ -119,6 +121,9 @@
   :init
   (which-key-mode 1))
 
+(use-package sx
+  :ensure)
+
 (use-package diminish
   :ensure
   :init
@@ -142,6 +147,9 @@
 (use-package gruber-darker-theme
   :ensure)
 
+(use-package zenburn-theme
+  :ensure)
+
 (use-package lsp-mode
   :ensure
   :hook ((c-mode . lsp)
@@ -149,7 +157,10 @@
   :commands (lsp lsp-deferred))
 
 (use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode))
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-enable nil)
+  (lsp-ui-sideline-show-hover nil))
 
 (use-package company
   :after lsp-mode
@@ -167,8 +178,6 @@
 
 (setq lsp-enable-links nil)
 (setq lsp-headerline-breadcrumb-enable nil)
-(setq lsp-ui-doc-enable nil)
-(setq lsp-ui-sideline-show-hover nil)
 (setq lsp-signature-render-documentation nil)
 (setq lsp-eldoc-enable-hover nil)
 
@@ -179,6 +188,9 @@
 ;; keybindings
 (evil-set-leader 'normal (kbd "SPC"))
 (evil-define-key 'normal 'global (kbd "C-p") 'projectile-find-file)
+(evil-define-key 'normal 'global (kbd "<leader>ph") '(lambda() (interactive)
+						       (cd "~/")
+						       (call-interactively 'find-file)))
 (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
 (evil-define-key 'normal 'global (kbd "<leader>pv") 'dired-jump)
 (evil-define-key 'normal 'global (kbd "<leader>pp") 'projectile-switch-project)
@@ -200,20 +212,34 @@
 (evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
 (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
 
+; sx keybindings
+(evil-define-key 'normal 'global (kbd "C-f i") 'sx-search)
+(evil-define-key 'normal 'global (kbd "C-f o") 'sx-display)
+
+; Company keybindigns
+(with-eval-after-load 'company (define-key company-active-map (kbd "C-w") 'backward-kill-word))
+(with-eval-after-load 'company (define-key company-active-map (kbd "C-e") 'company-abort))
+(with-eval-after-load 'company (define-key company-active-map (kbd "<SPC>") 'company-complete-selection))
+(with-eval-after-load 'company (global-set-key (kbd "C-<SPC>") 'company-complete))
+
 ; vertico keybindings
 (define-key vertico-map (kbd "C-w") #'backward-kill-word)
 (define-key vertico-map (kbd "C-u") #'backward-kill-sentence)
+
+;; hooks
+(add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode -1)))
+(add-hook 'dired-mode-hook 'auto-revert-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(gruber-darker))
+ '(custom-enabled-themes '(zenburn))
  '(custom-safe-themes
-   '("3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
+   '("70cfdd2e7beaf492d84dfd5f1955ca358afb0a279df6bd03240c2ce74a578e9e" "a37d20710ab581792b7c9f8a075fcbb775d4ffa6c8bce9137c84951b1b453016" "33ea268218b70aa106ba51a85fe976bfae9cf6931b18ceaf57159c558bbcd1e6" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
  '(package-selected-packages
-   '(projectile flycheck magit evil-collection evil company use-package))
+   '(zenburn-theme hc-zenburn-theme projectile flycheck magit evil-collection evil company use-package))
  '(warning-suppress-types '((comp) (comp))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
