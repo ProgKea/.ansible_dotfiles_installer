@@ -28,14 +28,12 @@
 (setq inhibit-startup-screen t)
 (setq compile-command "")
 (setq compilation-ask-about-save nil)
-
 (setq scroll-margin 8)
-(setq display-line-numbers-type 'relative)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
 ;; Set default font
-(set-frame-font "UbuntuMono 25" nil t)
+(set-frame-font "UbuntuMono 23" nil t)
 ;; (set-frame-font "Iosevka 23" nil t)
 
 ;; Set emacs modes
@@ -48,7 +46,7 @@
 (electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 (menu-bar--display-line-numbers-mode-relative)
-(fringe-mode 0)
+;; (fringe-mode 0)
 
 ;; set keybindings
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -184,6 +182,7 @@
 (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
 (evil-define-key 'normal 'global (kbd "<leader>pv") 'dired-jump)
 (evil-define-key 'normal 'global (kbd "<leader>pp") 'projectile-switch-project)
+(evil-define-key 'normal 'global (kbd "<leader>pr") 'projectile-remove-known-project)
 (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
 (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
 (evil-define-key 'normal 'global (kbd "C-o") 'previous-buffer)
@@ -215,6 +214,7 @@
 ;; hooks
 (add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'dired-mode-hook 'auto-revert-mode)
+(add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
 
 ;; functions
 (defun kill-other-buffers ()
@@ -222,7 +222,7 @@
     (interactive)
     (mapc 'kill-buffer 
           (delq (current-buffer) 
-                (remove-if-not 'buffer-file-name (buffer-list)))))
+                (cl-remove-if-not 'buffer-file-name (buffer-list)))))
 
 (defun my/jump-to-par (&rest args)
     (when (< (save-excursion
@@ -237,7 +237,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(zenburn))
+ '(custom-enabled-themes '(gruber-darker))
  '(custom-safe-themes
    '("6c4c97a17fc7b6c8127df77252b2d694b74e917bab167e7d3b53c769a6abb6d6" "b89a4f5916c29a235d0600ad5a0849b1c50fab16c2c518e1d98f0412367e7f97" "70cfdd2e7beaf492d84dfd5f1955ca358afb0a279df6bd03240c2ce74a578e9e" "a37d20710ab581792b7c9f8a075fcbb775d4ffa6c8bce9137c84951b1b453016" "33ea268218b70aa106ba51a85fe976bfae9cf6931b18ceaf57159c558bbcd1e6" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
  '(package-selected-packages
