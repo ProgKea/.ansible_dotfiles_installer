@@ -41,6 +41,9 @@
 (package-install 'quelpa-use-package)
 (require 'quelpa-use-package)
 
+;; keep custom variables inside its own file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
 ;;; ASYNC
 ;; Emacs look SIGNIFICANTLY less often which is a good thing.
 ;; asynchronous bytecode compilation and various other actions makes
@@ -66,14 +69,8 @@
 (setq auto-save-default nil)
 
 ;; Set default font
-;; (set-frame-font "UbuntuMono 23" nil t)
-;; (set-face-attribute 'default nil
-;;                     :family "Ubuntu Mono"
-;;                     :height 230
-;;                     :weight 'normal
-;;                     :width 'normal)
-;; (set-frame-font "Liberation Mono 20" nil t)
-(set-frame-font "Iosevka 23" nil t)
+(add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
+;;(add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
 
 (define-minor-mode minor-mode-blackout-mode
  "Hides minor modes from the mode line."
@@ -192,7 +189,10 @@
   (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
 (use-package vterm :ensure t)
-(use-package gruber-darker-theme :ensure t)
+(use-package gruber-darker-theme
+  :ensure t
+  :config
+  (load-theme 'gruber-darker t))
 (use-package zenburn-theme :ensure t)
 
 (use-package lsp-mode
@@ -307,21 +307,3 @@
          (search-forward ")")))
     (search-forward "(")))
 (advice-add 'evil-inner-paren :before #'my/jump-to-par)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(gruber-darker))
- '(custom-safe-themes
-   '("d14f3df28603e9517eb8fb7518b662d653b25b26e83bd8e129acea042b774298" "78c4238956c3000f977300c8a079a3a8a8d4d9fee2e68bad91123b58a4aa8588" "6b5c518d1c250a8ce17463b7e435e9e20faa84f3f7defba8b579d4f5925f60c1" "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27" "bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "4780d7ce6e5491e2c1190082f7fe0f812707fc77455616ab6f8b38e796cbffa9" "36ca8f60565af20ef4f30783aa16a26d96c02df7b4e54e9900a5138fb33808da" "c9ddf33b383e74dac7690255dd2c3dfa1961a8e8a1d20e401c6572febef61045" "dbade2e946597b9cda3e61978b5fcc14fa3afa2d3c4391d477bdaeff8f5638c5" "801a567c87755fe65d0484cb2bded31a4c5bb24fd1fe0ed11e6c02254017acb2" "dc6d3dbbfc3dde0a6d04b86a2659e208474646a5b559f05c95f2c450742fffb7" "6c4c97a17fc7b6c8127df77252b2d694b74e917bab167e7d3b53c769a6abb6d6" "b89a4f5916c29a235d0600ad5a0849b1c50fab16c2c518e1d98f0412367e7f97" "70cfdd2e7beaf492d84dfd5f1955ca358afb0a279df6bd03240c2ce74a578e9e" "a37d20710ab581792b7c9f8a075fcbb775d4ffa6c8bce9137c84951b1b453016" "33ea268218b70aa106ba51a85fe976bfae9cf6931b18ceaf57159c558bbcd1e6" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" default))
- '(package-selected-packages
-   '(monokai-theme company-posframe zenburn-theme projectile flycheck magit evil-collection evil company use-package))
- '(warning-suppress-types '((comp) (comp))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

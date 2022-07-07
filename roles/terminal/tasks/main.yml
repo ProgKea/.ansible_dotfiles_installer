@@ -35,9 +35,13 @@
   shell: sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   when: not oh_my_zsh_installed.stat.exists
 
-- name: Install zsh-theme
+- name: Install zsh-theme1
   tags: terminal
   copy: src="oh-my-zsh/kiku.zsh-theme" dest="$HOME/.oh-my-zsh/themes/kiku.zsh-theme"
+
+- name: Install zsh-theme2
+  tags: terminal
+  copy: src="oh-my-zsh/kikusimple.zsh-theme" dest="$HOME/.oh-my-zsh/themes/kikusimple.zsh-theme"
 
 - name: Check if .zshrc.pre-oh-my-zsh exists
   tags: terminal

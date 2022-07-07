@@ -1,7 +1,8 @@
 # Set mod to alt
 set $mod Mod1
 
-font pango:monospace 8
+# font pango:monospace 8
+font pango:Iosevka 10
 
 # Hide border if only 1 window is active
 hide_edge_borders smart
@@ -116,27 +117,13 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+q exec "logout"
+bindsym $mod+Shift+q exec "loginctl kill-session $XDG_SESSION_ID"
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+i resize shrink width 10 px or 10 ppt
 bindsym $mod+u resize grow width 10 px or 10 ppt
 bindsym $mod+Shift+i resize shrink height 10 px or 10 ppt
 bindsym $mod+Shift+u resize grow height 10 px or 10 ppt
-
-#mode "resize" {
-#        bindsym $mod+l resize shrink width 10 px or 10 ppt
-#        bindsym $mod+k resize grow height 10 px or 10 ppt
-#        bindsym $mod+j resize shrink height 10 px or 10 ppt
-#        bindsym $mod+h resize grow width 10 px or 10 ppt
-#
-#        # back to normal: Enter or Escape or $mod+r
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#        bindsym $mod+r mode "default"
-#}
-
-bindsym $mod+r mode "resize"
 
 bar {
 #    mode hide
