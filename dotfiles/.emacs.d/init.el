@@ -273,6 +273,9 @@
 (evil-define-key 'normal 'global (kbd "<leader>mr") 'recompile)
 (evil-define-key 'normal 'global (kbd "C-f i") 'eww)
 
+; make leader key work in dired mode
+(with-eval-after-load 'dired (evil-define-key 'normal dired-mode-map (kbd "<SPC>") 'evil-send-leader))
+
 ; lsp keybindings
 (evil-define-key 'normal 'global (kbd "<leader>r") 'lsp-rename)
 (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-find-references)
