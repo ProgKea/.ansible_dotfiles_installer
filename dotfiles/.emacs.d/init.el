@@ -68,7 +68,7 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-;; Set default font
+;; add-to-lists
 (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
 ;;(add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
 
@@ -189,11 +189,15 @@
   (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
 (use-package vterm :ensure t)
-(use-package gruber-darker-theme
-  :ensure t
-  :config
-  (load-theme 'gruber-darker t))
-(use-package zenburn-theme :ensure t)
+ (use-package gruber-darker-theme
+   :ensure t
+   :config
+   (load-theme 'gruber-darker t))
+
+;; (use-package zenburn-theme
+;;   :ensure t
+;;   :config
+;;  (load-theme 'zenburn t))
 
 (use-package lsp-mode
   :hook ((c-mode . lsp-deferred)

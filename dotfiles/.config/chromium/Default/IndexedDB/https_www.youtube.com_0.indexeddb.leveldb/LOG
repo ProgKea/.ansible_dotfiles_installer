@@ -1,0 +1,5 @@
+2022/07/07-18:28:07.848 3e51 Creating DB /home/keanu/.config/chromium/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb since it was missing.
+2022/07/07-18:28:07.850 3e51 Reusing MANIFEST /home/keanu/.config/chromium/Default/IndexedDB/https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/07/07-18:50:51.730 4083 Level-0 table #5: started
+2022/07/07-18:50:51.737 4083 Level-0 table #5: 1111930 bytes OK
+2022/07/07-18:50:51.738 4083 Delete type=0 #3

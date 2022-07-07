@@ -1,1 +1,1 @@
-("~/.ansible_dotfiles_installer/" "~/.oh-my-zsh/" "~/algo/codewars_rust/" "~/code/habitio/" "~/code/mini-game-collection/" "~/documents/Prüfung/" "~/code/emdless/" "~/code/bad-game-from-tiktok/" "~/code/yew-test/" "~/code/ppm_geometry/" "~/code/nvim_old/" "~/code/Endless-Driver/")
+("~/code/habitio/" "~/.ansible_dotfiles_installer/" "~/code/Endless-Driver/" "~/.oh-my-zsh/" "~/algo/codewars_rust/" "~/code/mini-game-collection/" "~/code/emdless/" "~/code/bad-game-from-tiktok/" "~/code/yew-test/" "~/code/ppm_geometry/" "~/code/nvim_old/")
