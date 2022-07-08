@@ -59,7 +59,6 @@
 
 ;; setq's
 (setq vc-follow-symlinks t)
-;(setq-default truncate-lines 1)
 (setq byte-compile-warnings '(cl-functions))
 (setq inhibit-startup-screen t)
 (setq compile-command "")
@@ -67,9 +66,7 @@
 (setq scroll-margin 8)
 (setq make-backup-files nil)
 (setq auto-save-default nil)
-
-(setq c-default-style "linux"
-      c-basic-offset 4)
+(setq-default word-wrap t)
 
 ;; add-to-lists
 (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
@@ -257,7 +254,6 @@
 
 ;; evil keybindings
 (evil-set-leader 'normal (kbd "SPC"))
-(evil-define-key 'normal 'global (kbd "<escape>") 'keyboard-escape-quit)
 (evil-define-key 'normal 'global (kbd "C-j") 'projectile-find-file)
 (evil-define-key 'normal 'global (kbd "<leader>jw") 'find-grep)
 (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
@@ -267,17 +263,21 @@
 (evil-define-key 'normal 'global (kbd "<leader>jv") 'dired-jump)
 ; Projectile
 (evil-define-key 'normal 'global (kbd "<leader>jj") 'projectile-switch-project)
-(evil-define-key 'normal 'global (kbd "<leader>ja") '(lambda() (interactive)
-						       (cd "~/")
-						       (call-interactively 'projectile-add-known-project)))
 (evil-define-key 'normal 'global (kbd "<leader>jr") 'projectile-remove-known-project)
 
 (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
 (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
-(evil-define-key 'normal 'global (kbd "C-o") 'previous-buffer)
+(evil-define-key 'normal 'global (kbd "C-o") 'evil-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>mm") 'compile)
 (evil-define-key 'normal 'global (kbd "<leader>mr") 'recompile)
 (evil-define-key 'normal 'global (kbd "C-f i") 'eww)
+
+; escape minibuffer
+(evil-define-key 'normal minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
+;(evil-define-key 'normal minibuffer-local-ns-map (kbd "<escape>") 'keyboard-escape-quit)
+;(evil-define-key 'normal minibuffer-local-completion-map (kbd "<escape>") 'keyboard-escape-quit)
+;(evil-define-key 'normal minibuffer-local-must-match-map (kbd "<escape>") 'keyboard-escape-quit)
+;(evil-define-key 'normal minibuffer-local-isearch-map (kbd "<escape>") 'keyboard-escape-quit)
 
 ; make leader key work in dired mode
 (with-eval-after-load 'dired (evil-define-key 'normal dired-mode-map (kbd "<SPC>") 'evil-send-leader))

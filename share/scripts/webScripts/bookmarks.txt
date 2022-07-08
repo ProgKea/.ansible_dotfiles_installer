@@ -13,3 +13,4 @@ wolframalpha https://www.wolframalpha.com/
 devdocs.io https://devdocs.io/
 twitch https://www.twitch.tv/
 monkeytype https://monkeytype.com/
+single-file-public-domain https://github.com/nothings/stb
