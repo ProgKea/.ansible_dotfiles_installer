@@ -252,12 +252,8 @@
   :init
   (setq zig-format-on-save nil))
 
-
 ;; keybindings
-(global-set-key (kbd "C-w") 'backward-kill-word)
-(global-set-key (kbd "C-u") 'backward-kill-sentence)
 (global-set-key (kbd "C-x j") 'async-shell-command)
-(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
 
 ;; evil keybindings
 (evil-set-leader 'normal (kbd "SPC"))
@@ -302,6 +298,16 @@
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-e") 'company-abort))
 (with-eval-after-load 'company (define-key company-active-map (kbd "<tab>") 'yas-next-field))
 (with-eval-after-load 'company (global-set-key (kbd "C-<SPC>") 'company-complete))
+
+; Vertico keybindings
+(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "j") 'vertico-next))
+(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "k") 'vertico-previous))
+(with-eval-after-load 'vertico (evil-define-key 'insert vertico-map (kbd "C-n") 'vertico-next))
+(with-eval-after-load 'vertico (evil-define-key 'insert vertico-map (kbd "C-p") 'vertico-previous))
+(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "<tab>") 'vertico-insert))
+(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "<RET>") '(lambda () (interactive)
+										     (vertico-insert)
+										     (vertico-exit-input))))
 
 ;; hooks
 (add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode -1)))
