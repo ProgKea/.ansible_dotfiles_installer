@@ -287,7 +287,7 @@
 (evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
 (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
 
-; Company keybindigns
+; Company keybindings
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-w") 'backward-kill-word))
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-e") 'company-abort))
 (with-eval-after-load 'company (define-key company-active-map (kbd "<tab>") 'yas-next-field))

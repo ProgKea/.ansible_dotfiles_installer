@@ -1,6 +1,0 @@
-2022/07/07-19:11:28.072 5092 Creating DB /home/keanu/.config/chromium/Default/IndexedDB/https_www.reddit.com_0.indexeddb.leveldb since it was missing.
-2022/07/07-19:11:28.076 5092 Reusing MANIFEST /home/keanu/.config/chromium/Default/IndexedDB/https_www.reddit.com_0.indexeddb.leveldb/MANIFEST-000001
-2022/07/07-19:12:22.284 5092 Level-0 table #5: started
-2022/07/07-19:12:22.286 5092 Level-0 table #5: 1857 bytes OK
-2022/07/07-19:12:22.287 5092 Delete type=0 #3
-2022/07/07-19:12:22.287 5092 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
