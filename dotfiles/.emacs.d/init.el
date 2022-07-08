@@ -68,6 +68,9 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
 ;; add-to-lists
 (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
 ;;(add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
@@ -98,18 +101,12 @@
 (menu-bar--display-line-numbers-mode-relative)
 (fringe-mode 0)
 
-;; set keybindings
-(global-set-key (kbd "C-w") 'backward-kill-word)
-(global-set-key (kbd "C-u") 'backward-kill-sentence)
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-x j") 'async-shell-command)
-(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
-
 ;; Install and configure packages
 (use-package evil
   :ensure
   :init
   (setq evil-want-keybinding nil)
+  (setq evil-want-minibuffer t)
   :config
   (setq cursor-type 'box)
   (setq evil-normal-state-cursor 'box)
@@ -250,8 +247,21 @@
 
 (use-package yaml-mode :ensure)
 
+(use-package zig-mode
+  :ensure
+  :init
+  (setq zig-format-on-save nil))
+
+
 ;; keybindings
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-u") 'backward-kill-sentence)
+(global-set-key (kbd "C-x j") 'async-shell-command)
+(global-set-key (kbd "C-c C-c") 'comment-or-uncomment-region)
+
+;; evil keybindings
 (evil-set-leader 'normal (kbd "SPC"))
+(evil-define-key 'normal 'global (kbd "<escape>") 'keyboard-escape-quit)
 (evil-define-key 'normal 'global (kbd "C-j") 'projectile-find-file)
 (evil-define-key 'normal 'global (kbd "<leader>jw") 'find-grep)
 (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
