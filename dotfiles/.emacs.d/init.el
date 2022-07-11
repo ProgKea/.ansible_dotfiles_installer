@@ -274,14 +274,13 @@
 
 (evil-define-key 'normal 'global (kbd "<leader>jv") 'dired-jump)
 
-;; Projectile
 (evil-define-key 'normal 'global (kbd "<leader>jj") 'projectile-switch-project)
-
 (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
 (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
 (evil-define-key 'normal 'global (kbd "C-o") 'evil-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>mm") 'compile)
 (evil-define-key 'normal 'global (kbd "<leader>mr") 'recompile)
+(evil-define-key 'normal 'global (kbd "<leader>mk") 'kill-compilation)
 (evil-define-key 'normal 'global (kbd "C-f i") 'eww)
 
 ;; escape minibuffer
