@@ -67,6 +67,7 @@
 (setq auto-save-default nil)
 (setq-default word-wrap t)
 (setq-default indent-tabs-mode nil)
+(setq-default compilation-scroll-output t)
 
 ;; add-to-lists
 (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
@@ -291,6 +292,7 @@
 
 (evil-define-key 'normal 'global (kbd "<leader>ln") 'next-error)
 (evil-define-key 'normal 'global (kbd "<leader>lp") 'previous-error)
+(evil-define-key 'normal 'global (kbd "<leader>i") 'imenu)
 
 ;; lsp keybindings
 (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
