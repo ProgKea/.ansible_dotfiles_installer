@@ -261,6 +261,7 @@
 (evil-define-key 'visual 'global (kbd "<leader>R") 'query-replace-regexp)
 
 (evil-define-key 'visual 'global (kbd "<leader>a") 'align-regexp)
+(evil-define-key 'visual 'global (kbd "C") 'comment-or-uncomment-region)
 
 ;; find
 (evil-define-key 'normal 'global (kbd "C-j") 'projectile-find-file)
@@ -349,7 +350,6 @@
 ;;(evil-define-key 'normal minibuffer-local-ns-map (kbd "<escape>") 'keyboard-escape-quit)
 ;;(evil-define-key 'normal minibuffer-local-completion-map (kbd "<escape>") 'keyboard-escape-quit)
 ;;(evil-define-key 'normal minibuffer-local-must-match-map (kbd "<escape>") 'keyboard-escape-quit)
-
 ;;(evil-define-key 'normal minibuffer-local-isearch-map (kbd "<escape>") 'keyboard-escape-quit)
 
 (custom-set-variables
@@ -360,8 +360,7 @@
  '(package-selected-packages
    '(zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package projectile orderless monokai-theme magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck evil-collection disable-mouse diminish company-posframe autothemer auctex async ansible))
  '(whitespace-style
-   (quote
-    (face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark))))
+   '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
