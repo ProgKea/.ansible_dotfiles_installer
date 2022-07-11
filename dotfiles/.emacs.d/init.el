@@ -12,7 +12,7 @@
       vc-make-backup-files t
       version-control t
       kept-old-versions 0
-      kept-new-versions 3
+      kept-new-versions 10
       delete-old-versions t
       backup-by-copying t)
 
@@ -299,8 +299,6 @@
 (evil-define-key 'normal 'global (kbd "<leader>lc") 'lsp-execute-code-action)
 (evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-format-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
-;;(evil-define-key 'normal 'global (kbd "<leader>ln") 'flycheck-next-error)
-;;(evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
 (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
 
 ;; Company keybindings
@@ -358,7 +356,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package projectile orderless monokai-theme magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck evil-collection disable-mouse diminish company-posframe autothemer auctex async ansible))
+   '(evil-mc zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package projectile orderless monokai-theme magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck evil-collection disable-mouse diminish company-posframe autothemer auctex async ansible))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark)))
 (custom-set-faces
