@@ -11,7 +11,6 @@ vnoremap("K", ":m '<-2<CR>gv=gv")
 
 nnoremap("<leader>pv", ":Ex<CR>")
 nnoremap("<leader>pt", ":Lexplore<CR>")
-nnoremap("<leader>u", ":UndotreeShow<CR>")
 nnoremap("<C-o>", ":bp<CR>")
 
 --nnoremap("<S-C-p>", ":\"0p")

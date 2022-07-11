@@ -1,14 +1,14 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="kikusimple"
+PROMPT='%n@%m:%~$ '
+#ZSH_THEME="kikusimple"
 #ZSH_THEME="robbyrussell"
 
 #plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-setopt autocd		  # Automatically cd into typed directory.
 stty stop undef		# Disable ctrl-s to freeze terminal.
 setopt interactive_comments
 
@@ -33,12 +33,12 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
-#bindkey -v '^?' backward-delete-char
+bindkey -v '^w' backward-delete-word # Delete word binding fix after using j or k in vim mode
 
 # Yank to the system clipboard
 function vi-yank-xclip {
     zle vi-yank
-   echo "$CUTBUFFER" | xclip -in -selection clipboard
+    echo "$CUTBUFFER" | xclip -in -selection clipboard
 }
 
 zle -N vi-yank-xclip
@@ -58,11 +58,13 @@ export GOPATH="$HOME/code/go"
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-alias ls='lsd'
-alias l='ls -l'
-alias la='ls -a'
-alias lla='ls -la'
-alias lt='ls --tree'
+#alias ls='lsd'
+#alias l='ls -l'
+#alias la='ls -a'
+#alias lla='ls -la'
+#alias lt='ls --tree'
+
+alias mpause='echo cycle pause | socat - $HOME/.config/mpv/socket'
 
 alias logout='loginctl kill-session $XDG_SESSION_ID'
 alias record='ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -c:v libx264rgb -crf 0 -preset ultrafast'

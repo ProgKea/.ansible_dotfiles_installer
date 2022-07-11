@@ -4,15 +4,10 @@ set $mod Mod1
 # font pango:monospace 8
 font pango:Iosevka 10
 
-# Hide border if only 1 window is active
-
-#hide_edge_borders smart
-#
-#default_border pixel 1
-#default_floating_border pixel 1
-
 hide_edge_borders both
 focus_follows_mouse no
+
+workspace_layout tabbed
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -28,6 +23,7 @@ floating_modifier $mod
 bindsym $mod+Shift+Return exec "$(cat $HOME/.local/share/terminal_emulator)"
 bindsym $mod+Shift+w exec google
 bindsym $mod+Shift+e exec emacs
+bindsym $mod+Shift+m exec "yt -g"
 bindsym $mod+w exec visitWebsite
 
 # kill focused window
@@ -125,3 +121,9 @@ bar {
 }
 
 bindsym $mod+Shift+t bar mode toggle
+
+# Hide border if only 1 window is active
+#hide_edge_borders smart
+
+#default_border pixel 1
+#default_floating_border pixel 1

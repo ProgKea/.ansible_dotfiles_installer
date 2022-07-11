@@ -42,7 +42,7 @@
 (require 'quelpa-use-package)
 
 ;; keep custom variables inside its own file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+;(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;;; ASYNC
 ;; Emacs look SIGNIFICANTLY less often which is a good thing.
@@ -64,9 +64,9 @@
 (setq compile-command "")
 (setq compilation-ask-about-save nil)
 (setq scroll-margin 8)
-(setq make-backup-files nil)
 (setq auto-save-default nil)
 (setq-default word-wrap t)
+(setq-default indent-tabs-mode nil)
 
 ;; add-to-lists
 (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
@@ -86,7 +86,7 @@
            (throw 'done t)))
        mode-line-modes))
 
-;; Set emacs modes
+;; activate some modes
 (blink-cursor-mode 1)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
@@ -97,6 +97,7 @@
 (global-display-line-numbers-mode 1)
 (menu-bar--display-line-numbers-mode-relative)
 (fringe-mode 0)
+(blink-cursor-mode 1)
 
 ;; Install and configure packages
 (use-package evil
@@ -188,16 +189,7 @@
    :config
    (load-theme 'gruber-darker t))
 
-;; (use-package zenburn-theme
-;;   :ensure t
-;;   :config
-;;  (load-theme 'zenburn t))
-
 (use-package lsp-mode
-  :hook ((c-mode . lsp-deferred)
-         (c++-mode . lsp-deferred)
-         (typescript-mode . lsp-deferred)
-         (rust-mode . lsp-deferred))
   :commands (lsp lsp-deferred)
   :init
   (add-hook 'lsp-completion-mode-hook
@@ -254,16 +246,34 @@
 
 ;; evil keybindings
 (evil-set-leader 'normal (kbd "SPC"))
+(evil-set-leader 'visual (kbd "SPC"))
+
+; replace
+(evil-define-key 'normal 'global (kbd "<leader>s") 'replace-string)
+(evil-define-key 'normal 'global (kbd "<leader>S") 'replace-regexp)
+(evil-define-key 'normal 'global (kbd "<leader>r") 'query-replace)
+(evil-define-key 'normal 'global (kbd "<leader>R") 'query-replace-regexp)
+(evil-define-key 'normal 'global (kbd "<leader>jr") 'projectile-replace)
+(evil-define-key 'normal 'global (kbd "<leader>jR") 'projectile-replace-regexp)
+(evil-define-key 'visual 'global (kbd "<leader>s") 'replace-string)
+(evil-define-key 'visual 'global (kbd "<leader>S") 'replace-regexp)
+(evil-define-key 'visual 'global (kbd "<leader>r") 'query-replace)
+(evil-define-key 'visual 'global (kbd "<leader>R") 'query-replace-regexp)
+
+(evil-define-key 'visual 'global (kbd "<leader>a") 'align-regexp)
+
+; find
 (evil-define-key 'normal 'global (kbd "C-j") 'projectile-find-file)
 (evil-define-key 'normal 'global (kbd "<leader>jw") 'find-grep)
 (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
 (evil-define-key 'normal 'global (kbd "<leader>jf") '(lambda() (interactive)
 						       (cd "~/")
 						       (call-interactively 'find-file)))
+
 (evil-define-key 'normal 'global (kbd "<leader>jv") 'dired-jump)
+
 ; Projectile
 (evil-define-key 'normal 'global (kbd "<leader>jj") 'projectile-switch-project)
-(evil-define-key 'normal 'global (kbd "<leader>jr") 'projectile-remove-known-project)
 
 (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
 (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
@@ -273,24 +283,23 @@
 (evil-define-key 'normal 'global (kbd "C-f i") 'eww)
 
 ; escape minibuffer
-(evil-define-key 'normal minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
-;(evil-define-key 'normal minibuffer-local-ns-map (kbd "<escape>") 'keyboard-escape-quit)
-;(evil-define-key 'normal minibuffer-local-completion-map (kbd "<escape>") 'keyboard-escape-quit)
-;(evil-define-key 'normal minibuffer-local-must-match-map (kbd "<escape>") 'keyboard-escape-quit)
-;(evil-define-key 'normal minibuffer-local-isearch-map (kbd "<escape>") 'keyboard-escape-quit)
+(evil-define-key 'normal 'global (kbd "<escape>") 'abort-minibuffers)
 
 ; make leader key work in dired mode
 (with-eval-after-load 'dired (evil-define-key 'normal dired-mode-map (kbd "<SPC>") 'evil-send-leader))
 
+(evil-define-key 'normal 'global (kbd "<leader>ln") 'next-error)
+(evil-define-key 'normal 'global (kbd "<leader>lp") 'previous-error)
+
 ; lsp keybindings
-(evil-define-key 'normal 'global (kbd "<leader>r") 'lsp-rename)
+(evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
 (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-find-references)
 (evil-define-key 'normal 'global (kbd "<leader>ld") 'lsp-find-defintion)
 (evil-define-key 'normal 'global (kbd "<leader>lc") 'lsp-execute-code-action)
 (evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-format-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
-(evil-define-key 'normal 'global (kbd "<leader>ln") 'flycheck-next-error)
-(evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
+;(evil-define-key 'normal 'global (kbd "<leader>ln") 'flycheck-next-error)
+;(evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
 (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
 
 ; Company keybindings
@@ -302,6 +311,10 @@
 ; Vertico keybindings
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "j") 'vertico-next))
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "k") 'vertico-previous))
+(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "G") 'vertico-last))
+(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "gg") 'vertico-first))
+(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "C-u") 'vertico-scroll-down))
+(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "C-d") 'vertico-scroll-up))
 (with-eval-after-load 'vertico (evil-define-key 'insert vertico-map (kbd "C-n") 'vertico-next))
 (with-eval-after-load 'vertico (evil-define-key 'insert vertico-map (kbd "C-p") 'vertico-previous))
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "<tab>") 'vertico-insert))
@@ -330,3 +343,26 @@
          (search-forward ")")))
     (search-forward "(")))
 (advice-add 'evil-inner-paren :before #'my/jump-to-par)
+
+;; maybe useful
+;(evil-define-key 'normal minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
+;(evil-define-key 'normal minibuffer-local-ns-map (kbd "<escape>") 'keyboard-escape-quit)
+;(evil-define-key 'normal minibuffer-local-completion-map (kbd "<escape>") 'keyboard-escape-quit)
+;(evil-define-key 'normal minibuffer-local-must-match-map (kbd "<escape>") 'keyboard-escape-quit)
+
+
+;(evil-define-key 'normal minibuffer-local-isearch-map (kbd "<escape>") 'keyboard-escape-quit)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package projectile orderless monokai-theme magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck evil-collection disable-mouse diminish company-posframe autothemer auctex async ansible)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

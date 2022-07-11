@@ -1,7 +1,6 @@
 #!/bin/sh
 
 time_path="$HOME/.local/share/flowtimer/"
-sound_path="$HOME/.local/share/sounds/operation_completed.ogg"
 
 if [[ $1 == "start" ]]; then
   echo $(date '+%s') > ${time_path}time
@@ -11,7 +10,7 @@ elif [[ $1 == "break" ]]; then
   new_time=$(date '+%s')
   break_time=$(awk -v o_time="$old_time" -v n_time="$new_time" -v div="$divider" 'BEGIN{print int(n_time - o_time) / 5}')
   awk -v b_time="$break_time" 'BEGIN{print "You have " int(b_time) / 60 " Minutes"}'
-  sleep $break_time && notify-send "Break is over!" && mpv --really-quiet $sound_path &
+  sleep $break_time && notify-send "Break is over!" &
 elif [[ $1 == "show" ]]; then
   old_time=$(cat ${time_path}time)
   new_time=$(date '+%s')
