@@ -1,8 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-PROMPT='%n@%m:%~$ '
-#ZSH_THEME="kikusimple"
+ZSH_THEME="kikusimple"
+#ZSH_THEME="kiku"
 #ZSH_THEME="robbyrussell"
 
 #plugins=(git)
@@ -44,9 +44,6 @@ function vi-yank-xclip {
 zle -N vi-yank-xclip
 bindkey -M vicmd 'y' vi-yank-xclip
 
-# open tmux if its not already open
-#[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}
-
 export FZF_DEFAULT_COMMAND="find -L -maxdepth 4"
 export PAGER="less"
 export TERMINAL="st"
@@ -73,5 +70,4 @@ alias hst="history 1 -1 | cut -c 8- | uniq | fzf | tr -d '\n' | xclip -sel c"
 alias ansi="ansible-playbook $HOME/.ansible_dotfiles_installer/local.yml"
 
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
-bindkey -s ^h "tmux-sessionizer\n"
-bindkey -s ^f "tmux a\n"
+bindkey -s ^f "[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}\n"

@@ -12,16 +12,16 @@
       vc-make-backup-files t
       version-control t
       kept-old-versions 0
-      kept-new-versions 10
+      kept-new-versions 3
       delete-old-versions t
       backup-by-copying t)
 
 (require 'package)
 (setq package-archives '(
-			 ("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+                         ("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpa/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
 
 ;;; BOOTSTRAP USE-PACKAGE
 (package-initialize)
@@ -42,7 +42,7 @@
 (require 'quelpa-use-package)
 
 ;; keep custom variables inside its own file
-;(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+;;(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;;; ASYNC
 ;; Emacs look SIGNIFICANTLY less often which is a good thing.
@@ -73,18 +73,18 @@
 ;;(add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
 
 (define-minor-mode minor-mode-blackout-mode
- "Hides minor modes from the mode line."
- t)
+  "Hides minor modes from the mode line."
+  t)
 
 (catch 'done
- (mapc (lambda (x)
-         (when (and (consp x)
-                    (equal (cadr x) '("" minor-mode-alist)))
-           (let ((original (copy-sequence x)))
-             (setcar x 'minor-mode-blackout-mode)
-             (setcdr x (list "" original)))
-           (throw 'done t)))
-       mode-line-modes))
+  (mapc (lambda (x)
+          (when (and (consp x)
+                     (equal (cadr x) '("" minor-mode-alist)))
+            (let ((original (copy-sequence x)))
+              (setcar x 'minor-mode-blackout-mode)
+              (setcdr x (list "" original)))
+            (throw 'done t)))
+        mode-line-modes))
 
 ;; activate some modes
 (blink-cursor-mode 1)
@@ -117,19 +117,19 @@
   (evil-mode 1))
 
 (use-package evil-collection
-             :after evil
-             :ensure t
-             :config
-             (evil-collection-init))
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 (use-package disable-mouse
   :ensure
   :config
   (mapc #'disable-mouse-in-keymap
-	(list evil-motion-state-map
-	      evil-normal-state-map
-	      evil-visual-state-map
-	      evil-insert-state-map)))
+        (list evil-motion-state-map
+              evil-normal-state-map
+              evil-visual-state-map
+              evil-insert-state-map)))
 
 (use-package magit
   :ensure
@@ -184,26 +184,26 @@
   (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
 (use-package vterm :ensure t)
- (use-package gruber-darker-theme
-   :ensure t
-   :config
-   (load-theme 'gruber-darker t))
+(use-package gruber-darker-theme
+  :ensure t
+  :config
+  (load-theme 'gruber-darker t))
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
   (add-hook 'lsp-completion-mode-hook
-	    (lambda ()
-	      (setf (alist-get 'lsp-capf completion-category-defaults) '((styles . (orderless flex)))))))
-  :config
+            (lambda ()
+              (setf (alist-get 'lsp-capf completion-category-defaults) '((styles . (orderless flex)))))))
+:config
 (setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-signature-render-documentation nil)
 (setq lsp-eldoc-enable-hover nil)
 (use-package haskell-mode :ensure t)
 (use-package lsp-haskell :ensure t :hook (haskell-mode . lsp-deferred))
 (use-package lsp-pyright :ensure t :hook (python-mode . (lambda ()
-							  (require 'lsp-pyright)
-							  (lsp-deferred))))
+                                                          (require 'lsp-pyright)
+                                                          (lsp-deferred))))
 (use-package lsp-ui  :ensure t
   :init
   (setq lsp-ui-sideline-show-code-actions t)
@@ -217,7 +217,7 @@
   :hook (prog-mode . company-mode)
   :custom
   (company-minimum-prefix-length 1)
-  (completion-ignore-case t) 
+  (completion-ignore-case t)
   (company-idle-delay 0.2))
 
 (use-package company-posframe
@@ -248,7 +248,7 @@
 (evil-set-leader 'normal (kbd "SPC"))
 (evil-set-leader 'visual (kbd "SPC"))
 
-; replace
+;; replace
 (evil-define-key 'normal 'global (kbd "<leader>s") 'replace-string)
 (evil-define-key 'normal 'global (kbd "<leader>S") 'replace-regexp)
 (evil-define-key 'normal 'global (kbd "<leader>r") 'query-replace)
@@ -262,17 +262,17 @@
 
 (evil-define-key 'visual 'global (kbd "<leader>a") 'align-regexp)
 
-; find
+;; find
 (evil-define-key 'normal 'global (kbd "C-j") 'projectile-find-file)
 (evil-define-key 'normal 'global (kbd "<leader>jw") 'find-grep)
 (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
 (evil-define-key 'normal 'global (kbd "<leader>jf") '(lambda() (interactive)
-						       (cd "~/")
-						       (call-interactively 'find-file)))
+                                                       (cd "~/")
+                                                       (call-interactively 'find-file)))
 
 (evil-define-key 'normal 'global (kbd "<leader>jv") 'dired-jump)
 
-; Projectile
+;; Projectile
 (evil-define-key 'normal 'global (kbd "<leader>jj") 'projectile-switch-project)
 
 (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
@@ -282,33 +282,33 @@
 (evil-define-key 'normal 'global (kbd "<leader>mr") 'recompile)
 (evil-define-key 'normal 'global (kbd "C-f i") 'eww)
 
-; escape minibuffer
+;; escape minibuffer
 (evil-define-key 'normal 'global (kbd "<escape>") 'abort-minibuffers)
 
-; make leader key work in dired mode
+;; make leader key work in dired mode
 (with-eval-after-load 'dired (evil-define-key 'normal dired-mode-map (kbd "<SPC>") 'evil-send-leader))
 
 (evil-define-key 'normal 'global (kbd "<leader>ln") 'next-error)
 (evil-define-key 'normal 'global (kbd "<leader>lp") 'previous-error)
 
-; lsp keybindings
+;; lsp keybindings
 (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
 (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-find-references)
 (evil-define-key 'normal 'global (kbd "<leader>ld") 'lsp-find-defintion)
 (evil-define-key 'normal 'global (kbd "<leader>lc") 'lsp-execute-code-action)
 (evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-format-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
-;(evil-define-key 'normal 'global (kbd "<leader>ln") 'flycheck-next-error)
-;(evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
+;;(evil-define-key 'normal 'global (kbd "<leader>ln") 'flycheck-next-error)
+;;(evil-define-key 'normal 'global (kbd "<leader>lp") 'flycheck-previous-error)
 (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
 
-; Company keybindings
+;; Company keybindings
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-w") 'backward-kill-word))
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-e") 'company-abort))
 (with-eval-after-load 'company (define-key company-active-map (kbd "<tab>") 'yas-next-field))
 (with-eval-after-load 'company (global-set-key (kbd "C-<SPC>") 'company-complete))
 
-; Vertico keybindings
+;; Vertico keybindings
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "j") 'vertico-next))
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "k") 'vertico-previous))
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "G") 'vertico-last))
@@ -319,8 +319,8 @@
 (with-eval-after-load 'vertico (evil-define-key 'insert vertico-map (kbd "C-p") 'vertico-previous))
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "<tab>") 'vertico-insert))
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "<RET>") '(lambda () (interactive)
-										     (vertico-insert)
-										     (vertico-exit-input))))
+                                                                                     (vertico-insert)
+                                                                                     (vertico-exit-input))))
 
 ;; hooks
 (add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode -1)))
@@ -330,28 +330,27 @@
 
 ;; functions
 (defun kill-other-buffers ()
-    "Kill all other buffers."
-    (interactive)
-    (mapc 'kill-buffer 
-          (delq (current-buffer) 
-                (cl-remove-if-not 'buffer-file-name (buffer-list)))))
+  "Kill all other buffers."
+  (interactive)
+  (mapc 'kill-buffer
+        (delq (current-buffer)
+              (cl-remove-if-not 'buffer-file-name (buffer-list)))))
 
 (defun my/jump-to-par (&rest args)
-    (when (< (save-excursion
-         (search-forward "("))
-       (save-excursion
-         (search-forward ")")))
+  (when (< (save-excursion
+             (search-forward "("))
+           (save-excursion
+             (search-forward ")")))
     (search-forward "(")))
 (advice-add 'evil-inner-paren :before #'my/jump-to-par)
 
 ;; maybe useful
-;(evil-define-key 'normal minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
-;(evil-define-key 'normal minibuffer-local-ns-map (kbd "<escape>") 'keyboard-escape-quit)
-;(evil-define-key 'normal minibuffer-local-completion-map (kbd "<escape>") 'keyboard-escape-quit)
-;(evil-define-key 'normal minibuffer-local-must-match-map (kbd "<escape>") 'keyboard-escape-quit)
+;;(evil-define-key 'normal minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
+;;(evil-define-key 'normal minibuffer-local-ns-map (kbd "<escape>") 'keyboard-escape-quit)
+;;(evil-define-key 'normal minibuffer-local-completion-map (kbd "<escape>") 'keyboard-escape-quit)
+;;(evil-define-key 'normal minibuffer-local-must-match-map (kbd "<escape>") 'keyboard-escape-quit)
 
-
-;(evil-define-key 'normal minibuffer-local-isearch-map (kbd "<escape>") 'keyboard-escape-quit)
+;;(evil-define-key 'normal minibuffer-local-isearch-map (kbd "<escape>") 'keyboard-escape-quit)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -359,7 +358,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package projectile orderless monokai-theme magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck evil-collection disable-mouse diminish company-posframe autothemer auctex async ansible)))
+   '(zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package projectile orderless monokai-theme magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck evil-collection disable-mouse diminish company-posframe autothemer auctex async ansible))
+ '(whitespace-style
+   (quote
+    (face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
