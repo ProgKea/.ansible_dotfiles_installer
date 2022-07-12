@@ -2306,7 +2306,7 @@
 #avcodec-hw=any
 
 # Threads (integer)
-#avcodec-threads=0
+avcodec-threads=2
 
 # Advanced options (string)
 #avcodec-options=
@@ -3066,7 +3066,7 @@
 [qt] # Qt interface
 
 # Start in minimal view (without menus) (boolean)
-qt-minimal-view=1
+#qt-minimal-view=0
 
 # Systray icon (boolean)
 #qt-system-tray=1
@@ -4036,7 +4036,7 @@ qt-privacy-ask=0
 #packetizer=
 
 # VoD server module (string)
-#vod-server=
+vod-server=any
 
 # Use a plugins cache (boolean)
 #plugins-cache=1
