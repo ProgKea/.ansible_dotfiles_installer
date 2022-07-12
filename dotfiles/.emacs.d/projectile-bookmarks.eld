@@ -1,1 +1,0 @@
-("~/.ansible_dotfiles_installer/" "~/code/pogozig/" "~/repos/sowon/" "~/code/mini-game-collection/" "~/code/bad-game-from-tiktok/" "~/code/habitio/" "~/documents/schule/Fachtheorie/" "~/code/Endless-Driver/" "~/documents/schule/Prüfung/" "~/.oh-my-zsh/" "~/algo/codewars_rust/" "~/code/emdless/" "~/code/yew-test/" "~/code/ppm_geometry/" "~/code/nvim_old/")

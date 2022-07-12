@@ -100,6 +100,28 @@
 (fringe-mode 0)
 (blink-cursor-mode 1)
 
+(load "~/.emacs.d/elpa/simpc-mode.el" t)
+;;(add-to-list 'load-path "~/.emacs.d/simpc-mode.el")
+
+(require 'simpc-mode)
+(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
+
+(defun astyle-buffer (&optional justify)
+  (interactive)
+  (let ((saved-line-number (line-number-at-pos)))
+    (shell-command-on-region
+     (point-min)
+     (point-max)
+     "astyle --style=kr"
+     nil
+     t)
+    (goto-line saved-line-number)))
+
+(add-hook 'simpc-mode-hook
+          (lambda ()
+            (interactive)
+            (setq-local fill-paragraph-function 'astyle-buffer)))
+
 ;; Install and configure packages
 (use-package evil
   :ensure
