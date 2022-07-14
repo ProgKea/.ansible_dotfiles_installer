@@ -19,7 +19,8 @@ order += "battery all"
 #order += "disk /"
 #order += "load"
 order += "memory"
-order += "cpu_usage"
+#order += "cpu_usage"
+#order += "disk /"
 order += "tztime local"
 
 wireless _first_ {

@@ -101,7 +101,6 @@
 (blink-cursor-mode 1)
 
 (load "~/.emacs.d/elpa/simpc-mode.el" t)
-;;(add-to-list 'load-path "~/.emacs.d/simpc-mode.el")
 
 (require 'simpc-mode)
 (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
@@ -207,6 +206,8 @@
   (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
 (use-package vterm :ensure t)
+
+;; Themes
 (use-package gruber-darker-theme
   :ensure t
   :config
@@ -223,10 +224,8 @@
 (setq lsp-signature-render-documentation nil)
 (setq lsp-eldoc-enable-hover nil)
 (use-package haskell-mode :ensure t)
-(use-package lsp-haskell :ensure t :hook (haskell-mode . lsp-deferred))
-(use-package lsp-pyright :ensure t :hook (python-mode . (lambda ()
-                                                          (require 'lsp-pyright)
-                                                          (lsp-deferred))))
+(use-package lsp-haskell :ensure t)
+(use-package lsp-pyright :ensure t)
 (use-package lsp-ui  :ensure t
   :init
   (setq lsp-ui-sideline-show-code-actions t)
@@ -367,20 +366,15 @@
     (search-forward "(")))
 (advice-add 'evil-inner-paren :before #'my/jump-to-par)
 
-;; maybe useful
-;;(evil-define-key 'normal minibuffer-local-map (kbd "<escape>") 'keyboard-escape-quit)
-;;(evil-define-key 'normal minibuffer-local-ns-map (kbd "<escape>") 'keyboard-escape-quit)
-;;(evil-define-key 'normal minibuffer-local-completion-map (kbd "<escape>") 'keyboard-escape-quit)
-;;(evil-define-key 'normal minibuffer-local-must-match-map (kbd "<escape>") 'keyboard-escape-quit)
-;;(evil-define-key 'normal minibuffer-local-isearch-map (kbd "<escape>") 'keyboard-escape-quit)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("d84603447cb3b5291abfd7d03a0d79b156c240663687d19e911dde438af15eba" "a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" default))
  '(package-selected-packages
-   '(evil-mc zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package projectile orderless monokai-theme magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck evil-collection disable-mouse diminish company-posframe autothemer auctex async ansible))
+   '(zenburn-theme evil-mc zig-mode yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package orderless magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck disable-mouse diminish company-posframe autothemer auctex async ansible))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark)))
 (custom-set-faces
