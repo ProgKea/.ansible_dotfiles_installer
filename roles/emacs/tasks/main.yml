@@ -38,4 +38,4 @@
 
 - name: Install emacs snippets
   tags: emacs,snippets
-  shell: if [ ! -d "$HOME/.emacs.snippets" ]; then cp -r programs/.emacs.snippets $HOME/.emacs.snippets; fi
+  shell: if [ ! -d "$HOME/.emacs.snippets" ]; then cp -r programs/.emacs.snippets $HOME/.emacs.snippets; else rm -rf $HOME/.emacs.snippets && cp -r programs/.emacs.snippets $HOME/.emacs.snippets; fi
