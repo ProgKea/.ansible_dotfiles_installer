@@ -70,8 +70,8 @@
 (setq-default compilation-scroll-output t)
 
 ;; add-to-lists
-(add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
-;;(add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
+;; (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
+(add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
 
 (define-minor-mode minor-mode-blackout-mode
   "Hides minor modes from the mode line."
@@ -248,9 +248,9 @@
 (use-package yasnippet
   :ensure
   :config
-  (yas-reload-all)
-  (add-hook 'prog-mode-hook 'yas-minor-mode)
-  (add-hook 'text-mode-hook 'yas-minor-mode))
+  (setq yas/triggers-in-field nil)
+  (setq yas-snippet-dirs '("~/.emacs.snippets/"))
+  (yas-global-mode 1))
 
 ;; languages
 (use-package rust-mode
@@ -372,7 +372,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("d84603447cb3b5291abfd7d03a0d79b156c240663687d19e911dde438af15eba" "a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" default))
+   '("3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "d84603447cb3b5291abfd7d03a0d79b156c240663687d19e911dde438af15eba" "a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" default))
  '(package-selected-packages
    '(zenburn-theme evil-mc zig-mode yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package orderless magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck disable-mouse diminish company-posframe autothemer auctex async ansible))
  '(whitespace-style

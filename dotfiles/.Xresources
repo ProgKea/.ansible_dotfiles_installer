@@ -92,7 +92,8 @@ Xft.hintstyle         : hintmedium
 Xft.autohint          : true
 Xft.dpi               : 96
 
-URxvt.font: xft:Iosevka:size=20
+!URxvt.font: xft:Iosevka:size=20
+URxvt.font: xft:Ubuntu Mono:size=20
 
 !URxvt*letterSpace: +1
 !URxvt.lineSpace: 0

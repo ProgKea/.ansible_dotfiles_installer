@@ -35,3 +35,7 @@
   tags: emacs
   shell: sudo make -C $HOME/emacs-src install
   when: '"not found" in emacs_installed.stdout'
+
+- name: Install emacs snippets
+  tags: emacs,snippets
+  shell: if [ ! -d "$HOME/.emacs.snippets" ]; then cp -r programs/.emacs.snippets $HOME/.emacs.snippets; fi
