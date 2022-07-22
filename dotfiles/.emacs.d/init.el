@@ -71,8 +71,8 @@
 (setq-default dired-dwim-target t)
 
 ;; add-to-lists
-;; (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
-(add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
+(add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
+;; (add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
 
 (define-minor-mode minor-mode-blackout-mode
   "Hides minor modes from the mode line."
@@ -377,6 +377,7 @@
 ;; Haskell
 (add-hook 'haskell-mode-hook #'haskell-doc-mode)
 (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
+(add-hook 'haskell-mode-hook (lambda () (flycheck-mode -1)))
 
 ;; functions
 (defun kill-other-buffers ()
@@ -393,7 +394,6 @@
              (search-forward ")")))
     (search-forward "(")))
 (advice-add 'evil-inner-paren :before #'my/jump-to-par)
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
