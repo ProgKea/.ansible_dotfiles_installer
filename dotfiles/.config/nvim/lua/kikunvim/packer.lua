@@ -31,4 +31,7 @@ return require("packer").startup(function()
   use("nvim-telescope/telescope-fzy-native.nvim")
   use("sbdchd/neoformat")
   use("windwp/nvim-autopairs")
+
+  -- Languages
+  use("neovimhaskell/haskell-vim")
 end)

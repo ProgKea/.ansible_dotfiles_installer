@@ -50,6 +50,9 @@ vim.opt.si = true
 vim.opt.wrap = false
 vim.opt.backspace = "start,eol,indent"
 
+-- disable mouse
+vim.opt.mouse = "c"
+
 -- netrw
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
