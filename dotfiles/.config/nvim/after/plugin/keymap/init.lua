@@ -34,7 +34,7 @@ nnoremap("<C-p>", ":lua require('telescope.builtin').git_files()<CR>")
 nnoremap("<Leader>f", ":lua require('telescope.builtin').find_files()<CR>")
 nnoremap("<leader>pw", ":lua require('telescope.builtin').grep_string { search = vim.fn.expand(\"<cword>\") }<CR>")
 nnoremap("<Leader>pb", ":Telescope buffers<CR>")
-nnoremap("<Leader>ph", ":Telescope help_tags<CR>")
+nnoremap("<Leader>pk", ":Telescope help_tags<CR>")
 nnoremap("<leader>ps", ":lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For > \")})<CR>")
 
 -- Quickfixlist

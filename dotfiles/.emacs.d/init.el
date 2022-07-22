@@ -101,26 +101,26 @@
 (fringe-mode 0)
 (blink-cursor-mode 1)
 
-(load "~/.emacs.d/elpa/simpc-mode.el" t)
+;;(load "~/.emacs.d/elpa/simpc-mode.el" t)
 
-(require 'simpc-mode)
-(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
+;;(require 'simpc-mode)
+;;(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 
-(defun astyle-buffer (&optional justify)
-  (interactive)
-  (let ((saved-line-number (line-number-at-pos)))
-    (shell-command-on-region
-     (point-min)
-     (point-max)
-     "astyle --style=kr"
-     nil
-     t)
-    (goto-line saved-line-number)))
-
-(add-hook 'simpc-mode-hook
-          (lambda ()
-            (interactive)
-            (setq-local fill-paragraph-function 'astyle-buffer)))
+;;(defun astyle-buffer (&optional justify)
+  ;;(interactive)
+  ;;(let ((saved-line-number (line-number-at-pos)))
+    ;;(shell-command-on-region
+     ;;(point-min)
+     ;;(point-max)
+     ;;"astyle --style=kr"
+     ;;nil
+     ;;t)
+    ;;(goto-line saved-line-number)))
+;;
+;;(add-hook 'simpc-mode-hook
+          ;;(lambda ()
+            ;;(interactive)
+            ;;(setq-local fill-paragraph-function 'astyle-buffer)))
 
 ;; Install and configure packages
 (use-package evil
@@ -136,13 +136,6 @@
   (setq evil-motion-state-cursor 'box)
   (setq evil-replace-state-cursor 'box)
   (setq evil-operator-state-cursor 'box)
-  ;; (setq cursor-type 'box)
-  ;; (setq evil-normal-state-cursor 'box)
-  ;; (setq evil-insert-state-cursor 'box)
-  ;; (setq evil-visual-state-cursor 'box)
-  ;; (setq evil-motion-state-cursor 'box)
-  ;; (setq evil-replace-state-cursor 'box)
-  ;; (setq evil-operator-state-cursor 'box)
   (global-set-key (kbd "C-u") 'evil-scroll-page-up)
   (evil-mode 1))
 
@@ -245,6 +238,7 @@
   :after lsp-mode
   :hook (prog-mode . company-mode)
   :custom
+  (global-company-mode 1)
   (company-minimum-prefix-length 1)
   (completion-ignore-case t)
   (company-idle-delay 0.2))
@@ -400,17 +394,16 @@
     (search-forward "(")))
 (advice-add 'evil-inner-paren :before #'my/jump-to-par)
 
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "4780d7ce6e5491e2c1190082f7fe0f812707fc77455616ab6f8b38e796cbffa9" "0cd00c17f9c1f408343ac77237efca1e4e335b84406e05221126a6ee7da28971" "93553b47c1837b65bcbbc7cb2024da14584223985620e50fc5d5d48a6c7ce0e2" "19759a26a033dcb680aa11ee08677e3146ba547f1e8a83514a1671e0d36d626c" "5a611788d47c1deec31494eb2bb864fde402b32b139fe461312589a9f28835db" "4a288765be220b99defaaeb4c915ed783a9916e3e08f33278bf5ff56e49cbc73" "46b2d7d5ab1ee639f81bde99fcd69eb6b53c09f7e54051a591288650c29135b0" "443e2c3c4dd44510f0ea8247b438e834188dc1c6fb80785d83ad3628eadf9294" "a9abd706a4183711ffcca0d6da3808ec0f59be0e8336868669dc3b10381afb6f" "3fe1ebb870cc8a28e69763dde7b08c0f6b7e71cc310ffc3394622e5df6e4f0da" "b99e334a4019a2caa71e1d6445fc346c6f074a05fcbb989800ecbe54474ae1b0" "8d8207a39e18e2cc95ebddf62f841442d36fcba01a2a9451773d4ed30b632443" "251ed7ecd97af314cd77b07359a09da12dcd97be35e3ab761d4a92d8d8cf9a71" "be84a2e5c70f991051d4aaf0f049fa11c172e5d784727e0b525565bb1533ec78" "4ff1c4d05adad3de88da16bd2e857f8374f26f9063b2d77d38d14686e3868d8d" "6945dadc749ac5cbd47012cad836f92aea9ebec9f504d32fe89a956260773ca4" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "24168c7e083ca0bbc87c68d3139ef39f072488703dcdd82343b8cab71c0f62a7" "fb83a50c80de36f23aea5919e50e1bccd565ca5bb646af95729dc8c5f926cbf3" "e3a1b1fb50e3908e80514de38acbac74be2eb2777fc896e44b54ce44308e5330" "b6269b0356ed8d9ed55b0dcea10b4e13227b89fd2af4452eee19ac88297b0f99" "b02eae4d22362a941751f690032ea30c7c78d8ca8a1212fdae9eecad28a3587f" "c8b83e7692e77f3e2e46c08177b673da6e41b307805cd1982da9e2ea2e90e6d7" "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27" "6b5c518d1c250a8ce17463b7e435e9e20faa84f3f7defba8b579d4f5925f60c1" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "d84603447cb3b5291abfd7d03a0d79b156c240663687d19e911dde438af15eba" "a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" default))
+   '("5586a5db9dadef93b6b6e72720205a4fa92fd60e4ccfd3a5fa389782eab2371b" "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "e1f4f0158cd5a01a9d96f1f7cdcca8d6724d7d33267623cc433fe1c196848554" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" default))
  '(package-selected-packages
-   '(modus-themes typescript-mode zenburn-theme evil-mc zig-mode yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package orderless magit lsp-pyright hydra haskell-mode gruber-darker-theme frame-local disable-mouse diminish company-posframe autothemer auctex async ansible))
- '(whitespace-style
-   '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark)))
+   '(doom-themes zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree typescript-mode rust-mode quelpa-use-package projectile orderless lsp-ui lsp-pyright iedit hydra haskell-mode gruber-darker-theme frame-local flymake-easy flycheck-nimsuggest evil-collection epc disable-mouse diminish company-posframe commenter autothemer auctex async ansible)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

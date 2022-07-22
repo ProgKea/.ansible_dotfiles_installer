@@ -73,12 +73,11 @@ alias ansi="ansible-playbook $HOME/.ansible_dotfiles_installer/local.yml"
 # start tmux in st or urxvt
 if [[ $- != *i* ]]; then
     return
-elif [[  $TERM == "rxvt"* && -z "$TMUX" ]]; then
+elif [[  $TERM == "rxvt-"* || $TERM == "st-"* && -z "$TMUX" ]]; then
     exec tmux new-session -A
 fi
 
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
-bindkey -s ^f "[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}\n"
 
 # install and initialize autopair pluggin
 if [[ ! -d ~/.zsh-autopair ]]; then

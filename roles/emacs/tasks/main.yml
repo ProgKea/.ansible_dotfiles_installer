@@ -1,4 +1,5 @@
 ---
+# TODO: this is check is not working... make it work
 - name: check if emacs is installed
   tags: emacs
   shell: which emacs
