@@ -7,9 +7,9 @@
  */
 //static char *font = "Fira Code Nerd Font:pixelsize=27:antialias=true:autohint=true";
 //static char *font = "Hack Nerd Font:pixelsize=30:antialias=true:autohint=true";
-//static char *font = "Ubuntu Mono:pixelsize=33:antialias=true:autohint=true";
-//static char *font = "Ubuntu Mono Nerd Font:pixelsize=33:antialias=true:autohint=true";
-static char *font = "Iosevka Nerd Font:pixelsize=30:antialias=true:autohint=true";
+static char *font = "Ubuntu Mono:pixelsize=29:antialias=true:autohint=true";
+// static char *font = "Ubuntu Mono Nerd Font:pixelsize=33:antialias=true:autohint=true";
+// static char *font = "Iosevka Nerd Font:pixelsize=30:antialias=true:autohint=true";
 //static char *font = "Jetbrains Mono:pixelsize=27:antialias=true:autohint=true";
 //static char *font = "monospace:pixelsize=30:antialias=true:autohint=true";
 #if FONT2_PATCH

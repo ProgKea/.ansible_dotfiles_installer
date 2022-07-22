@@ -4,6 +4,7 @@ require("lspconfig").texlab.setup{
     filetypes = {"tex", "bib", "markdown"}
 }
 require("lspconfig").cssls.setup{}
+require("lspconfig").hls.setup{}
 require("lspconfig").sumneko_lua.setup{}
 require("lspconfig").denols.setup{}
 require ("lspconfig").tsserver.setup{}

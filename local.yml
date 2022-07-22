@@ -24,3 +24,6 @@
     - langs
     - tools
     - productivity
+
+# TODO: install stack
+# note: stack needs ncurses5-compat-libs on arch

@@ -34,6 +34,7 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -v '^w' backward-delete-word # Delete word binding fix after using j or k in vim mode
+bindkey '^R' history-incremental-search-backward
 
 # Yank to the system clipboard
 function vi-yank-xclip {
@@ -69,5 +70,20 @@ alias copy='xclip -selection clipboard'
 alias hst="history 1 -1 | cut -c 8- | uniq | fzf | tr -d '\n' | xclip -sel c"
 alias ansi="ansible-playbook $HOME/.ansible_dotfiles_installer/local.yml"
 
+# start tmux in st or urxvt
+if [[ $- != *i* ]]; then
+    return
+elif [[  $TERM == "rxvt"* && -z "$TMUX" ]]; then
+    exec tmux new-session -A
+fi
+
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 bindkey -s ^f "[ -z "$TMUX"  ] && { tmux attach || exec tmux new-session;}\n"
+
+# install and initialize autopair pluggin
+if [[ ! -d ~/.zsh-autopair ]]; then
+  git clone https://github.com/hlissner/zsh-autopair ~/.zsh-autopair
+fi
+
+source ~/.zsh-autopair/autopair.zsh
+autopair-init

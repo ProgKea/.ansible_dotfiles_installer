@@ -68,6 +68,7 @@
 (setq-default word-wrap t)
 (setq-default indent-tabs-mode nil)
 (setq-default compilation-scroll-output t)
+(setq-default dired-dwim-target t)
 
 ;; add-to-lists
 ;; (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
@@ -135,6 +136,13 @@
   (setq evil-motion-state-cursor 'box)
   (setq evil-replace-state-cursor 'box)
   (setq evil-operator-state-cursor 'box)
+  ;; (setq cursor-type 'box)
+  ;; (setq evil-normal-state-cursor 'box)
+  ;; (setq evil-insert-state-cursor 'box)
+  ;; (setq evil-visual-state-cursor 'box)
+  ;; (setq evil-motion-state-cursor 'box)
+  ;; (setq evil-replace-state-cursor 'box)
+  ;; (setq evil-operator-state-cursor 'box)
   (global-set-key (kbd "C-u") 'evil-scroll-page-up)
   (evil-mode 1))
 
@@ -223,8 +231,7 @@
 (setq lsp-headerline-breadcrumb-enable nil)
 (setq lsp-signature-render-documentation nil)
 (setq lsp-eldoc-enable-hover nil)
-(use-package haskell-mode :ensure t)
-(use-package lsp-haskell :ensure t)
+
 (use-package lsp-pyright :ensure t)
 (use-package lsp-ui  :ensure t
   :init
@@ -256,7 +263,11 @@
 (use-package rust-mode
   :ensure)
 
+(use-package haskell-mode :ensure t)
+
 (use-package yaml-mode :ensure)
+
+(use-package typescript-mode :ensure)
 
 (use-package zig-mode
   :ensure
@@ -297,7 +308,6 @@
 (evil-define-key 'normal 'global (kbd "<leader>jj") 'projectile-switch-project)
 (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
 (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
-(evil-define-key 'normal 'global (kbd "C-o") 'evil-buffer)
 (evil-define-key 'normal 'global (kbd "C-f i") 'eww)
 
 ;; Compilation
@@ -317,18 +327,31 @@
 
 ;; lsp keybindings
 (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
-(evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-find-references)
-(evil-define-key 'normal 'global (kbd "<leader>ld") 'lsp-find-defintion)
+(evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-find-references)
+(evil-define-key 'normal 'global (kbd "<leader>ld") 'evil-goto-definition)
 (evil-define-key 'normal 'global (kbd "<leader>lc") 'lsp-execute-code-action)
-(evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-format-buffer)
+(evil-define-key 'normal 'global (kbd "<leader>la") 'lsp-format-buffer)
 (evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
 (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
+(evil-define-key 'normal 'global (kbd "<leader>lo") '(lambda () (interactive)
+                                                       (lsp-ui-doc-show)
+                                                       (lsp-ui-doc-focus-frame)))
 
-;; Company keybindings
+;; Autocompletion keybindings
+;; Company
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-w") 'backward-kill-word))
 (with-eval-after-load 'company (define-key company-active-map (kbd "C-e") 'company-abort))
-(with-eval-after-load 'company (define-key company-active-map (kbd "<tab>") 'yas-next-field))
 (with-eval-after-load 'company (global-set-key (kbd "C-<SPC>") 'company-complete))
+
+;; Yasnippet
+(evil-define-key 'insert company-mode-map (kbd "<tab>") 'yas-expand)
+(evil-define-key 'insert company-mode-map [tab] 'yas-expand)
+(define-key company-active-map [tab] 'yas-expand)
+(define-key company-active-map (kbd "TAB") 'yas-expand)
+(define-key yas-minor-mode-map [tab] nil)
+(define-key yas-minor-mode-map (kbd "TAB") nil)
+(define-key yas-keymap [tab] 'yas-next-field)
+(define-key yas-keymap (kbd "TAB") 'yas-next-field)
 
 ;; Vertico keybindings
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "j") 'vertico-next))
@@ -344,11 +367,22 @@
                                                                                      (vertico-insert)
                                                                                      (vertico-exit-input))))
 
+(evil-define-key 'insert minibuffer-mode-map (kbd "C-k") 'previous-history-element)
+(evil-define-key 'insert minibuffer-mode-map (kbd "C-j") 'next-history-element)
+(evil-define-key 'normal minibuffer-mode-map (kbd "C-k") 'previous-history-element)
+(evil-define-key 'normal minibuffer-mode-map (kbd "C-j") 'next-history-element)
+(evil-define-key 'normal minibuffer-mode-map (kbd "<RET>") '(lambda () (interactive)
+                                                              (evil-insert)
+                                                              (evil-ret)))
+
 ;; hooks
 (add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'eww-mode-hook (lambda () (display-line-numbers-mode -1)))
+;; Haskell
+(add-hook 'haskell-mode-hook #'haskell-doc-mode)
+(add-hook 'haskell-mode-hook #'interactive-haskell-mode)
 
 ;; functions
 (defun kill-other-buffers ()
@@ -372,9 +406,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "d84603447cb3b5291abfd7d03a0d79b156c240663687d19e911dde438af15eba" "a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" default))
+   '("cc0dbb53a10215b696d391a90de635ba1699072745bf653b53774706999208e3" "4780d7ce6e5491e2c1190082f7fe0f812707fc77455616ab6f8b38e796cbffa9" "0cd00c17f9c1f408343ac77237efca1e4e335b84406e05221126a6ee7da28971" "93553b47c1837b65bcbbc7cb2024da14584223985620e50fc5d5d48a6c7ce0e2" "19759a26a033dcb680aa11ee08677e3146ba547f1e8a83514a1671e0d36d626c" "5a611788d47c1deec31494eb2bb864fde402b32b139fe461312589a9f28835db" "4a288765be220b99defaaeb4c915ed783a9916e3e08f33278bf5ff56e49cbc73" "46b2d7d5ab1ee639f81bde99fcd69eb6b53c09f7e54051a591288650c29135b0" "443e2c3c4dd44510f0ea8247b438e834188dc1c6fb80785d83ad3628eadf9294" "a9abd706a4183711ffcca0d6da3808ec0f59be0e8336868669dc3b10381afb6f" "3fe1ebb870cc8a28e69763dde7b08c0f6b7e71cc310ffc3394622e5df6e4f0da" "b99e334a4019a2caa71e1d6445fc346c6f074a05fcbb989800ecbe54474ae1b0" "8d8207a39e18e2cc95ebddf62f841442d36fcba01a2a9451773d4ed30b632443" "251ed7ecd97af314cd77b07359a09da12dcd97be35e3ab761d4a92d8d8cf9a71" "be84a2e5c70f991051d4aaf0f049fa11c172e5d784727e0b525565bb1533ec78" "4ff1c4d05adad3de88da16bd2e857f8374f26f9063b2d77d38d14686e3868d8d" "6945dadc749ac5cbd47012cad836f92aea9ebec9f504d32fe89a956260773ca4" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "24168c7e083ca0bbc87c68d3139ef39f072488703dcdd82343b8cab71c0f62a7" "fb83a50c80de36f23aea5919e50e1bccd565ca5bb646af95729dc8c5f926cbf3" "e3a1b1fb50e3908e80514de38acbac74be2eb2777fc896e44b54ce44308e5330" "b6269b0356ed8d9ed55b0dcea10b4e13227b89fd2af4452eee19ac88297b0f99" "b02eae4d22362a941751f690032ea30c7c78d8ca8a1212fdae9eecad28a3587f" "c8b83e7692e77f3e2e46c08177b673da6e41b307805cd1982da9e2ea2e90e6d7" "78e6be576f4a526d212d5f9a8798e5706990216e9be10174e3f3b015b8662e27" "6b5c518d1c250a8ce17463b7e435e9e20faa84f3f7defba8b579d4f5925f60c1" "3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "d84603447cb3b5291abfd7d03a0d79b156c240663687d19e911dde438af15eba" "a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" default))
  '(package-selected-packages
-   '(zenburn-theme evil-mc zig-mode yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package orderless magit lsp-ui lsp-pyright lsp-haskell hydra haskell-mode gruber-darker-theme frame-local flycheck disable-mouse diminish company-posframe autothemer auctex async ansible))
+   '(modus-themes typescript-mode zenburn-theme evil-mc zig-mode yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree rust-mode quelpa-use-package orderless magit lsp-pyright hydra haskell-mode gruber-darker-theme frame-local disable-mouse diminish company-posframe autothemer auctex async ansible))
  '(whitespace-style
    '(face tabs spaces trailing space-before-tab newline indentation empty space-after-tab space-mark tab-mark)))
 (custom-set-faces
