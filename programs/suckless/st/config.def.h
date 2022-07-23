@@ -8,8 +8,8 @@
 //static char *font = "Fira Code Nerd Font:pixelsize=27:antialias=true:autohint=true";
 //static char *font = "Hack Nerd Font:pixelsize=30:antialias=true:autohint=true";
 static char *font = "Ubuntu Mono:pixelsize=29:antialias=true:autohint=true";
-// static char *font = "Ubuntu Mono Nerd Font:pixelsize=33:antialias=true:autohint=true";
-// static char *font = "Iosevka Nerd Font:pixelsize=30:antialias=true:autohint=true";
+//static char *font = "Ubuntu Mono Nerd Font:pixelsize=33:antialias=true:autohint=true";
+//static char *font = "Iosevka Nerd Font:pixelsize=27:antialias=true:autohint=true";
 //static char *font = "Jetbrains Mono:pixelsize=27:antialias=true:autohint=true";
 //static char *font = "monospace:pixelsize=30:antialias=true:autohint=true";
 #if FONT2_PATCH
@@ -391,8 +391,8 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,   {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,     {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,        {.i =  0} },
-	{ TERMMOD,              XK_asterisk,       zoom,            {.f = +1} },
-	{ TERMMOD,              XK_underscore,        zoom,            {.f = -1} },
+	{ ControlMask,              XK_plus,       zoom,            {.f = +1} },
+	{ ControlMask,              XK_minus,        zoom,            {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,       {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,        {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,       {.i =  0} },

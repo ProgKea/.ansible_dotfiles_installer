@@ -77,7 +77,7 @@ elif [[  $TERM == "rxvt-"* || $TERM == "st-"* && -z "$TMUX" ]]; then
     exec tmux new-session -A
 fi
 
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+#[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 # install and initialize autopair pluggin
 if [[ ! -d ~/.zsh-autopair ]]; then

@@ -1,5 +1,3 @@
-https://www.youtube.com/watch?v=V2b7x8aWpCU
-file:///$LIB/w3mman2html.cgi
 file:///$LIB/w3mman2html.cgi?man=&section=&keyword=external
 https://wiby.me/?q=w3m
 http://danluu.com/web-bloat/
@@ -98,3 +96,5 @@ https://lite.duckduckgo.com/lite/?q=linux%20xterm%20wide%20glyph
 https://duckduckgo.com/l/?uddg=https%3A%2F%2Funix.stackexchange.com%2Fquestions%2F219370%2Flarger%2Dxterm%2Dfonts%2Don%2Dhidpi%2Ddisplays&rut=45e91d31f8b2c88835c1892848dd2a104a17a9ffec0db472128ddb48dcaa0ba2
 https://unix.stackexchange.com/questions/219370/larger-xterm-fonts-on-hidpi-displays
 https://searx.be/search?q=can%20you%20install%20.deb%20packages%20on%20arch
+https://hoogle.haskell.org/?hoogle=foldl
+https://hackage.haskell.org/package/base/docs/Prelude.html#v:foldl
