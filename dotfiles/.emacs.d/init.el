@@ -145,6 +145,11 @@
   :config
   (evil-collection-init))
 
+(use-package evil-multiedit
+  :ensure t
+  :config
+  (evil-multiedit-mode 1))
+
 (use-package disable-mouse
   :ensure
   :config
@@ -346,6 +351,14 @@
 (define-key yas-minor-mode-map (kbd "TAB") nil)
 (define-key yas-keymap [tab] 'yas-next-field)
 (define-key yas-keymap (kbd "TAB") 'yas-next-field)
+
+;; Multicursor
+(evil-define-key 'normal evil-multiedit-mode-map (kbd "<escape>") 'evil-multiedit-abort)
+(evil-define-key 'normal 'global (kbd "z") 'evil-multiedit-match-symbol-and-next)
+(evil-define-key 'normal 'global (kbd "Z") 'evil-multiedit-match-symbol-and-prev)
+(evil-define-key 'visual 'global (kbd "z") 'evil-multiedit-match-and-next)
+(evil-define-key 'visual 'global (kbd "Z") 'evil-multiedit-match-and-prev)
+(evil-define-key 'visual 'global (kbd "R") 'evil-multiedit-match-all)
 
 ;; Vertico keybindings
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "j") 'vertico-next))

@@ -25,8 +25,6 @@ nmap("<Tab>", ":tabnext<Return>")
 -- Replace all is aliased to S.
 nnoremap("S", ":%s//g<Left><Left>")
 
-nmap("<leader>m", ":w<CR>:!make<CR>")
-
 nnoremap("Y", "y$")
 nnoremap("<leader>x", ":silent !chmod +x %<CR>")
 
@@ -41,6 +39,10 @@ nnoremap("<leader>ps", ":lua require('telescope.builtin').grep_string({ search =
 nnoremap("qn", ":cn<CR>")
 nnoremap("qp", ":cp<CR>")
 nnoremap("qo", ":copen<CR>")
+
+-- tmux compile
+nnoremap("<leader>mm", "<cmd>silent !tmux display-popup -E -y 100\\% -w 100\\% -h 10\\% tmux-compile.sh<CR>")
+nnoremap("<leader>mr", "<cmd>silent !tmux run-shell 'tmux-compile.sh -r'<CR>")
 
 -- nnoremap <leader>gc :lua require('telescope').git_branches()<CR>
 -- nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
