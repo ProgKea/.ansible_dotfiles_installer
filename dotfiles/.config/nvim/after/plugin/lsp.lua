@@ -1,5 +1,3 @@
-require("nvim-lsp-installer").setup{}
-
 require("lspconfig").clangd.setup{}
 require("lspconfig").pyright.setup{}
 require("lspconfig").texlab.setup{
@@ -8,7 +6,6 @@ require("lspconfig").texlab.setup{
 require("lspconfig").cssls.setup{}
 require("lspconfig").hls.setup{}
 require("lspconfig").sumneko_lua.setup{}
-require("lspconfig").bashls.setup{}
 require("lspconfig").grammarly.setup{}
 require ("lspconfig").tsserver.setup{}
 require("lspconfig").rust_analyzer.setup{

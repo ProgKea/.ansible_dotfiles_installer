@@ -68,14 +68,14 @@
 !URxvt*termName: xterm-256color
 !URxvt*termName: rxvt
 
-!URxvt.font: xft:Ubuntu Mono Nerd Font Mono:style=Regular:style=Medium:size=25:antialias=true:hinting=true,\
-!xft:Unifont:style=Medium:size=23
-!! Bolt
-!URxvt.boldFont: xft:Ubuntu Mono Nerd Font Mono:style=Bold:size=25:antialias=true:hinting=true,\
-!xft:Unifont:style=Medium:size=23
-!! Italic
-!URxvt.italicFont: xft:Ubuntu Mono Nerd Font Mono:style=Light,Regular:size=25:antialias=true:hinting=true,\
-!xft:Unifont:style=Medium:size=23
+URxvt.font: xft:Ubuntu Mono Nerd Font Mono:style=Regular:style=Medium:size=25:antialias=true:hinting=true,\
+xft:Unifont:style=Medium:size=23
+! Bolt
+URxvt.boldFont: xft:Ubuntu Mono Nerd Font Mono:style=Bold:size=25:antialias=true:hinting=true,\
+xft:Unifont:style=Medium:size=23
+! Italic
+URxvt.italicFont: xft:Ubuntu Mono Nerd Font Mono:style=Light,Regular:size=25:antialias=true:hinting=true,\
+xft:Unifont:style=Medium:size=23
 
 !URxvt.font: xft:Iosevka Nerd Font Mono:style=Regular:style=Medium:size=20:antialias=true:hinting=true,\
 !xft:Unifont:style=Medium:size=18
@@ -92,7 +92,7 @@ Xft.hintstyle         : hintmedium
 Xft.autohint          : true
 Xft.dpi               : 96
 
-URxvt.font: xft:Iosevka:size=20
+!URxvt.font: xft:Iosevka:size=20
 !URxvt.font: xft:Ubuntu Mono:size=20
 
 !URxvt*letterSpace: +1

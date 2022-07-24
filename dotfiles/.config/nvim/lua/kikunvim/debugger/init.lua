@@ -69,3 +69,6 @@ end)
 nnoremap("<leader>br", function()
     dap.run_to_cursor()
 end)
+
+require("kikunvim.debugger.node")
+require("kikunvim.debugger.lldb")

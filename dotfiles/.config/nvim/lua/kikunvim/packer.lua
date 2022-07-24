@@ -19,7 +19,8 @@ return require("packer").startup(function()
     use("saadparwaiz1/cmp_luasnip")
     use("rafamadriz/friendly-snippets")
     use("neovim/nvim-lspconfig")
-    use("williamboman/nvim-lsp-installer")
+    use("williamboman/mason.nvim")
+    use("williamboman/mason-lspconfig.nvim")
     use("glepnir/lspsaga.nvim")
     use("hrsh7th/cmp-nvim-lsp")
     use("hrsh7th/cmp-buffer")
@@ -31,22 +32,35 @@ return require("packer").startup(function()
     use("nvim-telescope/telescope-fzy-native.nvim")
     use("sbdchd/neoformat")
     use("windwp/nvim-autopairs")
-    use({
-        "aserowy/tmux.nvim",
+    use {
+        'numToStr/Comment.nvim',
         config = function()
-            require("tmux").setup({
-                copy_sync = {
-                    enable = true,
-                },
-                navigation = {
-                    enable_default_keybindings = false,
-                },
-                resize = {
-                    enable_default_keybindings = false,
-                }
-            })
+            require('Comment').setup()
         end
-    })
+    }
+    -- use({
+    --     "aserowy/tmux.nvim",
+    --     config = function()
+    --         require("tmux").setup({
+    --             copy_sync = {
+    --                 enable = false,
+    --                 sync_clipboard = false,
+    --                 sync_registers = false,
+    --                 sync_deletes = false,
+    --                 sync_unnamed = false,
+    --             },
+    --             navigation = {
+    --                 enable_default_keybindings = false,
+    --                 cycle_navigation = false,
+    --             },
+    --             resize = {
+    --                 enable_default_keybindings = false,
+    --                 resize_step_x = 4,
+    --                 resize_step_y = 4,
+    --             }
+    --         })
+    --     end
+    -- })
 
     -- Languages
     use("neovimhaskell/haskell-vim")

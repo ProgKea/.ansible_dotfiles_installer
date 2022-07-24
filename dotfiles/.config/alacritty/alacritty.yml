@@ -4,7 +4,7 @@ env:
 font:
   normal:
     family: Ubuntu Mono
-  size: 17.0
+  size: 19.0
 
 key_bindings:
   - { key: Up, mods: Control|Shift, action: IncreaseFontSize }
@@ -36,7 +36,8 @@ colors:
     white: "#d3d7cf"
     yellow: "#c4a000"
   primary:
-    background: "#000000"
+    #background: "#000000"
+    background: "#181818"
     foreground: "#ffffff"
   selection:
     background: "#b5d5ff"

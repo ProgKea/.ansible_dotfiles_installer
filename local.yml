@@ -25,5 +25,6 @@
     - tools
     - productivity
 
+# TODO: install debugging stuff (lldb, node-debug2)
 # TODO: install stack
 # note: stack needs ncurses5-compat-libs on arch
