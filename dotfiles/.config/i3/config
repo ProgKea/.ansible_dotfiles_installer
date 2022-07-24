@@ -123,7 +123,9 @@ bar {
     status_command i3status
 }
 
-bindsym $mod+Shift+t bar mode toggle
+bindsym $mod+Shift+t exec "flowtimer start"
+bindsym $mod+Shift+b exec "flowtimer break"
+bindsym $mod+Shift+s exec "screenshot.sh"
 
 # Hide border if only 1 window is active
 #hide_edge_borders smart
