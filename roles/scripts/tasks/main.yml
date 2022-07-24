@@ -8,6 +8,9 @@
       - w3m
       - xsel
       - xclip
+      - maim
+      - xrectsel
+      - byzanz
 
 - name: Create symlinks for scripts
   tags: scripts

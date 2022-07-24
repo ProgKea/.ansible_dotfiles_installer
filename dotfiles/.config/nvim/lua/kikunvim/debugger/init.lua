@@ -37,14 +37,14 @@ dap.listeners.before.event_exited["dapui_config"] = function()
     dapui.close()
 end
 
-nnoremap("bt", function()
+nnoremap("<leader>bt", function()
     dapui.toggle(1)
 end)
-nnoremap("bu", function()
+nnoremap("<leader>bu", function()
     dapui.toggle(2)
 end)
 
-nnoremap("q", function()
+nnoremap("<leader>bq", function()
     dap.close()
 end)
 
