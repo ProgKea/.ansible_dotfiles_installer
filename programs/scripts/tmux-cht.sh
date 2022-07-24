@@ -4,13 +4,16 @@ if [[ -z $selected ]]; then
     exit 0
 fi
 
-read -p "Enter Query: " query
+set -o vi
+IFS= read -rep "Enter Query: " || {
+    exit 0
+}
 
 if grep -qs "$selected" ~/.tmux-cht-languages; then
-    query=`echo $query | tr ' ' '+'`
-    tmux neww bash -c "echo \"curl cht.sh/$selected/$query/\" & curl cht.sh/$selected/$query & while [ : ]; do sleep 1; done" 
+    query=`echo $REPLY | tr ' ' '+'`
+    tmux neww bash -c "echo \"curl cht.sh/$selected/$REPLY/\" & curl cht.sh/$selected/$query & while [ : ]; do sleep 1; done" 
 else
-    query=`echo $query | tr ' ' '+'`
-    tmux neww bash -c "echo \"curl cht.sh/$selected~$query\" & curl cht.sh/$selected~$query & while [ : ]; do sleep 1; done" 
+    query=`echo $REPLY | tr ' ' '+'`
+    tmux neww bash -c "echo \"curl cht.sh/$selected~$REPLY\" & curl cht.sh/$selected~$query & while [ : ]; do sleep 1; done" 
 fi
 

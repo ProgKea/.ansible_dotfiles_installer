@@ -101,26 +101,25 @@
 (fringe-mode 0)
 (blink-cursor-mode 1)
 
-;;(load "~/.emacs.d/elpa/simpc-mode.el" t)
+(load "~/.emacs.d/elpa/simpc-mode.el" t)
 
-;;(require 'simpc-mode)
-;;(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
+(add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
 
-;;(defun astyle-buffer (&optional justify)
-  ;;(interactive)
-  ;;(let ((saved-line-number (line-number-at-pos)))
-    ;;(shell-command-on-region
-     ;;(point-min)
-     ;;(point-max)
-     ;;"astyle --style=kr"
-     ;;nil
-     ;;t)
-    ;;(goto-line saved-line-number)))
-;;
-;;(add-hook 'simpc-mode-hook
-          ;;(lambda ()
-            ;;(interactive)
-            ;;(setq-local fill-paragraph-function 'astyle-buffer)))
+(defun astyle-buffer (&optional justify)
+  (interactive)
+  (let ((saved-line-number (line-number-at-pos)))
+    (shell-command-on-region
+     (point-min)
+     (point-max)
+     "astyle --style=kr"
+     nil
+     t)
+    (goto-line saved-line-number)))
+
+(add-hook 'simpc-mode-hook
+          (lambda ()
+            (interactive)
+            (setq-local fill-paragraph-function 'astyle-buffer)))
 
 ;; Install and configure packages
 (use-package evil
@@ -239,17 +238,25 @@
   (setq lsp-ui-sideline-show-hover nil)
   (setq lsp-ui-sideline-show-code-actions t))
 
-(use-package company
-  :after lsp-mode
-  :hook (prog-mode . company-mode)
+(use-package corfu
   :custom
-  (global-company-mode 1)
-  (company-minimum-prefix-length 1)
-  (completion-ignore-case t)
-  (company-idle-delay 0.2))
+  (corfu-auto t)
+  (corfu-auto-delay 0.2)
+  (corfu-auto-prefix 1)
+  :init
+  (global-corfu-mode))
 
-(use-package company-posframe
-  :ensure)
+;; (use-package company
+;;   :after lsp-mode
+;;   :hook (prog-mode . company-mode)
+;;   :custom
+;;   (global-company-mode 1)
+;;   (company-minimum-prefix-length 1)
+;;   (completion-ignore-case t)
+;;   (company-idle-delay 0.2))
+
+;; (use-package company-posframe
+;;   :ensure)
 
 (use-package yasnippet
   :ensure
@@ -338,27 +345,30 @@
 
 ;; Autocompletion keybindings
 ;; Company
-(with-eval-after-load 'company (define-key company-active-map (kbd "C-w") 'backward-kill-word))
-(with-eval-after-load 'company (define-key company-active-map (kbd "C-e") 'company-abort))
-(with-eval-after-load 'company (global-set-key (kbd "C-<SPC>") 'company-complete))
+;;(with-eval-after-load 'company (define-key company-active-map (kbd "C-w") 'backward-kill-word))
+;;(with-eval-after-load 'company (define-key company-active-map (kbd "C-e") 'company-abort))
+;;(with-eval-after-load 'company (global-set-key (kbd "C-<SPC>") 'company-complete))
+(evil-define-key 'insert corfu-map (kbd "C-e") 'corfu-quit))
+(evil-define-key 'insert 'global (kbd "C-<SPC>") 'complete-symbol))
 
 ;; Yasnippet
-(evil-define-key 'insert company-mode-map (kbd "<tab>") 'yas-expand)
-(evil-define-key 'insert company-mode-map [tab] 'yas-expand)
-(define-key company-active-map [tab] 'yas-expand)
-(define-key company-active-map (kbd "TAB") 'yas-expand)
-(define-key yas-minor-mode-map [tab] nil)
-(define-key yas-minor-mode-map (kbd "TAB") nil)
-(define-key yas-keymap [tab] 'yas-next-field)
-(define-key yas-keymap (kbd "TAB") 'yas-next-field)
+;;(evil-define-key 'insert company-mode-map (kbd "<tab>") 'yas-expand)
+;;(evil-define-key 'insert company-mode-map [tab] 'yas-expand)
+;;(define-key company-active-map [tab] 'yas-expand)
+;;(define-key company-active-map (kbd "TAB") 'yas-expand)
+;;(define-key yas-minor-mode-map [tab] nil)
+;;(define-key yas-minor-mode-map (kbd "TAB") nil)
+;;(define-key yas-keymap [tab] 'yas-next-field)
+;;(define-key yas-keymap (kbd "TAB") 'yas-next-field)
 
 ;; Multicursor
 (evil-define-key 'normal evil-multiedit-mode-map (kbd "<escape>") 'evil-multiedit-abort)
-(evil-define-key 'normal 'global (kbd "z") 'evil-multiedit-match-symbol-and-next)
-(evil-define-key 'normal 'global (kbd "Z") 'evil-multiedit-match-symbol-and-prev)
-(evil-define-key 'visual 'global (kbd "z") 'evil-multiedit-match-and-next)
-(evil-define-key 'visual 'global (kbd "Z") 'evil-multiedit-match-and-prev)
-(evil-define-key 'visual 'global (kbd "R") 'evil-multiedit-match-all)
+(evil-define-key 'normal 'global "z" 'evil-multiedit-match-symbol-and-next)
+(evil-define-key 'normal evil-multiedit-mode-map "z" 'evil-multiedit-match-symbol-and-next)
+(evil-define-key 'normal 'global "Z" 'evil-multiedit-match-symbol-and-prev)
+(evil-define-key 'visual 'global "z" 'evil-multiedit-match-and-next)
+(evil-define-key 'visual 'global "Z" 'evil-multiedit-match-and-prev)
+(evil-define-key 'visual 'global "R" 'evil-multiedit-match-all)
 
 ;; Vertico keybindings
 (with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "j") 'vertico-next))
@@ -390,7 +400,9 @@
 ;; Haskell
 (add-hook 'haskell-mode-hook #'haskell-doc-mode)
 (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
-(add-hook 'haskell-mode-hook (lambda () (flycheck-mode -1)))
+
+;; fix haskell being slow
+(setq-default flycheck-disabled-checkers '(haskell-stack-ghc))
 
 ;; functions
 (defun kill-other-buffers ()
@@ -416,7 +428,7 @@
  '(custom-safe-themes
    '("5586a5db9dadef93b6b6e72720205a4fa92fd60e4ccfd3a5fa389782eab2371b" "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "e1f4f0158cd5a01a9d96f1f7cdcca8d6724d7d33267623cc433fe1c196848554" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" default))
  '(package-selected-packages
-   '(zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree typescript-mode rust-mode quelpa-use-package projectile orderless lsp-ui lsp-pyright iedit hydra haskell-mode gruber-darker-theme frame-local flymake-easy flycheck-nimsuggest evil-collection epc disable-mouse diminish company-posframe commenter autothemer auctex async ansible)))
+   '(astyle zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree typescript-mode rust-mode quelpa-use-package projectile orderless lsp-ui lsp-pyright iedit hydra haskell-mode gruber-darker-theme frame-local flymake-easy flycheck-nimsuggest evil-collection epc disable-mouse diminish commenter autothemer auctex async ansible)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

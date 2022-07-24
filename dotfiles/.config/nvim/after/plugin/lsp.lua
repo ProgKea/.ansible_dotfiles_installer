@@ -8,7 +8,7 @@ require("lspconfig").texlab.setup{
 require("lspconfig").cssls.setup{}
 require("lspconfig").hls.setup{}
 require("lspconfig").sumneko_lua.setup{}
-require("lspconfig").denols.setup{}
+require("lspconfig").bashls.setup{}
 require ("lspconfig").tsserver.setup{}
 require("lspconfig").rust_analyzer.setup{
     cmd = { "rustup", "run", "nightly", "rust-analyzer" }

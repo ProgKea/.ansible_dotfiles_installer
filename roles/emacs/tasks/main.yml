@@ -40,3 +40,12 @@
 - name: Install emacs snippets
   tags: emacs,snippets
   shell: if [ ! -d "$HOME/.emacs.snippets" ]; then cp -r programs/.emacs.snippets $HOME/.emacs.snippets; else rm -rf $HOME/.emacs.snippets && cp -r programs/.emacs.snippets $HOME/.emacs.snippets; fi
+
+- name: Install astyle
+  tags: emacs
+  package:
+    name: astyle
+
+- name: Install simpc mode if not installed already
+  tags: emacs
+  shell: if [ ! -f "$HOME/.emacs.d/elpa/simpc-mode.el" ]; then wget https://raw.githubusercontent.com/rexim/simpc-mode/master/simpc-mode.el -O $HOME/.emacs.d/elpa/simpc-mode.el; fi

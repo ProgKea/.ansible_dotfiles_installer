@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
-read -p "Enter Query: " query
-if [[ -z $query ]]; then
-    exit 0
-fi
+set -o emacs
+bind '"\C-w": kill-whole-line'
+bind '"\e": "\C-w\C-d"'
+bind '"\e\e": "\C-w\C-d"'
 
-tmux neww bash -c "so '$query'" 
+set -o vi
+IFS= read -rep "Enter Query: " || {
+    exit 0
+}
+
+tmux neww bash -c "so '$REPLY'" 
