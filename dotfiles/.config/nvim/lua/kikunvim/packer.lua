@@ -34,4 +34,9 @@ return require("packer").startup(function()
 
   -- Languages
   use("neovimhaskell/haskell-vim")
+
+  -- dap
+  use("mfussenegger/nvim-dap")
+  use("rcarriga/nvim-dap-ui")
+  use("theHamsta/nvim-dap-virtual-text")
 end)

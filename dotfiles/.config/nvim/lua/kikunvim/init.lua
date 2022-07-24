@@ -4,6 +4,7 @@ NeovimGroup = augroup('KikuNvim', {})
 require("kikunvim.set")
 require("kikunvim.packer")
 require("kikunvim.theme")
+require("kikunvim.debugger")
 
 SetColorscheme()
 
