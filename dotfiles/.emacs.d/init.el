@@ -41,9 +41,6 @@
 (package-install 'quelpa-use-package)
 (require 'quelpa-use-package)
 
-;; keep custom variables inside its own file
-;;(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-
 ;;; ASYNC
 ;; Emacs look SIGNIFICANTLY less often which is a good thing.
 ;; asynchronous bytecode compilation and various other actions makes
@@ -196,13 +193,6 @@
   :init
   (which-key-mode 1))
 
-(use-package diminish
-  :ensure
-  :init
-  (diminish 'which-key-mode)
-  (diminish 'flycheck-mode)
-  (diminish 'projectile-mode))
-
 (use-package undo-tree
   :ensure
   :after evil
@@ -260,6 +250,9 @@
 (use-package rust-mode
   :ensure)
 
+(use-package go-mode
+  :ensure)
+
 (use-package haskell-mode :ensure t)
 
 (use-package yaml-mode :ensure)
@@ -293,7 +286,6 @@
 
 ;; find
 (evil-define-key 'normal 'global (kbd "C-j") 'projectile-find-file)
-;;(evil-define-key 'normal 'global (kbd "<leader>jw") 'find-grep) (not needed anymore because of consult)
 (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
 (evil-define-key 'normal 'global (kbd "<leader>jf") '(lambda() (interactive)
                                                        (cd "~/")
@@ -303,12 +295,14 @@
 (evil-define-key 'normal 'global (kbd "<leader>jj") 'projectile-switch-project)
 (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
 (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
-(evil-define-key 'normal 'global (kbd "C-f i") 'eww)
+(evil-define-key 'normal 'global (kbd "<leader>i") 'eww)
+(evil-define-key 'normal 'global (kbd "C-o") 'evil-buffer)
 
 ;; consult
 (evil-define-key 'normal 'global "/" 'consult-line)
 (evil-define-key 'normal 'global (kbd "<leader>jr") 'consult-ripgrep)
 (evil-define-key 'normal 'global (kbd "<leader>jg") 'consult-git-grep)
+(evil-define-key 'normal 'global (kbd "<leader>jb") 'consult-buffer)
 
 ;; Compilation
 (evil-define-key 'normal 'global (kbd "<leader>mm") 'compile)
@@ -323,7 +317,6 @@
 
 (evil-define-key 'normal 'global (kbd "<leader>ln") 'next-error)
 (evil-define-key 'normal 'global (kbd "<leader>lp") 'previous-error)
-(evil-define-key 'normal 'global (kbd "<leader>i") 'imenu)
 
 ;; lsp keybindings
 (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
@@ -338,6 +331,7 @@
                                                        (lsp-ui-doc-focus-frame)))
 
 (evil-define-key 'insert corfu-map (kbd "C-e") 'corfu-quit)
+(evil-define-key 'insert corfu-map (kbd "<RET>") 'corfu-complete)
 (evil-define-key 'insert 'global (kbd "C-<SPC>") 'complete-symbol)
 (evil-define-key 'insert corfu-map (kbd "TAB") 'yas-expand)
 (evil-define-key 'insert corfu-map [tab] 'yas-expand)
@@ -381,7 +375,6 @@
 ;; Haskell
 (add-hook 'haskell-mode-hook #'haskell-doc-mode)
 (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
-
 ;; fix haskell being slow
 (setq-default flycheck-disabled-checkers '(haskell-stack-ghc))
 
@@ -409,7 +402,7 @@
  '(custom-safe-themes
    '("5586a5db9dadef93b6b6e72720205a4fa92fd60e4ccfd3a5fa389782eab2371b" "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "e1f4f0158cd5a01a9d96f1f7cdcca8d6724d7d33267623cc433fe1c196848554" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" default))
  '(package-selected-packages
-   '(consult-dir astyle zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree typescript-mode rust-mode quelpa-use-package projectile orderless lsp-ui lsp-pyright iedit hydra haskell-mode gruber-darker-theme frame-local flymake-easy flycheck-nimsuggest evil-collection epc disable-mouse diminish commenter autothemer auctex async ansible)))
+   '(move-text astyle zig-mode zenburn-theme yasnippet yaml-mode which-key vterm vertico unicode-escape undo-tree typescript-mode rust-mode quelpa-use-package projectile orderless lsp-pyright iedit hydra haskell-mode gruber-darker-theme frame-local flymake-easy flycheck-nimsuggest evil-collection epc disable-mouse commenter autothemer auctex async ansible)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -417,4 +410,4 @@
  ;; If there is more than one, they won't work right.
  )
 
-;; TODO: create rust snippets (accidentally deleted them)
+;; TODO: move line keybindings 

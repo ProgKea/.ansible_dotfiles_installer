@@ -6,8 +6,6 @@ require("kikunvim.packer")
 require("kikunvim.theme")
 require("kikunvim.debugger")
 
-SetColorscheme()
-
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
 

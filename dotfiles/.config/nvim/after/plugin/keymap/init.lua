@@ -9,11 +9,9 @@ local nmap = Remap.nmap
 vnoremap("J", ":m '>+1<CR>gv=gv")
 vnoremap("K", ":m '<-2<CR>gv=gv")
 
-nnoremap("<leader>pv", ":Ex<CR>")
-nnoremap("<leader>pt", ":Lexplore<CR>")
+nnoremap("<leader>jv", ":Ex<CR>")
+nnoremap("<leader>jt", ":Lexplore<CR>")
 nnoremap("<C-o>", ":bp<CR>")
-
---nnoremap("<S-C-p>", ":\"0p")
 
 nmap("<C-a>", "gg<S-v>G")
 
@@ -30,10 +28,12 @@ nnoremap("<leader>x", ":silent !chmod +x %<CR>")
 
 nnoremap("<C-p>", ":lua require('telescope.builtin').git_files()<CR>")
 nnoremap("<Leader>f", ":lua require('telescope.builtin').find_files()<CR>")
-nnoremap("<leader>pw", ":lua require('telescope.builtin').grep_string { search = vim.fn.expand(\"<cword>\") }<CR>")
-nnoremap("<Leader>pb", ":Telescope buffers<CR>")
-nnoremap("<Leader>ph", ":Telescope help_tags<CR>")
-nnoremap("<leader>ps", ":lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For > \")})<CR>")
+nnoremap("<leader>jl", ":lua require('telescope.builtin').grep_string()<CR>")
+nnoremap("<Leader>jb", ":Telescope buffers<CR>")
+nnoremap("<Leader>jh", ":Telescope help_tags<CR>")
+-- nnoremap <leader>gc :lua require('telescope').git_branches()<CR>
+-- nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
+-- nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 
 -- Quickfixlist
 nnoremap("qn", ":cn<CR>")
@@ -44,6 +44,5 @@ nnoremap("qo", ":copen<CR>")
 nnoremap("<leader>mm", "<cmd>silent !tmux display-popup -E -y 100\\% -w 100\\% -h 10\\% tmux-compile.sh<CR>")
 nnoremap("<leader>mr", "<cmd>silent !tmux run-shell 'tmux-compile.sh -r'<CR>")
 
--- nnoremap <leader>gc :lua require('telescope').git_branches()<CR>
--- nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
--- nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
+nnoremap("<C-l>", ":normal! zz<CR>")
+

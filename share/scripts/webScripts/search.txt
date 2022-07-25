@@ -1,5 +1,5 @@
-searx https://searx.be/search?q=
 google https://www.google.com/search?q=
+searx https://searx.be/search?q=
 qwant https://www.qwant.com/?q=
 duckduckgo https://duckduckgo.com/?q=
 khanacademy https://www.khanacademy.org/search?search_again=1&page_search_query=
