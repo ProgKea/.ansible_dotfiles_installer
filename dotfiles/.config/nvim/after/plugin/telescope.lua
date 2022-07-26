@@ -1,5 +1,5 @@
-local pickers = require("telescope.pickers")
-local previewers = require("telescope.previewers")
+-- local pickers = require("telescope.pickers")
+-- local previewers = require("telescope.previewers")
 local actions = require("telescope.actions")
 
 require("telescope").setup({
@@ -25,6 +25,11 @@ require("telescope").setup({
             override_file_sorter = true,
         },
     },
+    pickers = {
+        find_files = {
+            hidden = true
+        }
+    }
 })
 
 require("telescope").load_extension("fzy_native")

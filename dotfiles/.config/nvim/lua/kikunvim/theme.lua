@@ -34,3 +34,15 @@ hl("LineNr", {
 hl("netrwDir", {
     fg = "#5eacd3"
 })
+
+hl("TelescopeNormal", {
+    bg = "none"
+})
+
+hl("TelescopeBorder", {
+    bg = "none"
+})
+
+hl("TelescopeTitle", {
+    bg = "none"
+})

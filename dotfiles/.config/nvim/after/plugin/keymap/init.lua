@@ -45,11 +45,15 @@ nnoremap("<leader>q", "<cmd>close<CR>")
 nnoremap("<leader>ö", "<cmd>vsplit<CR>")
 nnoremap("<leader>h", "<cmd>split<CR>")
 nnoremap("<leader>0", "<cmd>normal! <C-w>w<CR>")
+nnoremap("<leader>9", "<cmd>normal! <C-w>W<CR>")
 nnoremap("<C-o>", "<cmd>normal! <C-^><CR>")
 
 nnoremap("<leader>jv", "<cmd>Ex<CR>")
 nnoremap("<leader>jt", "<cmd>Lexplore<CR>")
 nnoremap("<leader>jl", "<cmd>Ex ~<CR>")
+
+nnoremap("<leader>ms", ":!")
+nnoremap("<M-x>", ":") -- thats how you know he uses emacs
 
 -- tmux compile
 -- nnoremap("<leader>mm", "<cmd>w !tmux display-popup -E -y 100\\% -w 100\\% -h 10\\% tmux-compile.sh<CR>")
