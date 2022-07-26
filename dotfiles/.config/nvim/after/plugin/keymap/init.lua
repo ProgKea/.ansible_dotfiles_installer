@@ -7,6 +7,9 @@ local nmap = Remap.nmap
 
 nmap("<C-a>", "gg<S-v>G")
 
+vnoremap("J", ":m '>+1<CR>gv=gv")
+vnoremap("K", ":m '<-2<CR>gv=gv")
+
 -- Open current directory
 nmap("te", "<cmd>tabedit")
 nmap("<S-Tab>", "<cmd>tabprev<Return>")
