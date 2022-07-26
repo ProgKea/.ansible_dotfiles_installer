@@ -25,6 +25,7 @@ nnoremap("<leader><leader>x", "<cmd>source %<CR>")
 
 nnoremap("<leader>jf", "<cmd>lua require('telescope.builtin').git_files()<CR>")
 nnoremap("<Leader>f", "<cmd>lua require('telescope.builtin').find_files()<CR>")
+nnoremap("<leader>jl", "<cmd>Ex ~<CR>")
 nnoremap("<leader>jr", "<cmd>lua require('telescope.builtin').grep_string()<CR>")
 nnoremap("<Leader>k", "<cmd>Telescope buffers<CR>")
 nnoremap("<Leader>jh", "<cmd>Telescope help_tags<CR>")
@@ -50,11 +51,8 @@ nnoremap("<C-o>", "<cmd>normal! <C-^><CR>")
 
 nnoremap("<leader>jv", "<cmd>Ex<CR>")
 nnoremap("<leader>jt", "<cmd>Lexplore<CR>")
-nnoremap("<leader>jl", "<cmd>Ex ~<CR>")
 
 nnoremap("<leader>ms", ":!")
 nnoremap("<M-x>", ":") -- thats how you know he uses emacs
-
--- tmux compile
--- nnoremap("<leader>mm", "<cmd>w !tmux display-popup -E -y 100\\% -w 100\\% -h 10\\% tmux-compile.sh<CR>")
--- nnoremap("<leader>mr", "<cmd>w !tmux run-shell 'tmux-compile.sh -r'<CR>")
+nnoremap("<leader>mm", ":Dispatch ")
+nnoremap("<leader>mr", "<cmd>Dispatch!<CR>")

@@ -349,14 +349,6 @@
 (evil-define-key 'insert corfu-map [tab] 'yas-expand)
 
 ;; windows and buffers
-;; nnoremap("<leader>o", "<cmd>only<CR>")
-;; nnoremap("<leader>q", "<cmd>close<CR>")
-;; nnoremap("<leader>ö", "<cmd>vsplit<CR>")
-;; nnoremap("<leader>h", "<cmd>split<CR>")
-;; nnoremap("<leader>0", "<cmd>normal! <C-w>w<CR>")
-;; nnoremap("<leader>9", "<cmd>normal! <C-w>W<CR>")
-;; nnoremap("<C-o>", "<cmd>normal! <C-^><CR>")
-
 (evil-define-key 'normal 'global (kbd "<leader>o") 'delete-other-windows)
 (evil-define-key 'normal 'global (kbd "<leader>q") 'delete-window)
 (evil-define-key 'normal 'global (kbd "<leader>h") 'evil-window-split)
@@ -439,5 +431,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-

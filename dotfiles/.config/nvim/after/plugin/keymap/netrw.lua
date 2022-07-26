@@ -1,4 +1,4 @@
--- netrw
+-- some dired keybindings
 vim.api.nvim_create_autocmd('filetype', {
   pattern = 'netrw',
   desc = 'Better mappings for netrw',
@@ -18,5 +18,8 @@ vim.api.nvim_create_autocmd('filetype', {
 
     -- parent directoy
     bind('h', '-')
+
+    -- create directoy
+    bind('+', 'd')
   end
 })
