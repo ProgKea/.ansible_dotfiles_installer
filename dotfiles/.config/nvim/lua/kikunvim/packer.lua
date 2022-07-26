@@ -47,27 +47,3 @@ return require("packer").startup(function()
     use("rcarriga/nvim-dap-ui")
     use("theHamsta/nvim-dap-virtual-text")
 end)
-    -- use({
-        --     "aserowy/tmux.nvim",
-        --     config = function()
-            --         require("tmux").setup({
-                --             copy_sync = {
-                    --                 enable = false,
-                    --                 sync_clipboard = false,
-                    --                 sync_registers = false,
-                    --                 sync_deletes = false,
-                    --                 sync_unnamed = false,
-                    --             },
-                    --             navigation = {
-                        --                 enable_default_keybindings = false,
-                        --                 cycle_navigation = false,
-                        --             },
-                        --             resize = {
-                            --                 enable_default_keybindings = false,
-                            --                 resize_step_x = 4,
-                            --                 resize_step_y = 4,
-                            --             }
-                            --         })
-                            --     end
-                            -- })
-

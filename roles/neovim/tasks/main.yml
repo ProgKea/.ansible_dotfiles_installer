@@ -19,12 +19,12 @@
   shell: if [ ! -f /usr/local/bin/vim ]; then ln -s $(which nvim) /usr/local/bin/vim; fi
 
 - name: Check if Packer is installed
-  tags: neovim
+  tags: neovim, packer
   stat:
     path: "$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
   register: packer_installed
 
 - name: Install Packer
-  tags: neovim
-  shell: git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  tags: neovim, packer
+  shell: git clone --depth 1 https://github.com/wbthomason/packer.nvim $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
   when: not packer_installed.stat.exists

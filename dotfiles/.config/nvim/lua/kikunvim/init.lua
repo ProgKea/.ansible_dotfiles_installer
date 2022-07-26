@@ -2,9 +2,9 @@ local augroup = vim.api.nvim_create_augroup
 NeovimGroup = augroup('KikuNvim', {})
 
 require("kikunvim.set")
-require("kikunvim.packer")
-require("kikunvim.theme")
 require("kikunvim.debugger")
+require("kikunvim.theme")
+require("kikunvim.packer")
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
