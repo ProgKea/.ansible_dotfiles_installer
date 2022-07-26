@@ -1,9 +1,7 @@
 return require("packer").startup(function()
     use("wbthomason/packer.nvim")
-
     use("nvim-lua/popup.nvim")
     use("nvim-lua/plenary.nvim")
-
     use("TimUntersberger/neogit")
 
     -- Appearance
@@ -37,6 +35,7 @@ return require("packer").startup(function()
             require('Comment').setup()
         end
     }
+
     -- Languages
     use("neovimhaskell/haskell-vim")
 

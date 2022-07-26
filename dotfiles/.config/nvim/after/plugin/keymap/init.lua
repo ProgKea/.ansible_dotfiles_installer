@@ -6,50 +6,51 @@ local xnoremap = Remap.xnoremap
 local nmap = Remap.nmap
 
 -- Move lines
-vnoremap("J", ":m '>+1<CR>gv=gv")
-vnoremap("K", ":m '<-2<CR>gv=gv")
-
-nnoremap("<C-o>", ":bp<CR>")
+vnoremap("J", "<cmd>m '>+1<CR>gv=gv")
+vnoremap("K", "<cmd>m '<-2<CR>gv=gv")
 
 nmap("<C-a>", "gg<S-v>G")
 
 -- Open current directory
-nmap("te", ":tabedit")
-nmap("<S-Tab>", ":tabprev<Return>")
-nmap("<Tab>", ":tabnext<Return>")
+nmap("te", "<cmd>tabedit")
+nmap("<S-Tab>", "<cmd>tabprev<Return>")
+nmap("<Tab>", "<cmd>tabnext<Return>")
 
 -- Replace all is aliased to S.
-nnoremap("S", ":%s//g<Left><Left>")
+nnoremap("S", "<cmd>%s//g<Left><Left>")
 
 nnoremap("Y", "y$")
-nnoremap("<leader>x", ":silent !chmod +x %<CR>")
-nnoremap("<leader><leader>x", ":source %<CR>")
+nnoremap("<leader>x", "<cmd>silent !chmod +x %<CR>")
+nnoremap("<leader><leader>x", "<cmd>source %<CR>")
 
-nnoremap("<leader>jl", ":lua require('telescope.builtin').git_files()<CR>")
-nnoremap("<Leader>f", ":lua require('telescope.builtin').find_files()<CR>")
-nnoremap("<leader>jr", ":lua require('telescope.builtin').grep_string()<CR>")
-nnoremap("<Leader>k", ":Telescope buffers<CR>")
-nnoremap("<Leader>jh", ":Telescope help_tags<CR>")
--- nnoremap <leader>gc :lua require('telescope').git_branches()<CR>
--- nnoremap <leader>gw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
--- nnoremap <leader>gm :lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
+nnoremap("<leader>jf", "<cmd>lua require('telescope.builtin').git_files()<CR>")
+nnoremap("<Leader>f", "<cmd>lua require('telescope.builtin').find_files()<CR>")
+nnoremap("<leader>jr", "<cmd>lua require('telescope.builtin').grep_string()<CR>")
+nnoremap("<Leader>k", "<cmd>Telescope buffers<CR>")
+nnoremap("<Leader>jh", "<cmd>Telescope help_tags<CR>")
+-- nnoremap <leader>gc <cmd>lua require('telescope').git_branches()<CR>
+-- nnoremap <leader>gw <cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>
+-- nnoremap <leader>gm <cmd>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>
 
 -- Quickfixlist
-nnoremap("qn", ":cn<CR>")
-nnoremap("qp", ":cp<CR>")
-nnoremap("qo", ":copen<CR>")
+nnoremap("qn", "<cmd>cn<CR>")
+nnoremap("qp", "<cmd>cp<CR>")
+nnoremap("qo", "<cmd>copen<CR>")
+
+nnoremap("<C-l>", "<cmd>normal! zz<CR>")
+
+-- navigation
+nnoremap("<leader>o", "<cmd>only<CR>")
+nnoremap("<leader>q", "<cmd>close<CR>")
+nnoremap("<leader>ö", "<cmd>vsplit<CR>")
+nnoremap("<leader>h", "<cmd>split<CR>")
+nnoremap("<leader>0", "<cmd>normal! <C-w>w<CR>")
+nnoremap("<C-o>", "<cmd>normal! <C-^><CR>")
+
+nnoremap("<leader>jv", "<cmd>Ex<CR>")
+nnoremap("<leader>jt", "<cmd>Lexplore<CR>")
+nnoremap("<leader>jl", "<cmd>Ex ~<CR>")
 
 -- tmux compile
-nnoremap("<leader>mm", "<cmd>w !tmux display-popup -E -y 100\\% -w 100\\% -h 10\\% tmux-compile.sh<CR>")
-nnoremap("<leader>mr", "<cmd>w !tmux run-shell 'tmux-compile.sh -r'<CR>")
-
-nnoremap("<C-l>", ":normal! zz<CR>")
-
--- window navigation
-nnoremap("<leader>o", ":only<CR>")
-nnoremap("<leader>q", ":close<CR>")
-nnoremap("<leader>ö", ":vsplit<CR>")
-nnoremap("<leader>h", ":split<CR>")
-
-nnoremap("<leader>jv", ":Ex<CR>")
-nnoremap("<leader>jt", ":Lexplore<CR>")
+-- nnoremap("<leader>mm", "<cmd>w !tmux display-popup -E -y 100\\% -w 100\\% -h 10\\% tmux-compile.sh<CR>")
+-- nnoremap("<leader>mr", "<cmd>w !tmux run-shell 'tmux-compile.sh -r'<CR>")
