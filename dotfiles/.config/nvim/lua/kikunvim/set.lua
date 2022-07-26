@@ -21,6 +21,7 @@ vim.opt.scrolloff=8
 vim.opt.expandtab = true
 vim.opt.clipboard = vim.opt.clipboard + "unnamedplus"
 vim.opt.signcolumn = "yes"
+vim.opt.cedit = "<ESC>"
 
 vim.opt.isfname:append("@-@")
 vim.opt.hidden = true

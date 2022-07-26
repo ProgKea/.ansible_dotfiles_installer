@@ -48,9 +48,19 @@ nnoremap("<C-o>", "<cmd>normal! <C-^><CR>")
 nnoremap("<leader>jv", "<cmd>Ex<CR>")
 nnoremap("<leader>jt", "<cmd>Lexplore<CR>")
 
-nnoremap("<leader>ms", ":Dispatch! ")
+nnoremap("<leader>ms", ":Dispatch ")
 nnoremap("<M-x>", ":") -- thats how you know he uses emacs
 nnoremap("<leader>mm", ":set makeprg=")
 nnoremap("<leader>mr", "<cmd>w | Make<CR>")
 nnoremap("<leader>mt", "<cmd>w | Make!<CR>")
 nnoremap("<leader>mc", ":compiler ")
+
+vim.api.nvim_create_autocmd('filetype', {
+    pattern = 'vim',
+    callback = function()
+        local bind = function(lhs, rhs)
+            vim.keymap.set('n', lhs, rhs, {remap = true, buffer = true})
+        end 
+        bind("<ESC>", "<cmd>close<CR>")
+    end
+})
