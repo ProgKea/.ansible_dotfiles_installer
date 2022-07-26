@@ -5,10 +5,6 @@ local inoremap = Remap.inoremap
 local xnoremap = Remap.xnoremap
 local nmap = Remap.nmap
 
--- Move lines
-vnoremap("J", "<cmd>m '>+1<CR>gv=gv")
-vnoremap("K", "<cmd>m '<-2<CR>gv=gv")
-
 nmap("<C-a>", "gg<S-v>G")
 
 -- Open current directory
@@ -52,7 +48,9 @@ nnoremap("<C-o>", "<cmd>normal! <C-^><CR>")
 nnoremap("<leader>jv", "<cmd>Ex<CR>")
 nnoremap("<leader>jt", "<cmd>Lexplore<CR>")
 
-nnoremap("<leader>ms", ":!")
+nnoremap("<leader>ms", ":Dispatch! ")
 nnoremap("<M-x>", ":") -- thats how you know he uses emacs
-nnoremap("<leader>mm", ":Dispatch ")
-nnoremap("<leader>mr", "<cmd>Dispatch!<CR>")
+nnoremap("<leader>mm", ":set makeprg=")
+nnoremap("<leader>mr", "<cmd>w | Make<CR>")
+nnoremap("<leader>mt", "<cmd>w | Make!<CR>")
+nnoremap("<leader>mc", ":compiler ")
