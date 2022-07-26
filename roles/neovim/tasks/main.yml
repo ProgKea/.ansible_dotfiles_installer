@@ -12,7 +12,7 @@
 
 - name: Build Neovim
   tags: neovim
-  shell: sudo make distclean -C $HOME/neovim && sudo make CMAKE_BUILD_TYPE=RelWithDebInfo -C $HOME/neovim && sudo make install -C ~/neovim
+  shell: sudo make distclean -C $HOME/neovim && sudo make -j$(nproc) CMAKE_BUILD_TYPE=RelWithDebInfo -C $HOME/neovim && sudo make install -C ~/neovim
 
 - name: Create Neovim vim symlink if not present
   tags: neovim

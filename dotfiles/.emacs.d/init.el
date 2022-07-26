@@ -203,8 +203,6 @@
   :custom
   (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
-(use-package vterm :ensure t)
-
 ;; Themes
 (use-package gruber-darker-theme
   :ensure t
@@ -234,15 +232,31 @@
 (use-package corfu
   :custom
   (corfu-auto t)
+  (tab-always-indent 'complete)
   (corfu-auto-delay 0.2)
   (corfu-auto-prefix 1)
   :init
   (global-corfu-mode))
 
+(use-package cape
+  :defer 10
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (setq cape-dabbrev-min-length '1)
+  :config
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-silent)
+  (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify)
+  (add-hook 'eshell-mode-hook
+            (lambda () (setq-local corfu-quit-at-boundary t
+                                   corfu-quit-no-match t
+                                   corfu-auto nil)
+              (corfu-mode))))
+
 (use-package yasnippet
   :ensure
   :config
-  (setq yas/triggers-in-field nil)
+  (setq yas-triggers-in-field nil)
   (setq yas-snippet-dirs '("~/.emacs.snippets/"))
   (yas-global-mode 1))
 
@@ -265,9 +279,6 @@
   (setq zig-format-on-save nil))
 
 ;; keybindings
-(global-set-key (kbd "C-x j") 'async-shell-command)
-
-;; evil keybindings
 (evil-set-leader 'normal (kbd "SPC"))
 (evil-set-leader 'visual (kbd "SPC"))
 
@@ -285,9 +296,9 @@
 (evil-define-key 'visual 'global (kbd "C") 'comment-or-uncomment-region)
 
 ;; find
-(evil-define-key 'normal 'global (kbd "C-j") 'projectile-find-file)
+(evil-define-key 'normal 'global (kbd "<leader>jf") 'projectile-find-file)
 (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
-(evil-define-key 'normal 'global (kbd "<leader>jf") '(lambda() (interactive)
+(evil-define-key 'normal 'global (kbd "<leader>jl") '(lambda() (interactive)
                                                        (cd "~/")
                                                        (call-interactively 'find-file)))
 
@@ -302,14 +313,15 @@
 (evil-define-key 'normal 'global "/" 'consult-line)
 (evil-define-key 'normal 'global (kbd "<leader>jr") 'consult-ripgrep)
 (evil-define-key 'normal 'global (kbd "<leader>jg") 'consult-git-grep)
-(evil-define-key 'normal 'global (kbd "<leader>jb") 'consult-buffer)
 
 ;; Compilation
 (evil-define-key 'normal 'global (kbd "<leader>mm") 'compile)
 (evil-define-key 'normal 'global (kbd "<leader>mr") 'recompile)
 (evil-define-key 'normal 'global (kbd "<leader>mk") 'kill-compilation)
+(evil-define-key 'normal 'global (kbd "<leader>ms") 'async-shell-command)
 
 ;; escape minibuffer
+(global-set-key (kbd "C-x ESC") nil)
 (evil-define-key 'normal 'global (kbd "<escape>") 'abort-minibuffers)
 
 ;; make leader key work in dired mode
@@ -335,6 +347,10 @@
 (evil-define-key 'insert 'global (kbd "C-<SPC>") 'complete-symbol)
 (evil-define-key 'insert corfu-map (kbd "TAB") 'yas-expand)
 (evil-define-key 'insert corfu-map [tab] 'yas-expand)
+
+;; windows and buffers
+(evil-define-key 'normal 'global (kbd "<leader>k") 'consult-buffer)
+(evil-define-key 'normal 'global (kbd "<leader>jk") 'kill-buffer)
 
 ;; Multicursor
 (evil-define-key 'normal evil-multiedit-mode-map (kbd "<escape>") 'evil-multiedit-abort)
@@ -370,7 +386,6 @@
 ;; hooks
 (add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'dired-mode-hook 'auto-revert-mode)
-(add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'eww-mode-hook (lambda () (display-line-numbers-mode -1)))
 ;; Haskell
 (add-hook 'haskell-mode-hook #'haskell-doc-mode)
@@ -409,5 +424,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;; TODO: move line keybindings 
