@@ -13,9 +13,8 @@ require("telescope").setup({
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
         mappings = {
-            i = {
-                ["<C-x>"] = false,
-                ["<C-q>"] = actions.send_to_qflist,
+            n = {
+                ["<leader>lq"] = actions.send_to_qflist,
             },
         },
     },

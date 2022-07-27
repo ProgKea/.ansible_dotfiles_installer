@@ -53,6 +53,7 @@ nnoremap("<leader>jt", "<cmd>Lexplore<CR>")
 
 nnoremap("<leader>ms", ":Dispatch ")
 nnoremap("<M-x>", ":") -- thats how you know he uses emacs
+
 nnoremap("<leader>mm", ":set makeprg=")
 nnoremap("<leader>mr", "<cmd>w | Make<CR>")
 nnoremap("<leader>mt", "<cmd>w | Make!<CR>")

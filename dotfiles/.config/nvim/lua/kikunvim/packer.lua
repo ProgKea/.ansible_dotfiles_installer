@@ -25,6 +25,7 @@ return require("packer").startup(function()
     use("onsails/lspkind-nvim")
 
     -- Speed boosts
+    use("tpope/vim-dispatch")
     use("ThePrimeagen/harpoon")
     use("nvim-telescope/telescope.nvim")
     use("nvim-telescope/telescope-fzy-native.nvim")
@@ -36,15 +37,11 @@ return require("packer").startup(function()
         end
     }
 
-    -- Languages
-    use("neovimhaskell/haskell-vim")
-
     use("sbdchd/neoformat")
 
     -- dap
-    use("mfussenegger/nvim-dap")
-    use("rcarriga/nvim-dap-ui")
-    use("theHamsta/nvim-dap-virtual-text")
+    -- use("mfussenegger/nvim-dap")
+    -- use("rcarriga/nvim-dap-ui")
+    -- use("theHamsta/nvim-dap-virtual-text")
 
-    use("tpope/vim-dispatch")
 end)

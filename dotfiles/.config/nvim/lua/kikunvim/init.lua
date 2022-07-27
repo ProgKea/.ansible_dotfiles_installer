@@ -2,7 +2,6 @@ local augroup = vim.api.nvim_create_augroup
 NeovimGroup = augroup('KikuNvim', {})
 
 require("kikunvim.set")
-require("kikunvim.debugger")
 require("kikunvim.theme")
 require("kikunvim.packer")
 
