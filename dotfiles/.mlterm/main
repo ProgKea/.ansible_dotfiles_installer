@@ -11,3 +11,4 @@ logsize = 4096
 word_separators = " ,;="
 scrollbar_mode = none
 use_urgent_bell = false
+cursor_bg_color = #ffffff
