@@ -1,0 +1,13 @@
+bg_color=#181818
+fg_color=#e4e4ef
+cursor_bg_color=white
+fontsize = 20
+use_point_size = true
+geometry = 88x27
+use_anti_alias = true
+daemon_mode = none
+use_login_shell = true
+logsize = 4096
+word_separators = " ,;="
+scrollbar_mode = none
+use_urgent_bell = false
