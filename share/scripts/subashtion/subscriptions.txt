@@ -1,6 +1,9 @@
 , bugswriter
 . UCngn7SVujlvskHRvRKc1cTw
-- Discuss tech in Himalayas with 69 others | 20+ Days trip with tech people.
+- Tips for CS students.
 , theprimeagen
 . UC8ENHE5xdFSwx71u3fDH5Xw
-- Work for Free as Software Engineer?!? | Devhour 5 Madison Kanna
+- Go is blazingly faster than Zig?
+, 3blue1brown
+. UCYO_jab_esuFRV4b17AJtAw
+- How to lie using visual proofs

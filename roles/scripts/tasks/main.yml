@@ -11,6 +11,7 @@
       - maim
       - xrectsel
       - byzanz
+      - rlwrap
 
 - name: Create symlinks for scripts
   tags: scripts

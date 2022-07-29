@@ -8,3 +8,8 @@
   tags: chromium, productivity
   shell: paru --noconfirm --skipreview -Sy ungoogled-chromium-xdg-bin
   when: '"not found" not in paru_installed.stdout'
+
+- name: Install Brave nightly bin
+  tags: brave, productivity
+  shell: paru --noconfirm --skipreview -Sy brave-nightly-bin
+  when: '"not found" not in paru_installed.stdout'

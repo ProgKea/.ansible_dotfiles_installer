@@ -25,7 +25,7 @@ compinit
 _comp_options+=(globdots)		# Include hidden files.
 
 # vi mode
-bindkey -v
+#bindkey -v
 export KEYTIMEOUT=1
 
 # Use vim keys in tab complete menu:
@@ -62,13 +62,13 @@ bindkey '^e' edit-command-line
 #alias lla='ls -la'
 #alias lt='ls --tree'
 
-alias mpause='echo cycle pause | socat - $HOME/.config/mpv/socket'
-
 alias logout='loginctl kill-session $XDG_SESSION_ID'
 alias record='ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -c:v libx264rgb -crf 0 -preset ultrafast'
 alias copy='xclip -selection clipboard'
 alias hst="history 1 -1 | cut -c 8- | uniq | fzf | tr -d '\n' | xclip -sel c"
 alias ansi="ansible-playbook $HOME/.ansible_dotfiles_installer/local.yml"
+alias e="emacs &"
+alias rw="rlwrap --always-readline"
 
 # start tmux in st or urxvt
 if [[ $- != *i* ]]; then
@@ -77,7 +77,7 @@ elif [[  $TERM == "rxvt-"* || $TERM == "st-"* || $TERM == "xterm-256color" && -z
     exec tmux new-session -A
 fi
 
-#[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh # has issues with tmux and my compile script
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 # install and initialize autopair pluggin
 if [[ ! -d ~/.zsh-autopair ]]; then

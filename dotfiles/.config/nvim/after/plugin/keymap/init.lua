@@ -59,12 +59,12 @@ nnoremap("<leader>mr", "<cmd>w | Make<CR>")
 nnoremap("<leader>mt", "<cmd>w | Make!<CR>")
 nnoremap("<leader>mc", ":compiler ")
 
-vim.api.nvim_create_autocmd('filetype', {
-    pattern = 'vim',
-    callback = function()
-        local bind = function(lhs, rhs)
-            vim.keymap.set('n', lhs, rhs, {remap = true, buffer = true})
-        end 
-        bind("<ESC>", "<cmd>close<CR>")
-    end
-})
+-- vim.api.nvim_create_autocmd('filetype', {
+--     pattern = 'vim',
+--     callback = function()
+--         local bind = function(lhs, rhs)
+--             vim.keymap.set('n', lhs, rhs, {remap = true, buffer = true})
+--         end 
+--         bind("<ESC>", "<cmd>close<CR>")
+--     end
+-- })
