@@ -15,13 +15,12 @@ return require("packer").startup(function()
     use("saadparwaiz1/cmp_luasnip")
     use("rafamadriz/friendly-snippets")
     use("neovim/nvim-lspconfig")
-    use("williamboman/mason.nvim")
-    use("williamboman/mason-lspconfig.nvim")
     use("glepnir/lspsaga.nvim")
     use("hrsh7th/cmp-nvim-lsp")
     use("hrsh7th/cmp-buffer")
     use("hrsh7th/nvim-cmp")
     use("onsails/lspkind-nvim")
+    use("sbdchd/neoformat")
 
     -- Speed boosts
     use("tpope/vim-dispatch")
@@ -35,12 +34,12 @@ return require("packer").startup(function()
             require('Comment').setup()
         end
     }
-
-    use("sbdchd/neoformat")
-
-    -- dap
-    -- use("mfussenegger/nvim-dap")
-    -- use("rcarriga/nvim-dap-ui")
-    -- use("theHamsta/nvim-dap-virtual-text")
-
 end)
+
+-- dap
+-- use("mfussenegger/nvim-dap")
+-- use("rcarriga/nvim-dap-ui")
+-- use("theHamsta/nvim-dap-virtual-text")
+
+-- use("williamboman/mason.nvim")
+-- use("williamboman/mason-lspconfig.nvim")

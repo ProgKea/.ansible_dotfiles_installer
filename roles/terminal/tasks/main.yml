@@ -7,7 +7,6 @@
       - urxvt-perls
       - perl
       - tmux
-      - lsd
       - wget
       - unrar
       - unzip
