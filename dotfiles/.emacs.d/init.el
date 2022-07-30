@@ -66,7 +66,8 @@
 (setq-default compilation-scroll-output t)
 (setq-default dired-dwim-target t)
 
-(add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
+;; (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
+(add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
 
 (define-minor-mode minor-mode-blackout-mode
   "Hides minor modes from the mode line."
@@ -87,13 +88,11 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
-(blink-cursor-mode 0)
 (column-number-mode 1)
 (electric-pair-mode 1)
 (global-display-line-numbers-mode 1)
 (menu-bar--display-line-numbers-mode-relative)
-(fringe-mode 0)
-(blink-cursor-mode 1)
+;; (fringe-mode 0)
 
 ;; Install and configure packages
 (use-package evil
@@ -126,12 +125,13 @@
   (evil-define-key 'visual 'global (kbd "<leader>R") 'query-replace-regexp)
 
   (evil-define-key 'normal 'global (kbd "<leader>la") 'fill-paragraph)
+  (evil-define-key 'normal 'global (kbd "gr") 'revert-buffer)
   (evil-define-key 'visual 'global (kbd "<leader>a") 'align-regexp)
   (evil-define-key 'visual 'global (kbd "C") 'comment-or-uncomment-region)
+  (evil-define-key 'normal 'global (kbd "gc") 'comment-dwim)
 
   ;; find
   (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
-
   (evil-define-key 'normal 'global (kbd "<leader>jv") 'dired-jump)
   (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
   (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
@@ -270,41 +270,12 @@
               (interactive)
               (setq-local fill-paragraph-function 'astyle-buffer))))
 
-(use-package gruber-darker-theme
-  :config
-  (load-theme 'gruber-darker t))
-
-;; (use-package flycheck)
-
-;; (use-package lsp-mode
-;;   :after evil
-;;   :commands (lsp lsp-deferred)
-;;   :init
-;;   (add-hook 'lsp-completion-mode-hook
-;;             (lambda ()
-;;               (setf (alist-get 'lsp-capf completion-category-defaults) '((styles . (orderless flex))))))
+;; (use-package gruber-darker-theme
 ;;   :config
-;;   (use-package lsp-pyright)
-;;   (setq lsp-headerline-breadcrumb-enable nil)
-;;   (setq lsp-signature-render-documentation nil)
-;;   (setq lsp-eldoc-enable-hover nil)
-;;   (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
-;;   (evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-find-references)
-;;   (evil-define-key 'normal 'global (kbd "<leader>ld") 'evil-goto-definition)
-;;   (evil-define-key 'normal 'global (kbd "<leader>lc") 'lsp-execute-code-action)
-;;   (evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
-;;   (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
-;;   (evil-define-key 'normal 'global (kbd "<leader>lo") '(lambda () (interactive)
-;;                                                          (lsp-ui-doc-show)
-;;                                                          (lsp-ui-doc-focus-frame))))
-
-;; (use-package lsp-ui
-;;   :init
-;;   (setq lsp-ui-sideline-show-code-actions t)
-;;   (setq lsp-ui-sideline-show-diagnostics t)
-;;   (setq lsp-ui-doc-enable nil)
-;;   (setq lsp-ui-sideline-show-hover nil)
-;;   (setq lsp-ui-sideline-show-code-actions t))
+;;   (load-theme 'gruber-darker t))
+(use-package zenburn-theme
+  :config
+  (load-theme 'zenburn t))
 
 (use-package eglot
   :init
@@ -336,10 +307,12 @@
   (evil-define-key 'insert corfu-map (kbd "C-e") 'corfu-quit)
   (evil-define-key 'insert corfu-map (kbd "<RET>") 'evil-ret)
   (evil-define-key 'insert 'global (kbd "C-<SPC>") 'complete-symbol)
-  ;; (evil-define-key 'insert corfu-map (kbd "TAB") 'yas-expand)
-  ;; (evil-define-key 'insert corfu-map [tab] 'yas-expand))
-  (evil-define-key 'insert corfu-map (kbd "TAB") 'indent-for-tab-command)
-  (evil-define-key 'insert corfu-map [tab] 'indent-for-tab-command))
+  (evil-define-key 'insert corfu-map (kbd "TAB") #'(lambda () (interactive) ;; i dont know if this is a good idea (maybe find a better solution)
+                                                     (indent-for-tab-command)
+                                                     (yas-expand)))
+  (evil-define-key 'insert corfu-map [tab] #'(lambda () (interactive)
+                                                     (indent-for-tab-command)
+                                                     (yas-expand))))
 
 (use-package cape
   :defer 10
@@ -403,3 +376,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+;; Take a look at paredit

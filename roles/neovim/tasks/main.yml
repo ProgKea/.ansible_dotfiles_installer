@@ -21,3 +21,7 @@
 - name: Install Packer
   tags: neovim, packer
   shell: packer_path="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"; clone_cmd="git clone --depth 1 https://github.com/wbthomason/packer.nvim"; if [ -d $packer_path ]; then rm -rf $packer_path && eval $clone_cmd $packer_path; else eval $clone_cmd $packer_path; fi
+
+- name: Install plugins
+  tags: neovim, packer
+  shell: nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
