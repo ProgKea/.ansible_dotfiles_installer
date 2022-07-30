@@ -26,7 +26,6 @@
 ;;; BOOTSTRAP USE-PACKAGE
 (package-initialize)
 
-(setq use-package-always-ensure t)
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -35,6 +34,7 @@
 (setq package-native-compile t)
 (setq comp-async-report-warnings-errors nil)
 (setq comp-deferred-compilation t)
+(setq use-package-always-ensure t)
 
 ;; Install and load `quelpa-use-package'.
 (setq quelpa-update-melpa-p nil)
@@ -45,7 +45,6 @@
 ;; Emacs look SIGNIFICANTLY less often which is a good thing.
 ;; asynchronous bytecode compilation and various other actions makes
 (use-package async
-  :ensure t
   :defer t
   :init
   (dired-async-mode 1)
@@ -120,7 +119,6 @@
 
 ;; Install and configure packages
 (use-package evil
-  :ensure
   :init
   (setq evil-want-keybinding nil)
   (setq evil-want-minibuffer t)
@@ -133,21 +131,89 @@
   (setq evil-replace-state-cursor 'box)
   (setq evil-operator-state-cursor 'box)
   (global-set-key (kbd "C-u") 'evil-scroll-page-up)
-  (evil-mode 1))
+  (evil-mode 1)
+  ;; keybindings
+  (add-to-list 'evil-normal-state-modes 'shell-mode)
+  (evil-set-leader 'normal (kbd "SPC"))
+  (evil-set-leader 'visual (kbd "SPC"))
+
+  ;; replace
+  (evil-define-key 'normal 'global (kbd "<leader>s") 'replace-string)
+  (evil-define-key 'normal 'global (kbd "<leader>S") 'replace-regexp)
+  (evil-define-key 'normal 'global (kbd "<leader>r") 'query-replace)
+  (evil-define-key 'normal 'global (kbd "<leader>R") 'query-replace-regexp)
+  (evil-define-key 'visual 'global (kbd "<leader>s") 'replace-string)
+  (evil-define-key 'visual 'global (kbd "<leader>S") 'replace-regexp)
+  (evil-define-key 'visual 'global (kbd "<leader>r") 'query-replace)
+  (evil-define-key 'visual 'global (kbd "<leader>R") 'query-replace-regexp)
+
+  (evil-define-key 'visual 'global (kbd "<leader>a") 'align-regexp)
+  (evil-define-key 'visual 'global (kbd "C") 'comment-or-uncomment-region)
+
+  ;; find
+  (evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
+
+  (evil-define-key 'normal 'global (kbd "<leader>jv") 'dired-jump)
+  (evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
+  (evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
+  (evil-define-key 'normal 'global (kbd "<leader>i") 'eww)
+  (evil-define-key 'normal 'global (kbd "C-o") 'evil-buffer)
+
+  ;; Compilation
+  (evil-define-key 'normal 'global (kbd "<leader>mm") 'compile)
+  (evil-define-key 'normal 'global (kbd "<leader>mr") 'recompile)
+  (evil-define-key 'normal 'global (kbd "<leader>mk") 'kill-compilation)
+  (evil-define-key 'normal 'global (kbd "<leader>ms") 'async-shell-command)
+
+  ;; escape minibuffer
+  (global-set-key (kbd "C-x ESC") nil)
+  (evil-define-key 'normal 'global (kbd "<escape>") 'abort-minibuffers)
+
+  ;; make leader key work in dired mode
+  (with-eval-after-load 'dired (evil-define-key 'normal dired-mode-map (kbd "<SPC>") 'evil-send-leader))
+
+  (evil-define-key 'normal 'global (kbd "<leader>ln") 'next-error)
+  (evil-define-key 'normal 'global (kbd "<leader>lp") 'previous-error)
+
+  ;; windows and buffers
+  (evil-define-key 'normal 'global (kbd "<leader>o") 'delete-other-windows)
+  (evil-define-key 'normal 'global (kbd "<leader>q") 'delete-window)
+  (evil-define-key 'normal 'global (kbd "<leader>h") 'evil-window-split)
+  (evil-define-key 'normal 'global (kbd "<leader>ö") 'evil-window-vsplit)
+  (evil-define-key 'normal 'global (kbd "<leader>0") 'evil-window-next)
+  (evil-define-key 'normal 'global (kbd "<leader>9") 'evil-window-prev)
+  (evil-define-key 'normal 'global (kbd "<leader>jk") 'kill-buffer)
+  (evil-define-key 'normal minibuffer-mode-map (kbd "C-k") 'previous-history-element)
+  (evil-define-key 'normal minibuffer-mode-map (kbd "C-j") 'next-history-element)
+  (evil-define-key 'normal minibuffer-mode-map (kbd "<RET>") 'exit-minibuffer)
+  (evil-define-key 'insert minibuffer-mode-map (kbd "C-k") 'previous-history-element)
+  (evil-define-key 'insert minibuffer-mode-map (kbd "C-j") 'next-history-element))
 
 (use-package evil-collection
   :after evil
-  :ensure t
   :config
   (evil-collection-init))
 
 (use-package evil-multiedit
-  :ensure t
+  :after evil
   :config
-  (evil-multiedit-mode 1))
+  (evil-multiedit-mode 1)
+  (evil-define-key 'normal evil-multiedit-mode-map (kbd "<escape>") 'evil-multiedit-abort)
+  (evil-define-key 'normal 'global "z" 'evil-multiedit-match-symbol-and-next)
+  (evil-define-key 'normal evil-multiedit-mode-map "z" 'evil-multiedit-match-symbol-and-next)
+  (evil-define-key 'normal 'global "Z" 'evil-multiedit-match-symbol-and-prev)
+  (evil-define-key 'visual 'global "z" 'evil-multiedit-match-and-next)
+  (evil-define-key 'visual 'global "Z" 'evil-multiedit-match-and-prev)
+  (evil-define-key 'visual 'global "R" 'evil-multiedit-match-all))
+
+(use-package yasnippet
+  :after evil
+  :config
+  (setq yas-triggers-in-field nil)
+  (setq yas-snippet-dirs '("~/.emacs.snippets/"))
+  (yas-global-mode 1))
 
 (use-package disable-mouse
-  :ensure
   :config
   (mapc #'disable-mouse-in-keymap
         (list evil-motion-state-map
@@ -156,45 +222,56 @@
               evil-insert-state-map)))
 
 (use-package magit
-  :ensure
   :commands (magit-status magit-get-current-branch)
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
 (use-package flycheck
-  :ensure
   :init (global-flycheck-mode))
 
 (use-package projectile
-  :ensure
   :init
   (when (file-directory-p "~/documents")
     (setq projectile-project-search-path '("~/documents")))
   (when (file-directory-p "~/code")
     (setq projectile-project-search-path '("~/code")))
-  (projectile-mode 1))
+  (projectile-mode 1)
+  (evil-define-key 'normal 'global (kbd "<leader>jf") 'projectile-find-file)
+  (evil-define-key 'normal 'global (kbd "<leader>jj") 'projectile-switch-project))
 
 (use-package consult
-  :ensure)
+  :after evil
+  :config
+  (evil-define-key 'normal 'global (kbd "<leader>k") 'consult-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>jl") 'consult-line)
+  (evil-define-key 'normal 'global (kbd "<leader>jr") 'consult-ripgrep)
+  (evil-define-key 'normal 'global (kbd "<leader>jg") 'consult-git-grep))
 
 (use-package vertico
-  :ensure
-  :init (vertico-mode 1))
+  :after evil
+  :init (vertico-mode 1)
+  :config
+  (evil-define-key 'normal vertico-map (kbd "j") 'vertico-next)
+  (evil-define-key 'normal vertico-map (kbd "k") 'vertico-previous)
+  (evil-define-key 'normal vertico-map (kbd "G") 'vertico-last)
+  (evil-define-key 'normal vertico-map (kbd "gg") 'vertico-first)
+  (evil-define-key 'normal vertico-map (kbd "C-u") 'vertico-scroll-down)
+  (evil-define-key 'normal vertico-map (kbd "C-d") 'vertico-scroll-up)
+  (evil-define-key 'insert vertico-map (kbd "C-n") 'vertico-next)
+  (evil-define-key 'insert vertico-map (kbd "C-p") 'vertico-previous)
+  (evil-define-key 'normal vertico-map (kbd "<tab>") 'vertico-insert))
 
 (use-package orderless
-  :ensure
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
 
 (use-package which-key
-  :ensure
   :init
   (which-key-mode 1))
 
 (use-package undo-tree
-  :ensure
   :after evil
   :diminish
   :config
@@ -205,23 +282,32 @@
 
 ;; Themes
 (use-package gruber-darker-theme
-  :ensure t
   :config
   (load-theme 'gruber-darker t))
 
 (use-package lsp-mode
+  :after evil
   :commands (lsp lsp-deferred)
   :init
   (add-hook 'lsp-completion-mode-hook
             (lambda ()
-              (setf (alist-get 'lsp-capf completion-category-defaults) '((styles . (orderless flex)))))))
-:config
-(setq lsp-headerline-breadcrumb-enable nil)
-(setq lsp-signature-render-documentation nil)
-(setq lsp-eldoc-enable-hover nil)
+              (setf (alist-get 'lsp-capf completion-category-defaults) '((styles . (orderless flex))))))
+  :config
+  (setq lsp-headerline-breadcrumb-enable nil)
+  (setq lsp-signature-render-documentation nil)
+  (setq lsp-eldoc-enable-hover nil)
+  (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
+  (evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-find-references)
+  (evil-define-key 'normal 'global (kbd "<leader>ld") 'evil-goto-definition)
+  (evil-define-key 'normal 'global (kbd "<leader>lc") 'lsp-execute-code-action)
+  (evil-define-key 'normal 'global (kbd "<leader>la") 'lsp-format-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
+  (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
+  (evil-define-key 'normal 'global (kbd "<leader>lo") '(lambda () (interactive)
+                                                         (lsp-ui-doc-show)
+                                                         (lsp-ui-doc-focus-frame))))
 
-(use-package lsp-pyright :ensure t)
-(use-package lsp-ui  :ensure t
+(use-package lsp-ui
   :init
   (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-sideline-show-diagnostics t)
@@ -230,13 +316,20 @@
   (setq lsp-ui-sideline-show-code-actions t))
 
 (use-package corfu
+  :after yasnippet
   :custom
   (corfu-auto t)
   (tab-always-indent 'complete)
   (corfu-auto-delay 0.2)
   (corfu-auto-prefix 1)
   :init
-  (global-corfu-mode))
+  (global-corfu-mode)
+  :config
+  (evil-define-key 'insert corfu-map (kbd "C-e") 'corfu-quit)
+  (evil-define-key 'insert corfu-map (kbd "<RET>") 'corfu-complete)
+  (evil-define-key 'insert 'global (kbd "C-<SPC>") 'complete-symbol)
+  (evil-define-key 'insert corfu-map (kbd "TAB") 'yas-expand)
+  (evil-define-key 'insert corfu-map [tab] 'yas-expand))
 
 (use-package cape
   :defer 10
@@ -253,152 +346,26 @@
                                    corfu-auto nil)
               (corfu-mode))))
 
-(use-package yasnippet
-  :ensure
-  :config
-  (setq yas-triggers-in-field nil)
-  (setq yas-snippet-dirs '("~/.emacs.snippets/"))
-  (yas-global-mode 1))
-
 ;; languages
-(use-package rust-mode
-  :ensure)
-
-(use-package go-mode
-  :ensure)
-
-(use-package haskell-mode :ensure t)
-
-(use-package yaml-mode :ensure)
-
-(use-package typescript-mode :ensure)
-
+(use-package lsp-pyright)
+(use-package rust-mode)
+(use-package go-mode)
+(use-package haskell-mode 
+  :config
+  (add-hook 'haskell-mode-hook #'haskell-doc-mode)
+  (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
+  ;; fix haskell being slow
+  (setq-default flycheck-disabled-checkers '(haskell-stack-ghc)))
+(use-package yaml-mode)
+(use-package typescript-mode)
 (use-package zig-mode
-  :ensure
   :init
   (setq zig-format-on-save nil))
-
-;; keybindings
-(evil-set-leader 'normal (kbd "SPC"))
-(evil-set-leader 'visual (kbd "SPC"))
-
-;; replace
-(evil-define-key 'normal 'global (kbd "<leader>s") 'replace-string)
-(evil-define-key 'normal 'global (kbd "<leader>S") 'replace-regexp)
-(evil-define-key 'normal 'global (kbd "<leader>r") 'query-replace)
-(evil-define-key 'normal 'global (kbd "<leader>R") 'query-replace-regexp)
-(evil-define-key 'visual 'global (kbd "<leader>s") 'replace-string)
-(evil-define-key 'visual 'global (kbd "<leader>S") 'replace-regexp)
-(evil-define-key 'visual 'global (kbd "<leader>r") 'query-replace)
-(evil-define-key 'visual 'global (kbd "<leader>R") 'query-replace-regexp)
-
-(evil-define-key 'visual 'global (kbd "<leader>a") 'align-regexp)
-(evil-define-key 'visual 'global (kbd "C") 'comment-or-uncomment-region)
-
-;; find
-(evil-define-key 'normal 'global (kbd "<leader>jf") 'projectile-find-file)
-(evil-define-key 'normal 'global (kbd "<leader>f") 'find-file)
-(evil-define-key 'normal 'global (kbd "<leader>jl") '(lambda() (interactive)
-                                                       (cd "~/")
-                                                       (call-interactively 'find-file)))
-
-(evil-define-key 'normal 'global (kbd "<leader>jv") 'dired-jump)
-(evil-define-key 'normal 'global (kbd "<leader>jj") 'projectile-switch-project)
-(evil-define-key 'normal 'global (kbd "<leader>u") 'undo-tree-visualize)
-(evil-define-key 'normal 'global (kbd "<leader>g") 'magit)
-(evil-define-key 'normal 'global (kbd "<leader>i") 'eww)
-(evil-define-key 'normal 'global (kbd "C-o") 'evil-buffer)
-
-;; consult
-(evil-define-key 'normal 'global "/" 'consult-line)
-(evil-define-key 'normal 'global (kbd "<leader>jr") 'consult-ripgrep)
-(evil-define-key 'normal 'global (kbd "<leader>jg") 'consult-git-grep)
-
-;; Compilation
-(evil-define-key 'normal 'global (kbd "<leader>mm") 'compile)
-(evil-define-key 'normal 'global (kbd "<leader>mr") 'recompile)
-(evil-define-key 'normal 'global (kbd "<leader>mk") 'kill-compilation)
-(evil-define-key 'normal 'global (kbd "<leader>ms") 'async-shell-command)
-
-;; escape minibuffer
-(global-set-key (kbd "C-x ESC") nil)
-(evil-define-key 'normal 'global (kbd "<escape>") 'abort-minibuffers)
-
-;; make leader key work in dired mode
-(with-eval-after-load 'dired (evil-define-key 'normal dired-mode-map (kbd "<SPC>") 'evil-send-leader))
-
-(evil-define-key 'normal 'global (kbd "<leader>ln") 'next-error)
-(evil-define-key 'normal 'global (kbd "<leader>lp") 'previous-error)
-
-;; lsp keybindings
-(evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
-(evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-find-references)
-(evil-define-key 'normal 'global (kbd "<leader>ld") 'evil-goto-definition)
-(evil-define-key 'normal 'global (kbd "<leader>lc") 'lsp-execute-code-action)
-(evil-define-key 'normal 'global (kbd "<leader>la") 'lsp-format-buffer)
-(evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
-(evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
-(evil-define-key 'normal 'global (kbd "<leader>lo") '(lambda () (interactive)
-                                                       (lsp-ui-doc-show)
-                                                       (lsp-ui-doc-focus-frame)))
-
-(evil-define-key 'insert corfu-map (kbd "C-e") 'corfu-quit)
-(evil-define-key 'insert corfu-map (kbd "<RET>") 'corfu-complete)
-(evil-define-key 'insert 'global (kbd "C-<SPC>") 'complete-symbol)
-(evil-define-key 'insert corfu-map (kbd "TAB") 'yas-expand)
-(evil-define-key 'insert corfu-map [tab] 'yas-expand)
-
-;; windows and buffers
-(evil-define-key 'normal 'global (kbd "<leader>o") 'delete-other-windows)
-(evil-define-key 'normal 'global (kbd "<leader>q") 'delete-window)
-(evil-define-key 'normal 'global (kbd "<leader>h") 'evil-window-split)
-(evil-define-key 'normal 'global (kbd "<leader>ö") 'evil-window-vsplit)
-(evil-define-key 'normal 'global (kbd "<leader>0") 'evil-window-next)
-(evil-define-key 'normal 'global (kbd "<leader>9") 'evil-window-prev)
-
-(evil-define-key 'normal 'global (kbd "<leader>k") 'consult-buffer)
-(evil-define-key 'normal 'global (kbd "<leader>jk") 'kill-buffer)
-
-;; Multicursor
-(evil-define-key 'normal evil-multiedit-mode-map (kbd "<escape>") 'evil-multiedit-abort)
-(evil-define-key 'normal 'global "z" 'evil-multiedit-match-symbol-and-next)
-(evil-define-key 'normal evil-multiedit-mode-map "z" 'evil-multiedit-match-symbol-and-next)
-(evil-define-key 'normal 'global "Z" 'evil-multiedit-match-symbol-and-prev)
-(evil-define-key 'visual 'global "z" 'evil-multiedit-match-and-next)
-(evil-define-key 'visual 'global "Z" 'evil-multiedit-match-and-prev)
-(evil-define-key 'visual 'global "R" 'evil-multiedit-match-all)
-
-;; Vertico keybindings
-(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "j") 'vertico-next))
-(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "k") 'vertico-previous))
-(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "G") 'vertico-last))
-(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "gg") 'vertico-first))
-(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "C-u") 'vertico-scroll-down))
-(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "C-d") 'vertico-scroll-up))
-(with-eval-after-load 'vertico (evil-define-key 'insert vertico-map (kbd "C-n") 'vertico-next))
-(with-eval-after-load 'vertico (evil-define-key 'insert vertico-map (kbd "C-p") 'vertico-previous))
-(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "<tab>") 'vertico-insert))
-(with-eval-after-load 'vertico (evil-define-key 'normal vertico-map (kbd "<RET>") '(lambda () (interactive)
-                                                                                     (vertico-insert)
-                                                                                     (vertico-exit-input))))
-
-(evil-define-key 'insert minibuffer-mode-map (kbd "C-k") 'previous-history-element)
-(evil-define-key 'insert minibuffer-mode-map (kbd "C-j") 'next-history-element)
-(evil-define-key 'normal minibuffer-mode-map (kbd "C-k") 'previous-history-element)
-(evil-define-key 'normal minibuffer-mode-map (kbd "C-j") 'next-history-element)
-(evil-define-key 'normal minibuffer-mode-map (kbd "<RET>") '(lambda () (interactive)
-                                                              (evil-insert)
-                                                              (evil-ret)))
 
 ;; hooks
 (add-hook 'dired-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 (add-hook 'eww-mode-hook (lambda () (display-line-numbers-mode -1)))
-;; Haskell
-(add-hook 'haskell-mode-hook #'haskell-doc-mode)
-(add-hook 'haskell-mode-hook #'interactive-haskell-mode)
-;; fix haskell being slow
-(setq-default flycheck-disabled-checkers '(haskell-stack-ghc))
 
 ;; functions
 (defun kill-other-buffers ()
@@ -422,7 +389,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("5586a5db9dadef93b6b6e72720205a4fa92fd60e4ccfd3a5fa389782eab2371b" "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "e1f4f0158cd5a01a9d96f1f7cdcca8d6724d7d33267623cc433fe1c196848554" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" default))
+   '("a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" "5586a5db9dadef93b6b6e72720205a4fa92fd60e4ccfd3a5fa389782eab2371b" "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "e1f4f0158cd5a01a9d96f1f7cdcca8d6724d7d33267623cc433fe1c196848554" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" default))
  '(package-selected-packages
    '(move-text astyle zig-mode zenburn-theme yasnippet yaml-mode which-key vertico unicode-escape undo-tree typescript-mode rust-mode quelpa-use-package projectile orderless lsp-pyright iedit hydra haskell-mode gruber-darker-theme frame-local flymake-easy flycheck-nimsuggest epc disable-mouse commenter autothemer auctex async ansible)))
 (custom-set-faces
