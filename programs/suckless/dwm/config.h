@@ -8,8 +8,8 @@ static const int showbar = 1;           /* 0 means no bar */
 static const int topbar = 1;            /* 0 means bottom bar */
 // static const char *fonts[]          = { "Ubuntu Mono Nerd Font:size=17" };
 // static const char dmenufont[]       = "Ubuntu Mono Nerd Font:size=17";
-static const char *fonts[] = {"Iosevka Nerd Font:size=11"};
-static const char dmenufont[] = "Iosevka Nerd Font:size=11";
+static const char *fonts[] = {"Iosevka:size=10"};
+static const char dmenufont[] = "Iosevka:size=10";
 // background color
 static const char col_gray1[] = "#222222";
 // inactive window border color

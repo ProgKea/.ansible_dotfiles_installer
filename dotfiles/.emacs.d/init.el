@@ -202,9 +202,6 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
-(use-package flycheck
-  :init (global-flycheck-mode))
-
 (use-package projectile
   :init
   (when (file-directory-p "~/documents")
@@ -219,6 +216,7 @@
   :after evil
   :config
   (evil-define-key 'normal 'global (kbd "<leader>k") 'consult-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>ll") 'consult-flymake)
   (evil-define-key 'normal 'global (kbd "<leader>jl") 'consult-line)
   (evil-define-key 'normal 'global (kbd "<leader>jr") 'consult-ripgrep)
   (evil-define-key 'normal 'global (kbd "<leader>jg") 'consult-git-grep))
@@ -276,34 +274,53 @@
   :config
   (load-theme 'gruber-darker t))
 
-(use-package lsp-mode
-  :after evil
-  :commands (lsp lsp-deferred)
-  :init
-  (add-hook 'lsp-completion-mode-hook
-            (lambda ()
-              (setf (alist-get 'lsp-capf completion-category-defaults) '((styles . (orderless flex))))))
-  :config
-  (setq lsp-headerline-breadcrumb-enable nil)
-  (setq lsp-signature-render-documentation nil)
-  (setq lsp-eldoc-enable-hover nil)
-  (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
-  (evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-find-references)
-  (evil-define-key 'normal 'global (kbd "<leader>ld") 'evil-goto-definition)
-  (evil-define-key 'normal 'global (kbd "<leader>lc") 'lsp-execute-code-action)
-  (evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
-  (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
-  (evil-define-key 'normal 'global (kbd "<leader>lo") '(lambda () (interactive)
-                                                         (lsp-ui-doc-show)
-                                                         (lsp-ui-doc-focus-frame))))
+;; (use-package flycheck)
 
-(use-package lsp-ui
+;; (use-package lsp-mode
+;;   :after evil
+;;   :commands (lsp lsp-deferred)
+;;   :init
+;;   (add-hook 'lsp-completion-mode-hook
+;;             (lambda ()
+;;               (setf (alist-get 'lsp-capf completion-category-defaults) '((styles . (orderless flex))))))
+;;   :config
+;;   (use-package lsp-pyright)
+;;   (setq lsp-headerline-breadcrumb-enable nil)
+;;   (setq lsp-signature-render-documentation nil)
+;;   (setq lsp-eldoc-enable-hover nil)
+;;   (evil-define-key 'normal 'global (kbd "<leader>lr") 'lsp-rename)
+;;   (evil-define-key 'normal 'global (kbd "<leader>lf") 'lsp-find-references)
+;;   (evil-define-key 'normal 'global (kbd "<leader>ld") 'evil-goto-definition)
+;;   (evil-define-key 'normal 'global (kbd "<leader>lc") 'lsp-execute-code-action)
+;;   (evil-define-key 'normal 'global (kbd "<leader>ll") 'flycheck-list-errors)
+;;   (evil-define-key 'normal 'global (kbd "<leader>lh") 'lsp-ui-doc-glance)
+;;   (evil-define-key 'normal 'global (kbd "<leader>lo") '(lambda () (interactive)
+;;                                                          (lsp-ui-doc-show)
+;;                                                          (lsp-ui-doc-focus-frame))))
+
+;; (use-package lsp-ui
+;;   :init
+;;   (setq lsp-ui-sideline-show-code-actions t)
+;;   (setq lsp-ui-sideline-show-diagnostics t)
+;;   (setq lsp-ui-doc-enable nil)
+;;   (setq lsp-ui-sideline-show-hover nil)
+;;   (setq lsp-ui-sideline-show-code-actions t))
+
+(use-package eglot
   :init
-  (setq lsp-ui-sideline-show-code-actions t)
-  (setq lsp-ui-sideline-show-diagnostics t)
-  (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-sideline-show-hover nil)
-  (setq lsp-ui-sideline-show-code-actions t))
+  (setq eldoc-echo-area-display-truncation-message t)
+  (setq eldoc-echo-area-use-multiline-p nil)
+  (setq eglot-ignored-server-capabilities '(:documentHighlightProvider))
+  :config
+  (evil-define-key 'normal flymake-mode-map (kbd "<leader>ln") 'flymake-goto-next-error)
+  (evil-define-key 'normal flymake-mode-map (kbd "<leader>lp") 'flymake-goto-prev-error)
+  (evil-define-key 'normal 'global (kbd "<leader>lr") 'eglot-rename)
+  (evil-define-key 'normal 'global (kbd "<leader>li") 'eglot-find-implementation)
+  (evil-define-key 'normal 'global (kbd "<leader>lf") 'xref-find-references)
+  (evil-define-key 'normal 'global (kbd "<leader>la") 'eglot-format-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>ld") 'eglot-find-declaration)
+  (evil-define-key 'normal 'global (kbd "<leader>lc") 'eglot-code-actions)
+  (evil-define-key 'normal 'global (kbd "<leader>lh") 'eldoc-doc-buffer))
 
 (use-package corfu
   :after yasnippet
@@ -319,8 +336,10 @@
   (evil-define-key 'insert corfu-map (kbd "C-e") 'corfu-quit)
   (evil-define-key 'insert corfu-map (kbd "<RET>") 'evil-ret)
   (evil-define-key 'insert 'global (kbd "C-<SPC>") 'complete-symbol)
-  (evil-define-key 'insert corfu-map (kbd "TAB") 'yas-expand)
-  (evil-define-key 'insert corfu-map [tab] 'yas-expand))
+  ;; (evil-define-key 'insert corfu-map (kbd "TAB") 'yas-expand)
+  ;; (evil-define-key 'insert corfu-map [tab] 'yas-expand))
+  (evil-define-key 'insert corfu-map (kbd "TAB") 'indent-for-tab-command)
+  (evil-define-key 'insert corfu-map [tab] 'indent-for-tab-command))
 
 (use-package cape
   :defer 10
@@ -338,15 +357,14 @@
               (corfu-mode))))
 
 ;; languages
-(use-package lsp-pyright)
 (use-package rust-mode)
 (use-package go-mode)
 (use-package haskell-mode 
   :config
   (add-hook 'haskell-mode-hook #'haskell-doc-mode)
-  (add-hook 'haskell-mode-hook #'interactive-haskell-mode)
+  (add-hook 'haskell-mode-hook #'interactive-haskell-mode))
   ;; fix haskell being slow
-  (setq-default flycheck-disabled-checkers '(haskell-stack-ghc)))
+  ;; (setq-default flycheck-disabled-checkers '(haskell-stack-ghc)))
 (use-package yaml-mode)
 (use-package typescript-mode)
 (use-package zig-mode
@@ -378,7 +396,7 @@
  '(custom-safe-themes
    '("a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" "5586a5db9dadef93b6b6e72720205a4fa92fd60e4ccfd3a5fa389782eab2371b" "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "e1f4f0158cd5a01a9d96f1f7cdcca8d6724d7d33267623cc433fe1c196848554" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" default))
  '(package-selected-packages
-   '(move-text astyle zig-mode zenburn-theme yasnippet yaml-mode vertico unicode-escape undo-tree typescript-mode rust-mode quelpa-use-package projectile orderless lsp-pyright iedit hydra haskell-mode gruber-darker-theme frame-local flymake-easy flycheck-nimsuggest epc disable-mouse commenter autothemer auctex async ansible)))
+   '(eglot move-text astyle zig-mode zenburn-theme yasnippet yaml-mode vertico unicode-escape undo-tree typescript-mode rust-mode quelpa-use-package projectile orderless iedit hydra haskell-mode gruber-darker-theme frame-local flymake-easy flycheck-nimsuggest epc disable-mouse commenter autothemer auctex async ansible)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
