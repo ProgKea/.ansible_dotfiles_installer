@@ -66,8 +66,8 @@
 (setq-default compilation-scroll-output t)
 (setq-default dired-dwim-target t)
 
-;; (add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
-(add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
+(add-to-list 'default-frame-alist `(font . ,"Iosevka-20"))
+;; (add-to-list 'default-frame-alist `(font . ,"Ubuntu Mono-20"))
 
 (define-minor-mode minor-mode-blackout-mode
   "Hides minor modes from the mode line."
@@ -250,32 +250,12 @@
   :custom
   (undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
 
-(use-package astyle
+(use-package gruber-darker-theme
   :config
-  (load "~/.emacs.d/elpa/simpc-mode.el" t)
-  (add-to-list 'auto-mode-alist '("\\.[hc]\\(pp\\)?\\'" . simpc-mode))
-  (defun astyle-buffer (&optional justify)
-    (interactive)
-    (let ((saved-line-number (line-number-at-pos)))
-      (shell-command-on-region
-       (point-min)
-       (point-max)
-       "astyle --style=kr"
-       nil
-       t)
-      (goto-line saved-line-number)))
-
-  (add-hook 'simpc-mode-hook
-            (lambda ()
-              (interactive)
-              (setq-local fill-paragraph-function 'astyle-buffer))))
-
-;; (use-package gruber-darker-theme
+  (load-theme 'gruber-darker t))
+;; (use-package zenburn-theme
 ;;   :config
-;;   (load-theme 'gruber-darker t))
-(use-package zenburn-theme
-  :config
-  (load-theme 'zenburn t))
+;;   (load-theme 'zenburn t))
 
 (use-package eglot
   :init
@@ -367,7 +347,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" "5586a5db9dadef93b6b6e72720205a4fa92fd60e4ccfd3a5fa389782eab2371b" "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "e1f4f0158cd5a01a9d96f1f7cdcca8d6724d7d33267623cc433fe1c196848554" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" default))
+   '("3d2e532b010eeb2f5e09c79f0b3a277bfc268ca91a59cdda7ffd056b868a03bc" "a3e99dbdaa138996bb0c9c806bc3c3c6b4fd61d6973b946d750b555af8b7555b" "5586a5db9dadef93b6b6e72720205a4fa92fd60e4ccfd3a5fa389782eab2371b" "e3daa8f18440301f3e54f2093fe15f4fe951986a8628e98dcd781efbec7a46f2" "aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" "7a424478cb77a96af2c0f50cfb4e2a88647b3ccca225f8c650ed45b7f50d9525" "7e377879cbd60c66b88e51fad480b3ab18d60847f31c435f15f5df18bdb18184" "e1f4f0158cd5a01a9d96f1f7cdcca8d6724d7d33267623cc433fe1c196848554" "60ada0ff6b91687f1a04cc17ad04119e59a7542644c7c59fc135909499400ab8" default))
  '(package-selected-packages
    '(eglot move-text astyle zig-mode zenburn-theme yasnippet yaml-mode vertico unicode-escape undo-tree typescript-mode rust-mode quelpa-use-package projectile orderless iedit hydra haskell-mode gruber-darker-theme frame-local flymake-easy flycheck-nimsuggest epc disable-mouse commenter autothemer auctex async ansible)))
 (custom-set-faces
@@ -376,6 +356,3 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-
-;; Take a look at paredit

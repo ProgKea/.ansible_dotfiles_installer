@@ -1,6 +1,6 @@
 , bugswriter
 . UCngn7SVujlvskHRvRKc1cTw
-- Tips for CS students.
+- Most ELEGANT way of using Youtube.
 , theprimeagen
 . UC8ENHE5xdFSwx71u3fDH5Xw
 - Go is blazingly faster than Zig?

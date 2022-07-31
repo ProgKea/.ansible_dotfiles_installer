@@ -23,3 +23,4 @@ spriters-resource https://www.spriters-resource.com/search/?q=
 MDN https://developer.mozilla.org/en-US/search?q=
 fonts https://fonts.google.com/?query=
 hoogle https://hoogle.haskell.org/?hoogle=
+piped https://piped.kavin.rocks/results?search_query=
